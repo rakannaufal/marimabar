@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
-import { demoMode, supabase } from '../lib/supabase'
+import { configured, supabase } from '../lib/supabase'
 
 const route = useRoute(), router = useRouter()
 const resetting = computed(() => route.path.startsWith('/reset-password'))
@@ -17,18 +17,19 @@ function cooldown() {
   timer = setInterval(() => { seconds.value--; if (!seconds.value && timer) { clearInterval(timer); timer = undefined } }, 1000)
 }
 onMounted(async () => {
-  if (demoMode || !supabase) { checking.value = false; return }
+  if (!configured || !supabase) { checking.value = false; return }
   subscription = supabase.auth.onAuthStateChange((event) => { if (event === 'PASSWORD_RECOVERY') authorized.value = true }).data.subscription
   if (resetting.value) {
     // Only PASSWORD_RECOVERY authorizes this form. An ordinary signed-in
     // session or an arbitrary :token path segment must never count as a link.
-    await supabase.auth.getSession()
+    try { await supabase.auth.getSession() }
+    catch { error.value = 'Tautan belum bisa diperiksa. Minta tautan baru.' }
   }
   checking.value = false
 })
 onUnmounted(() => { subscription?.unsubscribe(); if (timer) clearInterval(timer) })
 async function requestLink() {
-  if (!supabase || demoMode || busy.value || seconds.value) return
+  if (!configured || !supabase || busy.value || seconds.value) return
   error.value = ''; busy.value = true
   try {
     const { error: failure } = await supabase.auth.resetPasswordForEmail(email.value.trim(), { redirectTo: new URL('/reset-password', location.origin).href })
@@ -40,7 +41,7 @@ async function requestLink() {
 }
 async function updatePassword() {
   error.value = ''
-  if (!supabase || demoMode || !authorized.value || busy.value) return
+  if (!configured || !supabase || !authorized.value || busy.value) return
   if (password.value.length < 8) { error.value = 'Kata sandi minimal 8 karakter.'; return }
   if (password.value !== confirm.value) { error.value = 'Konfirmasi kata sandi tidak cocok.'; return }
   busy.value = true
@@ -58,7 +59,7 @@ async function updatePassword() {
 <template>
   <main class="recovery"><aside class="visual"><RouterLink class="brand" to="/">Mabar Finder</RouterLink><div><h2>Balik ke squad, tanpa ribet.</h2><p>Akunmu tetap milikmu. Gunakan tautan pemulihan yang dikirim oleh Supabase saat layanan aktif.</p></div></aside>
     <section class="panel" aria-labelledby="recovery-title">
-      <div v-if="demoMode"><h1 id="recovery-title">Pemulihan tidak tersedia di demo</h1><p>Reset kata sandi dan email tidak tersedia di mode demo. Pilih persona tanpa memasukkan kata sandi.</p><RouterLink class="primary" to="/login">Pilih persona demo</RouterLink></div>
+      <div v-if="!configured"><h1 id="recovery-title">Pemulihan belum tersedia</h1><p role="alert">Layanan akun belum dikonfigurasi. Tidak ada tautan reset yang dapat dikirim. Hubungi pengelola situs.</p><RouterLink class="primary" to="/login">Kembali ke masuk</RouterLink></div>
       <div v-else-if="!resetting"><template v-if="sent"><div class="symbol" aria-hidden="true">✉</div><h1 id="recovery-title">Cek email kamu, ya</h1><p>Jika <strong>{{ email }}</strong> terdaftar, tautan reset akan dikirim. Periksa kotak masuk dan spam.</p><button class="outline" type="button" :disabled="busy || seconds > 0" @click="requestLink">{{ busy ? 'Mengirim…' : seconds ? `Kirim ulang dalam ${seconds} detik` : 'Kirim ulang' }}</button></template><template v-else><h1 id="recovery-title">Lupa kata sandi? Santai aja</h1><p>Masukkan email akunmu untuk meminta tautan pemulihan.</p><form @submit.prevent="requestLink"><label for="recovery-email">Email</label><input id="recovery-email" v-model="email" type="email" autocomplete="email" required placeholder="nama@email.com"><button class="primary" :disabled="busy">{{ busy ? 'Mengirim…' : 'Kirim Tautan Reset' }}</button></form></template><p v-if="error" class="error" role="alert">{{ error }}</p><RouterLink class="text-link" to="/login">Kembali ke halaman masuk</RouterLink></div>
       <div v-else-if="checking" role="status">Memeriksa tautan reset…</div>
       <div v-else-if="complete"><h1 id="recovery-title">Kata sandi berhasil diperbarui</h1><p>Silakan masuk dengan kata sandi baru.</p><p v-if="error" class="error" role="alert">{{ error }}</p><RouterLink class="primary" to="/login">Kembali ke masuk</RouterLink></div>

@@ -2,11 +2,11 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useSessionStore } from '../stores/session'
-import { demoMode } from '../lib/supabase'
+import { supabase } from '../lib/supabase'
 
 defineProps<{ title: string; subtitle: string }>()
 const session = useSessionStore()
-const allowed = computed(() => Boolean(session.user && session.admin))
+const allowed = computed(() => Boolean(supabase && session.user && session.admin))
 const sections = [
   { to: '/admin/statistik', text: 'Statistik' },
   { to: '/admin/game', text: 'Kelola Game' },
@@ -18,11 +18,11 @@ const sections = [
 <template>
   <main class="admin-workspace">
     <p v-if="session.loading" role="status">Memeriksa akses admin…</p>
-    <p v-else-if="!allowed" role="alert" class="guard">Akses ditolak. Halaman ini hanya untuk admin.</p>
+    <p v-else-if="!allowed" role="alert" class="guard">Akses ditolak. Masuk sebagai admin pada backend produksi untuk membuka halaman ini.</p>
     <template v-else>
       <div class="crumb"><RouterLink to="/">Mabar Finder</RouterLink><span>/</span> Admin Panel</div>
       <nav class="section-nav" aria-label="Bagian admin"><RouterLink v-for="section in sections" :key="section.to" :to="section.to">{{ section.text }}</RouterLink></nav>
-      <header class="page-head"><div><h1>{{ title }}</h1><p>{{ subtitle }}</p></div><span v-if="demoMode" class="demo-tag">Data sintetis</span><slot name="actions" /></header>
+      <header class="page-head"><div><h1>{{ title }}</h1><p>{{ subtitle }}</p></div><slot name="actions" /></header>
       <slot />
     </template>
   </main>

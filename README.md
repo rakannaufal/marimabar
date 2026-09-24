@@ -1,21 +1,21 @@
 # Mabar Finder
 
-Vue 3 + TypeScript + Vite + Supabase. Implementasi mengikuti `prd.md`, `Architecture.md`, `Rules.md`, `Schema.md`; `desain.md` dan seluruh `design/*/code.html` merupakan **desain asli**, bukan inspirasi opsional. Inventaris setiap halaman dan rute: `design-coverage.json`. Perilaku, privasi, dan angka harus tetap sesuai PRD; HTML Stitch memuat data contoh, bukan otorisasi produksi.
+Vue 3 + TypeScript + Vite + Supabase. `prd.md`, `Rules.md`, `Architecture.md`, dan `Schema.md` menjadi aturan produk. `desain.md` dan 32 `design/*/code.html` adalah rancangan asli; peta layar dan rute di `design-coverage.json`. Data contoh dalam HTML tidak digunakan sebagai data produksi.
 
-## Demo lokal tanpa Supabase
+## Menjalankan
 
-`npm install && npm run dev` tanpa `.env`. Banner **MODE DEMO — DATA SINTETIS** selalu terlihat; pilih persona Naya/Bima (pemain) atau Rani (admin) di banner, tanpa kata sandi. Coba cari/filter pemain, ubah profil sendiri, kirim/terima/tolak ajakan, buka chat, kirim pesan, bagikan ID game secara eksplisit, atau tambah opsi katalog/moderasi sebagai admin. Data demo disimpan hanya di `localStorage` browser pada key `mabar-finder.synthetic-demo.v1`; persona di `mabar-finder.synthetic-demo.persona.v1`. Hapus kedua key untuk reset. Data tersebut contoh sintetis, bukan akun atau data produksi; tidak dikirim ke Supabase. ID game privat tidak tampil di pencarian dan hanya dibaca peserta chat setelah dibagikan.
+1. `npm ci`.
+2. Buat proyek Supabase **development**. Jalankan migrasi `supabase/migrations/` secara berurutan, lalu katalog `supabase/seed.sql`. Baca `BACKEND.md` untuk bootstrap admin dan izin database.
+3. Salin `.env.example` menjadi `.env`; isi `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY` **publishable**, bukan service-role. Jangan commit `.env`.
+4. Konfigurasi Supabase Auth: verifikasi email aktif, Site URL origin aplikasi, redirect URL `http://127.0.0.1:5173/auth/callback*` (sesuaikan port/origin aktual, misalnya `5174`) dan origin produksi yang tepat, serta pemulihan kata sandi. Aktifkan provider Google di Supabase Auth dengan OAuth Client ID/Secret dari Google Cloud; daftarkan callback Google `https://<project-ref>.supabase.co/auth/v1/callback` sebagai Authorized redirect URI. Daftarkan origin aplikasi di Authorized JavaScript origins. Jangan simpan Client Secret di Vite. Jalankan migrasi `202609240003_google_adult_declaration.sql` sebelum memakai daftar Google. Jalankan `npm run dev`. Pendaftaran Google memerlukan deklarasi 18+ serta persetujuan kebijakan; akun Google baru yang masuk lewat tombol Masuk diarahkan ke Daftar untuk deklarasi. Ini pernyataan mandiri, bukan verifikasi usia.
+5. `npm run typecheck && npm test && npm run build`. Uji akun dewasa terverifikasi, akun admin yang di-bootstrap server-side, profil publik, ajakan, chat, laporan, blokir, dan RLS di proyek Supabase nyata.
 
-## Menjalankan dengan Supabase
+Tanpa variabel lingkungan, aplikasi menampilkan status **layanan belum dikonfigurasi**. Tidak ada persona atau data demo; tindakan data memerlukan Supabase.
 
-1. `npm install`
-2. Buat proyek Supabase development. Jalankan seluruh migrasi di `supabase/migrations/` berurutan; isi katalog dari `supabase/seed.sql` jika tersedia.
-3. Salin `.env.example` ke `.env`, isi `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY` (publishable). **Jangan masukkan `service_role` ke Vite.**
-4. Konfigurasi Supabase Auth Site URL `http://127.0.0.1:5173` dan redirect yang diizinkan; verifikasi email aktif.
-5. `npm run dev`. Uji dengan dua akun beremail terverifikasi; admin harus dibootstrap secara server-side sesuai `BACKEND.md`.
+## Atribut game
 
-`npm run build`, `npm test`, `npm run typecheck`. Tanpa kredensial, aplikasi menjalankan demo sintetis lokal terpisah; dengan kredensial valid, tetap memakai Supabase. Migrasi/RLS Auth dan alur multiuser harus diuji di proyek Supabase nyata sebelum rilis. Lihat `BACKEND.md` untuk prasyarat khusus backend.
+Migrasi `202609240004_game_attributes.sql` menambahkan 54 definisi atribut untuk Mobile Legends, PUBG Mobile, Free Fire, dan Valorant; jalankan setelah migrasi 001–003. Katalog opsi lama dan data profil tidak ditimpa. Admin dapat mengubah definisi di **Admin → Atribut Game**; input profil game ada pada **Onboarding langkah 2**, filter berdasarkan atribut muncul di **Cari teman**. Opsi katalog lama tetap terpisah. Nilai statistik/rank diisi pengguna dan **belum diverifikasi**. Daftar hero/karakter/agent dinamis belum tersedia karena belum ada sumber katalog tepercaya; filter tag belum ditampilkan sampai opsinya diisi admin. Rating dari pengguna lain, jumlah mabar berhasil, verifikasi akun game, serta status online/terakhir aktif belum disediakan sebagai filter karena belum ada data tepercaya. Jalankan `node tests/sql/game_attributes_smoke.mjs` untuk memeriksa skema dan perilaku SQL lokal. Akses dan RLS pada Supabase nyata tetap perlu diuji.
 
-## Batasan rilis
+## Sebelum produksi
 
-Kebijakan retensi, age assurance, tinjauan UU PDP, taksonomi rank/season, batas rate limit, dan uji beban belum diputuskan di PRD. Jangan promosikan ke production sebelum keputusan dan uji keamanan/akses selesai.
+Validasi privasi dan izin RLS memakai instance PostgreSQL/Supabase nyata beserta matriks peran. Pastikan pembatasan permintaan (rate limit), retensi dan penghapusan data, age assurance, kebijakan perlindungan data, izin aset desain, serta proses moderasi ditetapkan. Build lokal dan SQL smoke test bukan verifikasi deployment. Jangan rilis sampai pemeriksaan keamanan, legal, dan alur multiuser selesai.

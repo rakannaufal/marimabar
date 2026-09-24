@@ -1,13 +1,33 @@
 import { describe,it,expect,vi,beforeEach } from 'vitest'
 const {rpc,from}=vi.hoisted(()=>({rpc:vi.fn(),from:vi.fn()}))
 vi.mock('./supabase',()=>({requireBackend:()=>({rpc,from})}))
-import { searchProfiles,createInvite,reportUser,profileDetail,addCatalogOption,applyModerationAction } from './api'
+import { searchProfiles,listAttributeDefinitions,createInvite,reportUser,profileDetail,addCatalogOption,applyModerationAction } from './api'
 describe('kontrak API publik',()=>{
  beforeEach(()=>{rpc.mockReset();from.mockReset()})
  it('mengirim filter dan paginasi ke RPC server, bukan menyaring data pribadi di browser',async()=>{
   rpc.mockResolvedValue({data:[],error:null})
   expect(await searchProfiles('free-fire',{rank:'Heroic',roles:['Rusher','Support'],mode:'Clash Squad',ready:true},2)).toEqual([])
   expect(rpc).toHaveBeenCalledWith('search_game_profiles',{p_game_slug:'free-fire',p_rank:'Heroic',p_roles:['Rusher','Support'],p_mode:'Clash Squad',p_region:null,p_ready:true,p_limit:20,p_offset:40})
+ })
+ it('memuat definisi aktif terurut untuk satu game',async()=>{
+  const rows=[{key:'role',label:'Role'}]
+  const order=vi.fn().mockResolvedValue({data:rows,error:null})
+  const active=vi.fn().mockReturnValue({order})
+  const game=vi.fn().mockReturnValue({eq:active})
+  const select=vi.fn().mockReturnValue({eq:game})
+  from.mockReturnValue({select})
+  expect(await listAttributeDefinitions('game-1')).toEqual(rows)
+  expect(from).toHaveBeenCalledWith('game_attribute_definitions')
+  expect(select).toHaveBeenCalledWith('game_id,key,label,category,value_type,filter_type,options,range_min,range_max,unit,sort_order,active')
+  expect(game).toHaveBeenCalledWith('game_id','game-1')
+  expect(active).toHaveBeenCalledWith('active',true)
+  expect(order).toHaveBeenCalledWith('sort_order')
+ })
+ it('mengirim atribut dinamis ke RPC JSONB dengan paginasi',async()=>{
+  rpc.mockResolvedValue({data:[],error:null})
+  const attributes={role:['Tank'],rank_current:{min:'Epic',max:'Mythic'},voice_chat:false}
+  await searchProfiles('mlbb',{attributes},1)
+  expect(rpc).toHaveBeenCalledWith('search_game_profiles_by_attributes',{p_game_slug:'mlbb',p_filters:attributes,p_limit:20,p_offset:20})
  })
  it('mengembalikan detail kosong untuk profil yang tidak terlihat',async()=>{
   rpc.mockResolvedValue({data:[],error:null})

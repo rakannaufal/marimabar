@@ -2,9 +2,9 @@
 import { computed, onMounted, onServerPrefetch, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useSessionStore } from '../stores/session'
-import { demoMode } from '../lib/supabase'
-import { listGames, listOptions, ownGameProfiles, ownProfile, saveGameProfile, updateOwnProfile } from '../lib/api'
-import type { Game, GameProfile, Option } from '../lib/models'
+import { configured } from '../lib/supabase'
+import { listGames, listAttributeDefinitions, ownGameProfiles, ownProfile, saveGameProfile, updateOwnProfile } from '../lib/api'
+import type { AttributeDefinition, Game, GameProfile } from '../lib/models'
 
 const route = useRoute()
 const router = useRouter()
@@ -13,20 +13,24 @@ const step = computed(() => {
   const number = Number(route.params.step || route.query.step || 1)
   return [1, 2, 3].includes(number) ? number : 1
 })
-const loading = ref(true), busy = ref(false), error = ref(''), notice = ref('')
+const loading = ref(true), loaded = ref(false), busy = ref(false), error = ref(''), notice = ref('')
 const nickname = ref(''), bio = ref(''), timezone = ref('Asia/Jakarta')
-const games = ref<Game[]>([]), profiles = ref<GameProfile[]>([]), options = ref<Option[]>([])
-const selectedGame = ref(''), ign = ref(''), rankMode = ref(''), rank = ref(''), role = ref(''), region = ref('')
+const games = ref<Game[]>([]), profiles = ref<GameProfile[]>([])
+const definitions = ref<AttributeDefinition[]>([]), attributeValues = ref<Record<string, unknown>>({}), attributesLoading = ref(false), attributesLoaded = ref(false)
+const supportedDefinitions = computed(() => definitions.value.filter(definition => {
+  if (['mabar_rating', 'successful_mabar_count', 'account_verified', 'last_active'].includes(definition.key)) return false
+  const choices = Array.isArray(definition.options) && definition.options.length > 0
+  return (['single_select', 'multi_select', 'tag_multi', 'slider_tier', 'boolean_with_option'].includes(definition.value_type) && choices)
+    || ['boolean', 'number', 'decimal'].includes(definition.value_type)
+}))
+const selectedGame = ref(''), ign = ref('')
 const ready = ref(false), playStyle = ref('casual'), voice = ref('flexible')
 const selected = computed(() => games.value.find(game => game.id === selectedGame.value))
 const existing = computed(() => profiles.value.find(profile => profile.game_id === selectedGame.value))
-const choices = (kind: string) => options.value.filter(option => option.kind === kind)
-const ranks = computed(() => choices('rank').filter(option => !option.rank_mode_option_id || option.rank_mode_option_id === rankMode.value))
-const hasModeRanks = computed(() => choices('rank').some(option => option.rank_mode_option_id))
 const headings = ['Kenalan dulu, yuk!', 'Mau temenan buat main apa?', 'Terakhir nih, atur preferensi kamu']
 
 async function loadProfile() {
-  if (!session.user) { loading.value = false; return }
+  if (!configured || !session.user || !session.verified) { loading.value = false; return }
   try {
     const [profile, catalog, saved] = await Promise.all([ownProfile(session.user.id), listGames(), ownGameProfiles(session.user.id)])
     const data = profile as unknown as { display_name?: string; bio?: string | null; timezone?: string; availability_status?: string; play_style?: string; voice_preference?: string }
@@ -38,25 +42,45 @@ async function loadProfile() {
     voice.value = data.voice_preference || 'flexible'
     games.value = catalog
     profiles.value = saved
+    loaded.value = true
   } catch { error.value = 'Profil atau katalog belum bisa dimuat. Coba muat ulang halaman.' }
   finally { loading.value = false }
 }
 onMounted(loadProfile)
 onServerPrefetch(loadProfile)
 watch(selectedGame, async gameId => {
-  options.value = []
-  rankMode.value = ''; rank.value = ''; role.value = ''; region.value = ''; ign.value = existing.value?.ign || ''
+  definitions.value = []; attributesLoaded.value = false; attributeValues.value = {}
+  ign.value = existing.value?.ign || ''
   if (!gameId) return
+  attributesLoading.value = true; error.value = ''
   try {
-    const result = await listOptions(gameId)
-    if (selectedGame.value === gameId) options.value = result
-  } catch { error.value = 'Pilihan game belum bisa dimuat. Coba pilih game lain lalu kembali.' }
+    const schema = await listAttributeDefinitions(gameId)
+    if (selectedGame.value === gameId) {
+      definitions.value = schema
+      attributeValues.value = Object.fromEntries(Object.entries(existing.value?.attributes || {}).filter(([key]) => schema.some(definition => definition.key === key && definition.active)))
+      attributesLoaded.value = true
+    }
+  } catch { if (selectedGame.value === gameId) error.value = 'Atribut game belum bisa dimuat. Coba pilih game lain lalu kembali.' }
+  finally { if (selectedGame.value === gameId) attributesLoading.value = false }
 })
-watch(rankMode, () => { rank.value = '' })
+function setNumber(key: string, event: Event) {
+  const raw = (event.target as HTMLInputElement).value
+  if (raw === '') delete attributeValues.value[key]
+  else attributeValues.value[key] = Number(raw)
+}
+function setChoice(key: string, event: Event) {
+  const value = (event.target as HTMLSelectElement).value
+  if (value) attributeValues.value[key] = value
+  else delete attributeValues.value[key]
+}
+function toggleAttribute(key: string, choice: string) {
+  const selected = Array.isArray(attributeValues.value[key]) ? attributeValues.value[key] as string[] : []
+  attributeValues.value[key] = selected.includes(choice) ? selected.filter(value => value !== choice) : [...selected, choice]
+}
 watch(step, () => { error.value = ''; notice.value = '' })
 function go(next: number) { void router.push(`/onboarding/${next}`) }
 async function saveProfile() {
-  if (!session.user || busy.value) return
+  if (!configured || !session.user || !session.verified || !loaded.value || busy.value) return
   const name = nickname.value.trim(), about = bio.value.trim(), zone = timezone.value.trim()
   if (name.length < 2 || name.length > 60) { error.value = 'Nickname harus 2–60 karakter.'; return }
   if (about.length > 500) { error.value = 'Bio maksimal 500 karakter.'; return }
@@ -67,13 +91,13 @@ async function saveProfile() {
   finally { busy.value = false }
 }
 async function saveGame() {
-  if (!session.user || busy.value) return
+  if (!configured || !session.user || !session.verified || !loaded.value || busy.value) return
   if (!selectedGame.value) { error.value = 'Pilih satu game dulu, atau lewati langkah ini.'; return }
   if (ign.value.trim().length < 2 || ign.value.trim().length > 64) { error.value = 'Nama dalam game harus 2–64 karakter.'; return }
-  if (options.value.length === 0) { error.value = 'Pilihan game belum dimuat. Coba lagi.'; return }
-  if (hasModeRanks.value && rank.value && !rankMode.value) { error.value = 'Pilih mode sebelum memilih rank.'; return }
+  if (attributesLoading.value || !attributesLoaded.value) { error.value = 'Atribut game belum dimuat. Coba lagi.'; return }
   error.value = ''; busy.value = true
-  const input = { ign: ign.value.trim(), primary_rank_mode_option_id: rankMode.value || null, primary_rank_option_id: rank.value || null, primary_role_option_id: role.value || null, region_option_id: region.value || null }
+  const retained = Object.fromEntries(Object.entries(existing.value?.attributes || {}).filter(([key]) => !definitions.value.some(definition => definition.key === key)))
+  const input = { ign: ign.value.trim(), attributes: { ...retained, ...attributeValues.value } }
   try {
     await saveGameProfile(existing.value ? input : { ...input, user_id: session.user.id, game_id: selectedGame.value }, existing.value?.id)
     profiles.value = await ownGameProfiles(session.user.id)
@@ -82,7 +106,7 @@ async function saveGame() {
   finally { busy.value = false }
 }
 async function finish() {
-  if (!session.user || busy.value) return
+  if (!configured || !session.user || !session.verified || !loaded.value || busy.value) return
   error.value = ''; busy.value = true
   try {
     await updateOwnProfile(session.user.id, { availability_status: ready.value ? 'ready' : 'unavailable', play_style: playStyle.value, voice_preference: voice.value })
@@ -108,13 +132,15 @@ async function finish() {
         </ol>
         <h1 id="onboarding-title">{{ headings[step - 1] }}</h1>
         <p class="muted">{{ step === 1 ? 'Ceritain sedikit tentang dirimu sebelum mulai cari teman main.' : step === 2 ? 'Pilih game pertama. Rank dan role bisa kamu ubah lagi nanti.' : 'Status ini manual, bukan penanda online real-time.' }}</p>
-        <p v-if="!session.user" class="message" role="alert">Masuk dulu untuk menyimpan onboarding. <RouterLink to="/login">Masuk</RouterLink></p>
+        <p v-if="!configured" class="message" role="alert">Layanan akun belum dikonfigurasi. Onboarding belum tersedia.</p>
+        <p v-else-if="!session.user" class="message" role="alert">Masuk dulu untuk menyimpan onboarding. <RouterLink to="/login">Masuk</RouterLink></p>
+        <p v-else-if="!session.verified" class="message" role="alert">Verifikasi email dulu sebelum menyimpan profil. <RouterLink to="/verifikasi-email">Cek verifikasi</RouterLink></p>
         <template v-else>
-          <p v-if="demoMode" class="message" role="status">Mode demo: perubahan tersimpan hanya di perangkat ini untuk persona yang dipilih.</p>
           <p v-if="loading" role="status">Memuat profil…</p>
           <p v-if="error" class="error" role="alert">{{ error }}</p>
+          <button v-if="!loading && !loaded" type="button" class="secondary" @click="loadProfile">Coba lagi</button>
           <p v-if="notice" role="status">{{ notice }}</p>
-          <form v-if="!loading && step === 1" @submit.prevent="saveProfile">
+          <form v-if="!loading && loaded && step === 1" @submit.prevent="saveProfile">
             <div class="avatar-placeholder" aria-hidden="true">MF</div>
             <p class="hint">Unggah avatar belum tersedia. Kamu bisa lanjut tanpa foto.</p>
             <label for="onboard-name">Nickname</label><input id="onboard-name" v-model="nickname" autocomplete="nickname" required minlength="2" maxlength="60" placeholder="Nama yang dilihat teman mabar">
@@ -123,18 +149,28 @@ async function finish() {
             <label for="onboard-bio">Bio singkat <span class="muted">(opsional)</span></label><textarea id="onboard-bio" v-model="bio" maxlength="500" rows="3" placeholder="Biasanya main santai setelah kerja…"></textarea>
             <button class="primary" :disabled="busy">{{ busy ? 'Menyimpan…' : 'Lanjut' }}</button>
           </form>
-          <form v-if="!loading && step === 2" @submit.prevent="saveGame">
+          <form v-if="!loading && loaded && step === 2" @submit.prevent="saveGame">
             <fieldset class="game-field"><legend>Pilih game</legend><p v-if="!games.length" class="hint">Belum ada game tersedia. Kamu bisa melewati langkah ini.</p><div v-else class="game-grid"><label v-for="game in games" :key="game.id" class="game-card" :class="{ chosen: selectedGame === game.id }"><input v-model="selectedGame" type="radio" name="game" :value="game.id"><strong>{{ game.name }}</strong><small>{{ profiles.some(profile => profile.game_id === game.id) ? 'Profil tersimpan' : 'Pilih game' }}</small></label></div></fieldset>
             <template v-if="selected"><p class="hint">Data game diisi pengguna, belum terverifikasi. Jangan masukkan ID akun privat ke nama dalam game.</p><label for="onboard-ign">Nama dalam game</label><input id="onboard-ign" v-model="ign" required minlength="2" maxlength="64" autocomplete="off" placeholder="IGN kamu">
-              <div class="fields"><div v-if="choices('mode').length && hasModeRanks"><label for="onboard-mode">Mode rank</label><select id="onboard-mode" v-model="rankMode"><option value="">Belum dipilih</option><option v-for="option in choices('mode')" :key="option.id" :value="option.id">{{ option.label }}</option></select></div>
-                <div v-if="choices('rank').length"><label for="onboard-rank">Rank</label><select id="onboard-rank" v-model="rank" :disabled="hasModeRanks && !rankMode"><option value="">Belum dipilih</option><option v-for="option in ranks" :key="option.id" :value="option.id">{{ option.label }}</option></select></div>
-                <div v-if="choices('role').length"><label for="onboard-role">Role</label><select id="onboard-role" v-model="role"><option value="">Belum dipilih</option><option v-for="option in choices('role')" :key="option.id" :value="option.id">{{ option.label }}</option></select></div>
-                <div v-if="choices('region').length"><label for="onboard-region">Region</label><select id="onboard-region" v-model="region"><option value="">Belum dipilih</option><option v-for="option in choices('region')" :key="option.id" :value="option.id">{{ option.label }}</option></select></div>
+              <p v-if="attributesLoading" role="status">Memuat atribut game…</p>
+              <div v-for="definition in supportedDefinitions" :key="definition.key" class="attribute-field">
+                <label v-if="['single_select', 'slider_tier', 'boolean_with_option'].includes(definition.value_type)" :for="`attribute-${definition.key}`">{{ definition.label }}
+                  <select :id="`attribute-${definition.key}`" :value="attributeValues[definition.key] || ''" @change="setChoice(definition.key, $event)">
+                    <option value="">Belum dipilih</option><option v-for="choice in (definition.options as string[])" :key="choice" :value="choice">{{ choice }}</option>
+                  </select>
+                </label>
+                <fieldset v-else-if="['multi_select', 'tag_multi'].includes(definition.value_type)" class="attribute-group"><legend>{{ definition.label }}</legend>
+                  <label v-for="choice in (definition.options as string[])" :key="choice"><input type="checkbox" :checked="Array.isArray(attributeValues[definition.key]) && (attributeValues[definition.key] as string[]).includes(choice)" @change="toggleAttribute(definition.key, choice)"> {{ choice }}</label>
+                </fieldset>
+                <label v-else-if="definition.value_type === 'boolean'" class="check-field"><input type="checkbox" :checked="attributeValues[definition.key] === true" @change="attributeValues[definition.key] = ($event.target as HTMLInputElement).checked"> {{ definition.label }}</label>
+                <label v-else :for="`attribute-${definition.key}`">{{ definition.label }} {{ definition.unit || '' }}
+                  <input :id="`attribute-${definition.key}`" type="number" :step="definition.value_type === 'decimal' ? '0.01' : '1'" :min="definition.range_min ?? undefined" :max="definition.range_max ?? undefined" :value="attributeValues[definition.key] ?? ''" @input="setNumber(definition.key, $event)">
+                </label>
               </div>
             </template>
             <div class="actions"><button type="button" class="secondary" @click="go(1)">Kembali</button><button type="button" class="text-button" @click="go(3)">Lewati langkah ini</button><button class="primary" :disabled="busy || !games.length">{{ busy ? 'Menyimpan…' : 'Lanjut' }}</button></div>
           </form>
-          <form v-if="!loading && step === 3" @submit.prevent="finish">
+          <form v-if="!loading && loaded && step === 3" @submit.prevent="finish">
             <label class="toggle"><input v-model="ready" type="checkbox"><span><strong>Siap mabar sekarang</strong><small>Ubah kapan saja. Status ini bukan indikator online.</small></span></label>
             <label for="onboard-style">Gaya bermain</label><select id="onboard-style" v-model="playStyle"><option value="casual">Santai</option><option value="competitive">Kompetitif</option></select>
             <label for="onboard-voice">Komunikasi</label><select id="onboard-voice" v-model="voice"><option value="flexible">Fleksibel</option><option value="voice">Voice chat</option><option value="text">Teks</option></select>

@@ -15,7 +15,7 @@
   "login_register_mabar_finder": {"route":"/login","view":"AuthView"},
   "register_mabar_finder": {"route":"/register","view":"AuthView"},
   "lupa_password_mabar_finder": {"route":"/lupa-password","view":"AuthView"},
-  "reset_password_mabar_finder": {"route":"/reset-password/demo","view":"ResetPasswordView"},
+  "reset_password_mabar_finder": {"route":"/reset-password/recovery","view":"ResetPasswordView"},
   "verifikasi_email_mabar_finder": {"route":"/verifikasi-email","view":"VerificationView"},
   "verifikasi_berhasil_mabar_finder": {"route":"/verifikasi-email/berhasil","view":"VerificationView"},
   "onboarding_01_lengkapi_profil_umum": {"route":"/onboarding/1","view":"OnboardingView"},

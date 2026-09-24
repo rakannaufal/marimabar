@@ -1,12 +1,15 @@
 import { PGlite } from '@electric-sql/pglite'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 const db=new PGlite()
 const bootstrap=`create role anon;create role authenticated;create schema auth;create table auth.users(id uuid primary key,instance_id uuid,aud text,role text,email text,encrypted_password text,email_confirmed_at timestamptz,raw_user_meta_data jsonb default '{}'::jsonb);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema auth to authenticated;`
 try {
  await db.exec(bootstrap)
  console.log('Bootstrap OK')
- await db.exec(readFileSync(new URL('../../supabase/migrations/202609240001_mvp.sql',import.meta.url),'utf8'))
- console.log('Migration OK in PGlite')
+ const migrations=new URL('../../supabase/migrations/',import.meta.url)
+ for (const file of readdirSync(migrations).filter(name=>name.endsWith('.sql')).sort()) {
+  await db.exec(readFileSync(new URL(file,migrations),'utf8'))
+  console.log(`Migration ${file} OK in PGlite`)
+ }
  await db.exec(readFileSync(new URL('../../supabase/seed.sql',import.meta.url),'utf8'))
  console.log('Seed OK in PGlite')
  const {rows}=await db.query('select slug,name from public.games order by slug')

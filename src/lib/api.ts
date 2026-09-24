@@ -1,5 +1,5 @@
 import { requireBackend } from './supabase'
-import type { Game, Player, SearchFilters, Option, GameProfile, Invite, Conversation, ChatMessage } from './models'
+import type { Game, Player, SearchFilters, Option, AttributeDefinition, GameProfile, Invite, Conversation, ChatMessage } from './models'
 
 function unwrap<T>(result: {data:T|null;error:{message:string}|null}):T {
   if (result.error) throw new Error(result.error.message)
@@ -8,7 +8,9 @@ function unwrap<T>(result: {data:T|null;error:{message:string}|null}):T {
 }
 export async function listGames():Promise<Game[]> { return unwrap(await requireBackend().from('games').select('id,slug,name').eq('active',true).order('name')) as Game[] }
 export async function listOptions(gameId:string):Promise<Option[]> { return unwrap(await requireBackend().from('game_catalog_options').select('id,game_id,kind,code,label,sort_order,rank_mode_option_id').eq('game_id',gameId).eq('active',true).order('sort_order')) as Option[] }
+export async function listAttributeDefinitions(gameId:string):Promise<AttributeDefinition[]> { return unwrap(await requireBackend().from('game_attribute_definitions').select('game_id,key,label,category,value_type,filter_type,options,range_min,range_max,unit,sort_order,active').eq('game_id',gameId).eq('active',true).order('sort_order')) as AttributeDefinition[] }
 export async function searchProfiles(gameSlug:string,filters:SearchFilters={},page=0):Promise<Player[]> {
+  if (filters.attributes !== undefined) return unwrap(await requireBackend().rpc('search_game_profiles_by_attributes',{p_game_slug:gameSlug,p_filters:filters.attributes,p_limit:20,p_offset:page*20})) as Player[]
   return unwrap(await requireBackend().rpc('search_game_profiles',{p_game_slug:gameSlug,p_rank:filters.rank||null,p_roles:filters.roles?.length?filters.roles:null,p_mode:filters.mode||null,p_region:filters.region||null,p_ready:filters.ready??null,p_limit:20,p_offset:page*20})) as Player[]
 }
 export async function profileDetail(id:string):Promise<Player|null> { const data=unwrap(await requireBackend().rpc('public_profile_detail',{p_id:id})); return Array.isArray(data)?(data[0]||null):data as Player|null }

@@ -2,12 +2,12 @@
 import { computed, onMounted, ref } from 'vue'
 import AdminShell from '../components/AdminShell.vue'
 import { useSessionStore } from '../stores/session'
-import { requireBackend } from '../lib/supabase'
+import { requireBackend, supabase } from '../lib/supabase'
 
 type Game={id:string;slug:string;name:string;active:boolean}
 const session=useSessionStore(),games=ref<Game[]>([]),filter=ref('all'),search=ref(''),loading=ref(false),error=ref('')
 const visible=computed(()=>games.value.filter(g=>(filter.value==='all'||g.active===(filter.value==='active'))&&`${g.name} ${g.slug}`.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())))
-async function load(){if(!session.user||!session.admin)return;loading.value=true;error.value='';try{const {data,error:failure}=await requireBackend().from('games').select('id,slug,name,active').order('name');if(failure)throw failure;games.value=(data||[]) as Game[]}catch{error.value='Katalog game tidak dapat dimuat. Periksa izin admin dan koneksi.'}finally{loading.value=false}}
+async function load(){if(!supabase||!session.user||!session.admin)return;loading.value=true;error.value='';try{const {data,error:failure}=await requireBackend().from('games').select('id,slug,name,active').order('name');if(failure)throw failure;games.value=(data||[]) as Game[]}catch{error.value='Katalog game tidak dapat dimuat. Periksa izin admin dan koneksi.'}finally{loading.value=false}}
 onMounted(load)
 </script>
 <template>

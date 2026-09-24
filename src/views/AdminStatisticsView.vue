@@ -2,14 +2,14 @@
 import { computed, onMounted, ref } from 'vue'
 import AdminShell from '../components/AdminShell.vue'
 import { useSessionStore } from '../stores/session'
-import { requireBackend } from '../lib/supabase'
+import { requireBackend, supabase } from '../lib/supabase'
 
 type Game = { id:string; name:string; slug:string; active:boolean }
 type Report = { id:string; status:string; category:string; created_at:string }
 const session=useSessionStore(), games=ref<Game[]>([]),reports=ref<Report[]>([]),loading=ref(false),error=ref('')
 const pending=computed(()=>reports.value.filter(r=>r.status==='new'||r.status==='open'||r.status==='reviewing').length)
 const reportLimited=computed(()=>reports.value.length===100)
-async function load(){if(!session.user||!session.admin)return;loading.value=true;error.value='';try{
+async function load(){if(!supabase||!session.user||!session.admin)return;loading.value=true;error.value='';try{
   const [g,r]=await Promise.all([requireBackend().from('games').select('id,name,slug,active').order('name'),requireBackend().from('reports').select('id,status,category,created_at').order('created_at',{ascending:false}).limit(100)])
   if(g.error)throw g.error;if(r.error)throw r.error
   games.value=(g.data||[]) as Game[];reports.value=(r.data||[]) as Report[]

@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useSessionStore } from '../stores/session'
-import { configured, demoMode } from '../lib/supabase'
+import { configured } from '../lib/supabase'
 import {
   blockUser, listConversations, listGames, listInvites, listMessages,
   ownGameProfiles, readSharedGameId, reportUser, searchProfiles, sendMessage, shareGameId,
@@ -67,7 +67,7 @@ function time(value: string) {
 
 async function load() {
   const version = ++loadVersion
-  if ((!configured && !demoMode) || !userId.value) { loading.value = false; return }
+  if (!configured || !userId.value) { loading.value = false; return }
   loading.value = true
   error.value = ''
   try {
@@ -188,7 +188,7 @@ onMounted(load)
   <main class="chat">
     <nav class="breadcrumb" aria-label="Breadcrumb"><RouterLink to="/">Beranda</RouterLink><span>/</span><RouterLink to="/request-mabar">Request mabar</RouterLink><span>/</span><span>Pesan</span></nav>
     <header class="page-head"><h1>Pesan</h1><p>Ajakan sudah diterima? Lanjut ngobrol di sini. ID game tetap privat sampai pemilik membagikannya sendiri.</p></header>
-    <p v-if="!configured && !demoMode" role="alert" class="state">Layanan belum dikonfigurasi.</p>
+    <p v-if="!configured" role="alert" class="state">Layanan belum dikonfigurasi.</p>
     <p v-else-if="!userId" class="state">Silakan <RouterLink to="/login">masuk</RouterLink> untuk melihat pesan.</p>
     <template v-else>
       <p v-if="!session.verified" class="warning" role="status">Verifikasi email sebelum mengirim pesan atau membagikan ID game.</p>

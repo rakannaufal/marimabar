@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import { listGames, listInvites, listOptions, ownGameProfiles, ownProfile, searchProfiles } from '../lib/api'
 import type { Game, GameProfile, Invite, Option, Player } from '../lib/models'
 import { useSessionStore } from '../stores/session'
+import { configured } from '../lib/supabase'
 
 const session = useSessionStore()
 const games = ref<Game[]>([]), profiles = ref<GameProfile[]>([]), invites = ref<Invite[]>([])
@@ -17,7 +18,7 @@ const inviteStatus = (invite: Invite) => invite.status === 'pending' && new Date
 const dateLabel = (value: string) => new Date(value).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
 async function load() {
   const id = session.user?.id
-  if (!id) { loading.value = false; return }
+  if (!configured || !id) { loading.value = false; return }
   loading.value = true; error.value = ''
   try {
     const [person, catalog, owned, requests] = await Promise.all([ownProfile(id), listGames(), ownGameProfiles(id), listInvites(id)])
@@ -45,7 +46,9 @@ onServerPrefetch(load)
   <main class="dashboard">
     <div class="dashboard-inner">
       <header class="dashboard-heading"><div><h1>Beranda, {{ name || 'Teman' }}!</h1><p>Profil game dan ajakan mabar kamu ada di sini.</p></div><div class="heading-actions"><RouterLink class="request-pill" to="/request-mabar"><strong>{{ incoming.length }}</strong> Permintaan Masuk</RouterLink><RouterLink class="primary" to="/pilih-game">Cari Teman Mabar</RouterLink></div></header>
-      <p v-if="loading" class="state" role="status">Memuat beranda…</p>
+      <p v-if="!configured" class="state" role="alert">Layanan belum dikonfigurasi.</p>
+      <p v-else-if="!session.user" class="state">Silakan <RouterLink to="/login">masuk</RouterLink> untuk melihat beranda pribadi.</p>
+      <p v-else-if="loading" class="state" role="status">Memuat beranda…</p>
       <div v-else-if="error" class="state" role="alert"><p>{{ error }}</p><button type="button" class="secondary" @click="load">Coba lagi</button></div>
       <template v-else>
         <section class="profile-section" aria-labelledby="my-games"><div class="section-heading"><h2 id="my-games">Profil Game Kamu</h2><span>{{ profiles.length }} Game Terhubung</span></div>

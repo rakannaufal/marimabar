@@ -2,6 +2,7 @@
 import { computed, onMounted, onServerPrefetch, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { listGames, searchProfiles } from '../lib/api'
+import { configured } from '../lib/supabase'
 import type { Game } from '../lib/models'
 
 type Category = 'all' | 'moba' | 'fps' | 'br'
@@ -22,6 +23,7 @@ const loading = ref(true)
 const error = ref('')
 const visibleGames = computed(() => games.value.filter(game => category.value === 'all' || details[game.slug]?.category === category.value))
 async function load() {
+  if (!configured) { loading.value = false; return }
   loading.value = true; error.value = ''
   try {
     games.value = await listGames()
@@ -45,7 +47,8 @@ onServerPrefetch(load)
       <div class="filters" role="group" aria-label="Kategori game">
         <button v-for="item in categories" :key="item.key" type="button" :aria-pressed="category === item.key" @click="category = item.key">{{ item.name }}</button>
       </div>
-      <p v-if="loading" class="state" role="status">Memuat pilihan game…</p>
+      <p v-if="!configured" class="state" role="alert">Layanan belum dikonfigurasi.</p>
+      <p v-else-if="loading" class="state" role="status">Memuat pilihan game…</p>
       <div v-else-if="error" class="state" role="alert"><p>{{ error }}</p><button class="secondary" type="button" @click="load">Coba lagi</button></div>
       <p v-else-if="!games.length" class="state">Belum ada game tersedia. Coba lagi nanti, ya.</p>
       <div v-else class="game-grid">

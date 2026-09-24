@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { demoMode } from './lib/supabase'
-import { demoPersonas } from './lib/demo'
+import { configured } from './lib/supabase'
 import { useSessionStore } from './stores/session'
 
 const session = useSessionStore()
@@ -20,28 +19,11 @@ async function logout() {
   try { await session.signOut(); mobileOpen.value = false; await router.push('/') }
   catch (error) { alert(error instanceof Error ? error.message : 'Gagal keluar') }
 }
-async function loginDemo(id: string) {
-  if (!id) return
-  try {
-    await session.signInDemo(id)
-    mobileOpen.value = false
-    await router.push(id === 'demo-admin' ? '/admin/statistik' : '/beranda')
-  } catch (error) { alert(error instanceof Error ? error.message : 'Gagal mengganti persona') }
-}
 </script>
 
 <template>
   <div class="app-shell" :class="{ 'app-shell--dashboard': dashboard, 'app-shell--admin': adminArea }">
-    <div v-if="demoMode" role="status" class="config-banner">
-      <div class="config-banner__inner container">
-        <span><strong>Mode demo: data sintetis.</strong> Hanya tersimpan di browser ini, bukan pengguna nyata atau layanan Supabase.</span>
-        <label for="demo-persona">Coba sebagai</label>
-        <select id="demo-persona" :value="session.user?.id || ''" @change="loginDemo(($event.target as HTMLSelectElement).value)">
-          <option value="" disabled>Pilih persona demo</option>
-          <option v-for="persona in demoPersonas" :key="persona.id" :value="persona.id">{{ persona.name }}</option>
-        </select>
-      </div>
-    </div>
+    <div v-if="!configured" role="alert" class="config-banner"><div class="config-banner__inner container">Layanan belum dikonfigurasi. Hubungkan Supabase untuk masuk dan memuat data.</div></div>
 
     <template v-if="dashboard">
       <div class="dashboard-layout">

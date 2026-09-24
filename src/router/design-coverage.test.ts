@@ -24,7 +24,8 @@ describe('original design inventory',()=>{
    const path=entry.route.split('?')[0]
    const matched=router.resolve(path).matched.at(-1)
    expect(matched,name).toBeDefined()
-   expect(matched?.path,name).not.toBe('/:pathMatch(.*)*')
+   if(entry.view==='NotFoundView') expect(matched?.path,name).toBe('/:pathMatch(.*)*')
+   else expect(matched?.path,name).not.toBe('/:pathMatch(.*)*')
   }
  })
 })

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onServerPrefetch, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { listGames } from '../lib/api'
+import { configured } from '../lib/supabase'
 import type { Game } from '../lib/models'
 
 const games = ref<Game[]>([])
@@ -14,6 +15,7 @@ const gameDescriptions: Record<string, { genre: string; description: string; ico
   'free-fire': { genre: 'SURVIVAL CLASH', description: 'Cari teman untuk main squad.', icon: '♨' },
 }
 async function loadGames() {
+  if (!configured) { loading.value = false; return }
   loading.value = true
   error.value = ''
   try { games.value = await listGames() }
@@ -21,6 +23,7 @@ async function loadGames() {
   finally { loading.value = false }
 }
 onMounted(loadGames)
+onServerPrefetch(loadGames)
 </script>
 
 <template>
@@ -41,7 +44,8 @@ onMounted(loadGames)
 
     <section id="pilih-game" class="page-shell home-section" aria-labelledby="games-title">
       <div class="section-heading"><div><span class="section-kicker">✦ PILIHAN KOMUNITAS</span><h2 id="games-title">Game Populer di Mabar Finder</h2><p>Pilih arena favoritmu dan temukan profil pemain yang bisa kamu ajak mabar.</p></div></div>
-      <p v-if="loading" class="state-card" role="status">Memuat pilihan game…</p>
+      <p v-if="!configured" class="state-card" role="alert">Layanan belum dikonfigurasi.</p>
+      <p v-else-if="loading" class="state-card" role="status">Memuat pilihan game…</p>
       <div v-else-if="error" class="state-card" role="alert"><h3>Game belum tampil</h3><p>{{ error }}</p><button class="button button--outline" type="button" @click="loadGames">Coba lagi</button></div>
       <div v-else-if="!games.length" class="state-card"><h3>Belum ada game tersedia</h3><p>Coba kembali nanti untuk melihat pilihan game.</p></div>
       <div v-else class="game-grid">

@@ -78,5 +78,76 @@ begin
  then raise exception 'block did not hide search'; end if;
  raise notice 'PASS: projection, owner RLS, role, pending both ways, chat, explicit ID, block';
 end $$;
+-- Restricted users cannot bypass the account lock via direct table grants.
+reset role;
+update public.profiles set account_status='restricted' where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3';
+set local role authenticated;
+select set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3',true);
+reset role;
+insert into public.notifications(user_id,kind,reference_type,reference_id)
+values('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3','moderation','moderation_action',gen_random_uuid());
+set local role authenticated;
+do $$ declare denied boolean;
+begin
+ denied:=false;
+ begin insert into public.blocks(blocker_id,blocked_id) values(auth.uid(),'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1');
+ exception when others then denied:=true; end;
+ if not denied then raise exception 'restricted account inserted block'; end if;
+ denied:=false;
+ begin update public.notifications set read_at=now() where user_id=auth.uid();
+ exception when others then denied:=true; end;
+ if not denied and exists(select 1 from public.notifications where user_id=auth.uid() and read_at is not null) then
+   raise exception 'restricted account updated notification'; end if;
+end $$;
+-- Report triage, appeal, and audit require DB-enforced identities and immutable audit.
+reset role;
+delete from public.blocks where blocker_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2'
+ and blocked_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1';
+update public.user_roles set role='admin' where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4';
+update public.profiles set adult_declared_at=null where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4';
+set local role authenticated;
+select set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4',true);
+do $$ begin
+ if private.is_admin() then raise exception 'undeclared admin privilege'; end if;
+end $$;
+reset role;
+update public.profiles set adult_declared_at=now() where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4';
+set local role authenticated;
+select set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',true);
+do $$ declare report_id uuid; action_id uuid; appeal_id uuid; denied boolean;
+begin
+ report_id:=public.create_report('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','spam','Repeated unsolicited messages','profile',
+  (select id from public.game_profiles where user_id=auth.uid()));
+ raise exception 'unreachable';
+exception when others then
+ if sqlerrm='unreachable' then raise exception 'report accepted mismatched owner'; end if;
+end $$;
+do $$ declare report_id uuid; action_id uuid; appeal_id uuid; denied boolean;
+begin
+ report_id:=public.create_report('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','spam','Repeated unsolicited messages','profile',
+  (select id from public.search_game_profiles('mlbb') where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2'));
+ if exists(select 1 from public.reports where id=report_id) then raise exception 'report payload exposed to reporter'; end if;
+ if (select count(*) from public.my_report_status() where id=report_id and status='new')<>1 then
+  raise exception 'report status projection missing'; end if;
+ if exists(select 1 from public.my_report_status() s where to_jsonb(s) ? 'description' or to_jsonb(s) ? 'evidence_path') then
+  raise exception 'report payload exposed by projection'; end if;
+ perform set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4',true);
+ perform public.review_report(report_id,'reviewing');
+ if (select status from public.reports where id=report_id)<>'reviewing' then raise exception 'report triage failed'; end if;
+ action_id:=public.apply_moderation_action('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','restrict_account','Repeated harassment',report_id);
+ if (select count(*) from public.moderation_actions where id=action_id and admin_id=auth.uid())<>1 then raise exception 'moderation audit absent'; end if;
+ perform public.review_report(report_id,'resolved');
+ perform set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',true);
+ appeal_id:=public.submit_appeal(action_id,'Please review this restriction');
+ denied:=false;
+ begin perform public.review_report(report_id,'dismissed'); exception when others then denied:=true; end;
+ if not denied then raise exception 'user triaged report'; end if;
+ perform set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa4',true);
+ perform public.review_appeal(appeal_id,'reviewing');
+ if (select status from public.appeals where id=appeal_id)<>'reviewing' then raise exception 'appeal triage failed'; end if;
+ denied:=false;
+ begin update public.moderation_actions set reason='tamper' where id=action_id; exception when insufficient_privilege then denied:=true; end;
+ if not denied then raise exception 'audit mutated'; end if;
+end $$;
 reset role;
 rollback;

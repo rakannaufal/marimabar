@@ -7,7 +7,7 @@ import router from './index'
 
 const implementedRoutes = [
  '/', '/tentang', '/syarat-ketentuan', '/kebijakan-privasi',
- '/login', '/register', '/lupa-password', '/reset-password/:token',
+ '/login', '/register', '/lupa-password', '/reset-password', '/reset-password/:token',
  '/verifikasi-email', '/verifikasi-email/berhasil', '/onboarding/:step?',
  '/beranda', '/komunitas', '/pilih-game', '/cari/:gameSlug', '/profil/:id',
  '/profil-saya', '/request-mabar', '/pesan', '/admin', '/admin/game',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { demoMode, supabase } from '../lib/supabase'
+import { configured, supabase } from '../lib/supabase'
 import { useSessionStore } from '../stores/session'
 
 const route = useRoute(), session = useSessionStore()
 const success = computed(() => route.path.endsWith('/berhasil'))
-const email = computed(() => demoMode ? '' : session.user?.email || '')
+const email = computed(() => session.user?.email || '')
 const busy = ref(false), error = ref(''), notice = ref(''), seconds = ref(0)
 let timer: ReturnType<typeof setInterval> | undefined
 function cooldown() {
@@ -14,10 +14,10 @@ function cooldown() {
   if (timer) clearInterval(timer)
   timer = setInterval(() => { seconds.value--; if (seconds.value <= 0 && timer) { clearInterval(timer); timer = undefined } }, 1000)
 }
-onMounted(() => { if (!success.value && email.value && !session.verified && !demoMode) cooldown() })
+onMounted(() => { if (!success.value && email.value && !session.verified && configured) cooldown() })
 onUnmounted(() => { if (timer) clearInterval(timer) })
 async function resend() {
-  if (!email.value || demoMode || !supabase || seconds.value || busy.value) return
+  if (!email.value || !configured || !supabase || seconds.value || busy.value) return
   error.value = ''; notice.value = ''; busy.value = true
   try {
     const { error: failure } = await supabase.auth.resend({ type: 'signup', email: email.value, options: { emailRedirectTo: new URL('/verifikasi-email/berhasil', location.origin).href } })
@@ -30,8 +30,8 @@ async function resend() {
 </script>
 <template>
   <main class="verification"><RouterLink class="brand" to="/">Mabar Finder</RouterLink>
-    <section class="card" aria-labelledby="verify-title"><div class="symbol" aria-hidden="true">{{ success && (session.verified || demoMode) ? '✓' : '✉' }}</div>
-      <template v-if="demoMode"><h1 id="verify-title">Verifikasi tidak diperlukan di demo</h1><p>Mode demo tidak mengirim email atau tautan verifikasi. Pilih persona untuk menjelajah.</p><RouterLink class="primary" to="/login">Pilih persona demo</RouterLink></template>
+    <section class="card" aria-labelledby="verify-title"><div class="symbol" aria-hidden="true">{{ success && session.verified ? '✓' : '✉' }}</div>
+      <template v-if="!configured"><h1 id="verify-title">Verifikasi belum tersedia</h1><p role="alert">Layanan akun belum dikonfigurasi. Tidak ada email verifikasi yang dikirim dari situs ini.</p><RouterLink class="primary" to="/login">Kembali ke masuk</RouterLink></template>
       <template v-else-if="success && session.verified"><h1 id="verify-title">Yes! Email kamu berhasil diverifikasi</h1><p>Akunmu siap. Lengkapi profil dan game sebelum cari teman mabar.</p><RouterLink class="primary" to="/onboarding/1">Lanjut ke Onboarding</RouterLink></template>
       <template v-else-if="success"><h1 id="verify-title">Tautan belum terverifikasi</h1><p>Tautan mungkin sudah kedaluwarsa atau belum selesai diproses. Masuk kembali untuk mengecek status akun.</p><RouterLink class="primary" to="/login">Kembali ke masuk</RouterLink></template>
       <template v-else-if="session.verified"><h1 id="verify-title">Email kamu sudah terverifikasi</h1><p>Kamu bisa lanjut melengkapi profil.</p><RouterLink class="primary" to="/onboarding/1">Lanjut ke Onboarding</RouterLink></template>
