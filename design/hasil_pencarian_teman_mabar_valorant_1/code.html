@@ -1,0 +1,742 @@
+<!DOCTYPE html><html class="dark" lang="id" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Mabar Finder - Temukan Kawan Mabar Santai &amp; Kompetitif</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "background": "#13131b",
+          "error": "#ffb4ab",
+          "on-error-container": "#ffdad6",
+          "text-muted": "#A0A0B2",
+          "on-primary": "#253500",
+          "surface": "#1E1E29",
+          "surface-bright": "#393841",
+          "tertiary-fixed-dim": "#d7c0cf",
+          "on-secondary-fixed": "#170065",
+          "on-surface-variant": "#c3c9af",
+          "border-subtle": "#2E2E3E",
+          "outline": "#8d937c",
+          "surface-container-high": "#292932",
+          "secondary-fixed-dim": "#c7bfff",
+          "outline-variant": "#434935",
+          "on-secondary": "#2a039d",
+          "primary-container": "#bef443",
+          "paper": "#F5F3EE",
+          "error-container": "#93000a",
+          "inverse-surface": "#e4e1ed",
+          "surface-container": "#1f1f27",
+          "surface-elevated": "#272736",
+          "on-secondary-fixed-variant": "#422db2",
+          "tertiary-fixed": "#f4dceb",
+          "primary-fixed-dim": "#a3d724",
+          "surface-container-lowest": "#0d0d15",
+          "on-background": "#e4e1ed",
+          "on-primary-fixed": "#141f00",
+          "on-tertiary-fixed": "#251722",
+          "on-error": "#690005",
+          "surface-variant": "#34343d",
+          "tertiary": "#ffffff",
+          "on-tertiary": "#3b2c37",
+          "surface-container-low": "#1b1b23",
+          "secondary-container": "#422db2",
+          "base-ink": "#14141C",
+          "surface-tint": "#a3d724",
+          "surface-container-highest": "#34343d",
+          "on-surface": "#e4e1ed",
+          "inverse-on-surface": "#303038",
+          "on-secondary-container": "#b4abff",
+          "alert-coral": "#FF6B5E",
+          "inverse-primary": "#4b6700",
+          "secondary-fixed": "#e4dfff",
+          "primary-fixed": "#bef443",
+          "primary": "#ffffff",
+          "on-tertiary-container": "#725f6c",
+          "signal-teal": "#4ADE80",
+          "surface-dim": "#13131b",
+          "tertiary-container": "#f4dceb",
+          "on-tertiary-fixed-variant": "#53424e",
+          "on-primary-container": "#506e00",
+          "on-primary-fixed-variant": "#384e00",
+          "secondary": "#c7bfff"
+        },
+        "borderRadius": {
+          "DEFAULT": "1rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter-desktop": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-xl": "2rem",
+          "margin-tablet": "2rem",
+          "space-xs": "0.25rem",
+          "space-md": "1rem",
+          "space-sm": "0.5rem",
+          "gutter": "1.25rem",
+          "margin": "1rem",
+          "margin-desktop": "3rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "display-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "700"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-xl": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "30px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-xl-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "label-lg": [
+            "15px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-base-ink font-body-md text-body-md text-on-surface"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-base-ink/90 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.45)]"><div class="h-20 max-w-7xl mx-auto px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm" data-path="beranda" href="#"><div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-fixed text-[24px]">sports_esports</span></div><span class="font-headline-md text-headline-md text-paper tracking-tight">Mabar<span class="text-primary-fixed">Finder</span></span></a><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-md text-label-md rounded-full px-space-md py-space-xs"><a class="px-space-md py-space-xs font-label-md text-label-md text-text-muted hover:text-paper hover:bg-surface-elevated rounded-full transition-colors" data-path="beranda" href="#">Beranda</a><a aria-current="page" class="transition-colors bg-primary-container text-on-primary-container font-label-md text-label-md rounded-full px-space-md py-space-xs" data-path="cari-lobi" href="#">Cari Lobi</a><a class="px-space-md py-space-xs font-label-md text-label-md text-text-muted hover:text-paper hover:bg-surface-elevated rounded-full transition-colors" data-path="pilih-game" href="#">Pilih Game</a><a class="px-space-md py-space-xs font-label-md text-label-md text-text-muted hover:text-paper hover:bg-surface-elevated rounded-full transition-colors" data-path="komunitas" href="#">Komunitas</a><a class="px-space-md py-space-xs font-label-md text-label-md text-text-muted hover:text-paper hover:bg-surface-elevated rounded-full transition-colors" data-path="turnamen" href="#">Turnamen</a></nav></div><div class="hidden md:flex items-center flex-1 max-w-xs mx-space-sm"><div class="w-full flex items-center bg-base-ink rounded-full px-space-md py-space-xs border border-border-subtle focus-within:border-primary-fixed transition-colors"><span class="material-symbols-outlined text-text-muted text-[20px] mr-space-xs">search</span><input class="bg-transparent w-full text-paper placeholder:text-text-muted font-body-sm text-body-sm focus:outline-none" placeholder="Cari game, squad, lobi..." type="text"></div></div><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-space-xs bg-surface-elevated px-space-md py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-signal-teal"></span><span class="font-label-sm text-label-sm text-paper">Party Aktif</span><span class="font-label-sm text-label-sm text-secondary">(3/5)</span></div><button class="relative p-space-xs rounded-full text-text-muted hover:text-paper hover:bg-surface-elevated transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-alert-coral"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-10 h-10 rounded-full p-[2px] bg-secondary flex items-center justify-center"><div class="w-full h-full rounded-full bg-surface-container-high flex items-center justify-center"><span class="material-symbols-outlined text-paper text-[20px]">person</span></div></div><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-paper leading-tight">Arthur_Slayer</span><span class="font-label-sm text-label-sm text-secondary leading-tight">Tier Mythic</span></div></div></div></div></header><main class="w-full pt-20 bg-base-ink min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-margin lg:px-margin-desktop py-space-lg flex flex-col gap-space-lg">
+<!-- Breadcrumb & Top Bar -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-body-sm font-body-sm text-text-muted">
+<a class="hover:text-paper transition-colors" data-path="beranda" href="#">Beranda</a>
+<span class="material-symbols-outlined text-[16px] text-border-subtle">chevron_right</span>
+<a class="hover:text-paper transition-colors" data-path="pilih-game" href="#">Pilih Game</a>
+<span class="material-symbols-outlined text-[16px] text-border-subtle">chevron_right</span>
+<span class="text-paper">Valorant</span>
+<span class="material-symbols-outlined text-[16px] text-border-subtle">chevron_right</span>
+<span class="text-primary-fixed font-label-sm">Cari Teman Mabar</span>
+</nav>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-xs">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="inline-flex items-center gap-space-xs w-fit bg-surface-elevated text-secondary px-space-md py-space-xs rounded-full font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-signal-teal"></span>
+<span class="">Matchmaking Khusus Valorant Indonesia</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-paper tracking-tight">Teman Mabar Valorant</h1>
+<p class="font-body-md text-body-md text-text-muted">Temukan rekan tim sefrekuensi, siap komunikasi rapi, dan no toxic untuk push rank atau unrated santai.</p>
+</div>
+<!-- Quick Action Right -->
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="flex items-center gap-space-xs bg-surface-elevated hover:bg-surface text-paper px-space-md py-space-sm rounded-full font-label-md text-label-md transition-colors shadow-sm" type="button">
+
+<span class="">Bikin Lobi Mabar</span>
+</button>
+</div>
+</div>
+<!-- Main Two-Column Layout -->
+<div class="flex flex-col lg:flex-row items-start gap-space-lg w-full">
+<!-- LEFT COLUMN: Filter Panel (Fixed 280px on desktop) -->
+<aside class="w-full lg:w-[280px] shrink-0 flex flex-col gap-space-md bg-surface p-space-lg rounded-2xl shadow-sm">
+<!-- Filter Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-paper font-headline-sm text-headline-sm">
+<div class="w-7 h-7 rounded-full bg-surface-elevated flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">tune</span>
+</div>
+<span class="">Filter</span>
+</div>
+<button class="text-text-muted hover:text-paper font-label-sm text-label-sm transition-colors" type="button">
+            Reset
+          </button>
+</div>
+<!-- Filter 1: Tier Rank -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Tier Rank</span>
+<div class="flex flex-col gap-space-xs">
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl bg-surface-elevated cursor-pointer">
+<span class="font-body-sm text-body-sm text-paper">Radiant &amp; Immortal</span>
+<input checked="" class="w-4 h-4 rounded-full accent-primary-fixed bg-base-ink" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl hover:bg-surface-elevated/60 transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-text-muted">Ascendant &amp; Diamond</span>
+<input class="w-4 h-4 rounded-full accent-primary-fixed bg-base-ink" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl hover:bg-surface-elevated/60 transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-text-muted">Platinum &amp; Gold</span>
+<input class="w-4 h-4 rounded-full accent-primary-fixed bg-base-ink" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl hover:bg-surface-elevated/60 transition-colors cursor-pointer">
+<span class="font-body-sm text-body-sm text-text-muted">Silver &amp; Bronze</span>
+<input class="w-4 h-4 rounded-full accent-primary-fixed bg-base-ink" type="checkbox">
+</label>
+</div>
+<!-- MMR Range Slider -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex justify-between items-center text-label-sm font-label-sm text-text-muted">
+<span class="">Rentang MMR</span>
+<span class="text-primary-fixed font-bold">250+ RR</span>
+</div>
+<input class="w-full h-1.5 bg-surface-elevated rounded-full accent-primary-fixed cursor-pointer" max="500" min="0" type="range" value="320">
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-elevated"></div>
+<!-- Filter 2: Main Role -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Role Utama</span>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="py-space-xs px-space-sm rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm text-center" type="button">
+              Initiator
+            </button>
+<button class="py-space-xs px-space-sm rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high font-label-sm text-label-sm text-center transition-colors" type="button">
+              Duelist
+            </button>
+<button class="py-space-xs px-space-sm rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high font-label-sm text-label-sm text-center transition-colors" type="button">
+              Controller
+            </button>
+<button class="py-space-xs px-space-sm rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high font-label-sm text-label-sm text-center transition-colors" type="button">
+              Sentinel
+            </button>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-elevated"></div>
+<!-- Filter 3: Voice Chat -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Voice Chat</span>
+<div class="flex flex-col gap-space-xs">
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl bg-surface-elevated cursor-pointer">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">headset_mic</span>
+<span class="font-body-sm text-body-sm text-paper">Discord ON</span>
+</div>
+<input checked="" class="w-4 h-4 rounded-full accent-primary-fixed" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl bg-surface-elevated cursor-pointer">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-signal-teal">volume_up</span>
+<span class="font-body-sm text-body-sm text-paper">In-Game Mic</span>
+</div>
+<input checked="" class="w-4 h-4 rounded-full accent-primary-fixed" type="checkbox">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl hover:bg-surface-elevated/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">mic_off</span>
+<span class="font-body-sm text-body-sm text-text-muted">Listen Only</span>
+</div>
+<input class="w-4 h-4 rounded-full accent-primary-fixed" type="checkbox">
+</label>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-elevated"></div>
+<!-- Filter 4: Server / Region -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Server Region</span>
+<div class="flex flex-col gap-space-xs">
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl bg-surface-elevated cursor-pointer">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-signal-teal"></span>
+<span class="font-body-sm text-body-sm text-paper">Jakarta (ID)</span>
+</div>
+<input checked="" class="w-4 h-4 accent-primary-fixed" name="server" type="radio">
+</label>
+<label class="flex items-center justify-between p-space-xs px-space-sm rounded-xl hover:bg-surface-elevated/60 transition-colors cursor-pointer">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-text-muted"></span>
+<span class="font-body-sm text-body-sm text-text-muted">SG / APAC</span>
+</div>
+<input class="w-4 h-4 accent-primary-fixed" name="server" type="radio">
+</label>
+</div>
+</div>
+<!-- Filter Bottom Actions -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<button class="w-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+            Terapkan Filter
+          </button>
+<button class="text-center font-label-sm text-label-sm text-text-muted hover:text-paper hover:underline transition-colors" type="button">
+            Reset ke Pengaturan Awal
+          </button>
+</div>
+</aside>
+<!-- RIGHT COLUMN: Search Results & Players -->
+<section class="flex-1 w-full flex flex-col gap-space-md">
+<!-- Results Header Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface p-space-md rounded-2xl">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-primary-fixed leading-none">214</span>
+<span class="font-body-md text-body-md text-paper">pemain ditemukan</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Urutkan:</span>
+<div class="relative inline-block">
+<select class="appearance-none bg-surface-elevated text-paper font-label-sm text-label-sm py-space-xs pl-space-md pr-space-xl rounded-full focus:outline-none cursor-pointer">
+<option>Paling relevan</option>
+<option>Rank tertinggi</option>
+<option>Win rate terbaik</option>
+<option>Baru aktif</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-text-muted">
+                expand_more
+              </span>
+</div>
+</div>
+</div>
+<!-- Active Filter Chips -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="inline-flex items-center gap-space-xs bg-surface-elevated px-space-md py-space-xs rounded-full font-label-sm text-label-sm text-paper">
+<span class="">Immortal 1-3</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs bg-surface-elevated px-space-md py-space-xs rounded-full font-label-sm text-label-sm text-paper">
+<span class="">Initiator / Duelist</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs bg-surface-elevated px-space-md py-space-xs rounded-full font-label-sm text-label-sm text-paper">
+<span class="">Jakarta Server</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs bg-surface-elevated px-space-md py-space-xs rounded-full font-label-sm text-label-sm text-paper">
+<span class="">Discord ON</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<button class="text-primary-fixed hover:underline font-label-sm text-label-sm ml-space-xs" type="button">
+            Hapus Semua
+          </button>
+</div>
+<!-- Vertical Player Cards List (5 Players) -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1: Valk_Arthur -->
+<article class="bg-surface p-space-lg rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md transition-all hover:bg-surface-elevated shadow-sm group">
+<div class="flex items-start gap-space-md min-w-0">
+<!-- Avatar with Ring & Tier Badge -->
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full p-[2.5px] bg-secondary flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Stylized portrait of a young Southeast Asian competitive tactical shooter esports player with headset, violet neon ambient lighting, confident warm expression, dark minimalist backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFWbRuMDqIJfA3qefbiStbS-VBYAYMKx5DfkNZ_VbUQ4eILvwCBfxa052PrloiMuJ6uzCdK0Z1QeE2CkIrBBvNzVWxb539wq7z7kM3sNdftUYWhm3if-1JpE0D0ajQUZgjfYP53S6a9mD9ZBlHG3qkkU8xEAnzlUgLqvJTrMS-tsK0wUycdlYwf6yUJSoQeNTcaWi174zOyYiJd1hNcd8dUTaCfNdOxi_ZP0hoYzYbjIYaBkGEOuSB">
+</div>
+</div>
+<!-- Online Status Dot -->
+<span class="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<!-- Center Info -->
+<div class="flex flex-col gap-space-xs min-w-0">
+<!-- Row 1: Nickname, Verified, Compatibility -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-paper">Valk_Arthur</h2>
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    98% Sefrekuensi
+                  </span>
+</div>
+<!-- Row 2: Sub-info -->
+<div class="flex flex-wrap items-center gap-x-space-md text-body-sm font-body-sm text-text-muted">
+<div class="flex items-center gap-1">
+
+<span class="">Online 4 mnt lalu</span>
+</div>
+<span class="">Server Jakarta</span>
+<span class="text-secondary font-label-sm">Reputasi S (99.8%)</span>
+</div>
+<!-- Row 3: Attribute Pills -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="bg-secondary text-on-secondary-fixed font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Immortal 2
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Main: Sova &amp; Fade
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Winrate 68.4%
+                  </span>
+<span class="bg-surface-container-high text-signal-teal font-label-sm text-label-sm px-space-md py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">headset_mic</span>
+                    Discord Ready
+                  </span>
+<span class="bg-surface-elevated text-text-muted font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    KDA 1.42
+                  </span>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center w-full md:w-auto justify-end pt-space-sm md:pt-0">
+<button class="w-10 h-10 rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm px-space-lg py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+                Kirim Request
+              </button>
+</div>
+</article>
+<!-- Card 2: Reyhan_Viper -->
+<article class="bg-surface p-space-lg rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md transition-all hover:bg-surface-elevated shadow-sm group">
+<div class="flex items-start gap-space-md min-w-0">
+<!-- Avatar -->
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full p-[2.5px] bg-secondary flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Digital art avatar of a female gamer with neon green streaks in dark hair wearing a comfortable gaming headset, friendly smile, purple darkroom background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaqeGnHS8_6TdUYEDx18lDIk3x38TVbCtZF_fpMEoMqsPzawcJ9tideuxgj4CKUAAkTKZSyh1bnnmR1x6veqmnSyBiuZnCdscktJn79honHfNlAqzJfRAAIYajXW0miat-WFoNafSZKM8CN6D416e9d3mr2lJmOvQouxHbfq8tZqLQHIQJmyPJZgKVQfSJ7GZfSG2oBaWOb4hWotOdom4AXYYvFE-xpiifb64KnY4dX4Xw_XsgpErh">
+</div>
+</div>
+<span class="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<!-- Center Info -->
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-paper">Reyhan_Viper</h2>
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    95% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md text-body-sm font-body-sm text-text-muted">
+<div class="flex items-center gap-1">
+
+<span class="">Online 12 mnt lalu</span>
+</div>
+<span class="">Server Jakarta</span>
+<span class="text-secondary font-label-sm">Reputasi S (99.2%)</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="bg-secondary text-on-secondary-fixed font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Immortal 3
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Main: Viper &amp; Omen
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Winrate 64.1%
+                  </span>
+<span class="bg-surface-container-high text-signal-teal font-label-sm text-label-sm px-space-md py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">volume_up</span>
+                    In-Game Mic
+                  </span>
+<span class="bg-surface-elevated text-text-muted font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    KDA 1.28
+                  </span>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center w-full md:w-auto justify-end pt-space-sm md:pt-0">
+<button class="w-10 h-10 rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm px-space-lg py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+                Kirim Request
+              </button>
+</div>
+</article>
+<!-- Card 3: Kazuya_Sova -->
+<article class="bg-surface p-space-lg rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md transition-all hover:bg-surface-elevated shadow-sm group">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full p-[2.5px] bg-secondary flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Anime style gamer avatar icon of a calm strategist with glasses, glowing neon accents, deep navy and lime colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtidZPyxs9lAgpxA76zhWLX3yfScscfDvFywFwrIRuFb48nSyNcyVIF2caju1N_QiPT0W0bcocQSlDtVZNy1Pdgw2mMyEDxglq9WdjY5DfXnPm-h9aRZFkGT_-mGiT3ewC2W6AE72GKsp_jeJFj9ta31k1ph_MAaCAJXY9JKmEJ_7eELeqhIPaNiYcJKa4031euVT27MdM0uefhEHlLZnj_Xu_SmolkALnOuWoikL3_G3S1k1seC-h">
+</div>
+</div>
+<span class="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-paper">Kazuya_Sova</h2>
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    94% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md text-body-sm font-body-sm text-text-muted">
+<div class="flex items-center gap-1">
+
+<span class="">Online 1 mnt lalu</span>
+</div>
+<span class="">Server Jakarta</span>
+<span class="text-secondary font-label-sm">Reputasi S (100%)</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="bg-secondary text-on-secondary-fixed font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Radiant Top 400
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Main: Sova &amp; Breach
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Winrate 71.2%
+                  </span>
+<span class="bg-surface-container-high text-signal-teal font-label-sm text-label-sm px-space-md py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">headset_mic</span>
+                    Discord Call
+                  </span>
+<span class="bg-surface-elevated text-text-muted font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    KDA 1.58
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center w-full md:w-auto justify-end pt-space-sm md:pt-0">
+<button class="w-10 h-10 rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm px-space-lg py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+                Kirim Request
+              </button>
+</div>
+</article>
+<!-- Card 4: Clara_Jett -->
+<article class="bg-surface p-space-lg rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md transition-all hover:bg-surface-elevated shadow-sm group">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full p-[2.5px] bg-secondary flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Modern 3D digital illustration avatar of a cheerful young adult streamer wearing white gaming headphones, soft violet ambient tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC1OeJK9d2MuivhkaFEeZZqzQNT5Mcwwg7qNz77eysKfrHyg_DfiJHYPWuQQrEjzU_-cDxv7CVmsnZkzmqT3Lz_y34HUJFjfGxGMQ0z7kLoGBDvQRhj787YZHwdf3a13OzE8xajevM9Wws_8EIl11VeEw4xoUeEj9g8vntFfeKnsz42aIOUMRKtD6vlCAq893pg_gUzQiKImofH9u_yVMSAXECyPSRUXUN5aMmHX-0Hr8QLsGKdsPP">
+</div>
+</div>
+<span class="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-paper">Clara_Jett</h2>
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    91% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md text-body-sm font-body-sm text-text-muted">
+<div class="flex items-center gap-1">
+
+<span class="">Online 25 mnt lalu</span>
+</div>
+<span class="">Server Jakarta</span>
+<span class="text-secondary font-label-sm">Reputasi S (98.9%)</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="bg-secondary text-on-secondary-fixed font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Immortal 1
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Main: Jett &amp; Reyna
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Winrate 59.8%
+                  </span>
+<span class="bg-surface-container-high text-signal-teal font-label-sm text-label-sm px-space-md py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">headset_mic</span>
+                    Discord Active
+                  </span>
+<span class="bg-surface-elevated text-text-muted font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    KDA 1.35
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center w-full md:w-auto justify-end pt-space-sm md:pt-0">
+<button class="w-10 h-10 rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm px-space-lg py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+                Kirim Request
+              </button>
+</div>
+</article>
+<!-- Card 5: Raka_Fade -->
+<article class="bg-surface p-space-lg rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md transition-all hover:bg-surface-elevated shadow-sm group">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full p-[2.5px] bg-secondary flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Cool esports athlete avatar with subtle neon edge lighting, dark tactical hoodie, determined warm smirk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYG7AD3P9KHcMJRKbg4ePGx37b1J6QS00bmoN33LY89PU7yZqoT9GSV8cQ39Jtwyfc8KxvUAv1NgJFLpqfYxfhCKUZVfSaX_6s-Wiuqa9S1KczSIuV7CAXfOzClkwuXqw7L1gQplPeXfTQc4IAm5FYVsdcG8WwbVT5njqE61HK2MOsuW_gRS0-X_nwTYS3zRNLUXiQBXjWOcnOOkDndKXHWXRJtwb_PA7HQIcuYv-KtscZ_umVPhxx">
+</div>
+</div>
+<span class="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-paper">Raka_Fade</h2>
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    90% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md text-body-sm font-body-sm text-text-muted">
+<div class="flex items-center gap-1">
+
+<span class="">Online 30 mnt lalu</span>
+</div>
+<span class="">Server Jakarta</span>
+<span class="text-secondary font-label-sm">Reputasi S (99.0%)</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="bg-secondary text-on-secondary-fixed font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Immortal 2
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Main: Fade &amp; Skye
+                  </span>
+<span class="bg-surface-elevated text-paper font-label-sm text-label-sm px-space-md py-0.5 rounded-full">
+                    Winrate 62.0%
+                  </span>
+<span class="bg-surface-container-high text-signal-teal font-label-sm text-label-sm px-space-md py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">headset_mic</span>
+                    Discord Standby
+                  </span>
+<span class="bg-surface-elevated text-text-muted font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">
+                    KDA 1.39
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center w-full md:w-auto justify-end pt-space-sm md:pt-0">
+<button class="w-10 h-10 rounded-full bg-surface-elevated text-paper hover:bg-surface-container-high flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-headline-sm text-headline-sm px-space-lg py-space-sm rounded-full transition-all shadow-[0_8px_24px_rgba(200,255,77,0.18)]" type="button">
+                Kirim Request
+              </button>
+</div>
+</article>
+</div>
+<!-- Educational Prompt / Empty State Alternative Banner -->
+<div class="w-full bg-surface p-space-lg rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-space-md mt-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-elevated flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-secondary">groups</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-paper">Mau cari tim full-party (5-man)?</span>
+<span class="font-body-sm text-body-sm text-text-muted">Kamu juga bisa langsung membuka lobi party sendiri dan biarkan pemain lain yang mendaftar.</span>
+</div>
+</div>
+<button class="whitespace-nowrap bg-surface-elevated hover:bg-surface-container-high text-paper font-label-md text-label-md px-space-lg py-space-sm rounded-full transition-colors shrink-0" type="button">
+            Buat Lobi Terbuka
+          </button>
+</div>
+</section>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest"><div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-fixed text-[18px]">sports_esports</span></div><span class="font-headline-sm text-headline-sm text-paper">Mabar Finder</span></div><div class="flex flex-wrap items-center justify-center gap-space-lg"><a class="font-body-sm text-body-sm text-text-muted hover:text-paper transition-colors" data-path="aturan-lobi" href="#">Aturan Lobi</a><a class="font-body-sm text-body-sm text-text-muted hover:text-paper transition-colors" data-path="bantuan" href="#">Bantuan &amp; FAQ</a><a class="font-body-sm text-body-sm text-text-muted hover:text-paper transition-colors" data-path="privasi" href="#">Kebijakan Privasi</a></div><div class="font-body-sm text-body-sm text-text-muted">© 2024 Mabar Finder. Hak cipta dilindungi.</div></div></footer>
+
+</body></html>

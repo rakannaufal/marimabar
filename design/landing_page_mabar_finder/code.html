@@ -1,0 +1,397 @@
+<!DOCTYPE html><html class="dark" lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Mabar Finder</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed": "#bef443", "signal-online": "#4ADE80", "surface-variant": "#34343d", "primary-container": "#bef443", "surface-container": "#1f1f27", "surface-container-highest": "#34343d", "surface-card": "#1E1E29", "surface-elevated": "#282837", "surface-container-high": "#292932", "on-surface": "#e4e1ed", "on-primary-container": "#506e00", "on-error-container": "#ffdad6", "surface-bright": "#393841", "on-tertiary-fixed-variant": "#005227", "secondary": "#c7bfff", "on-primary": "#253500", "on-surface-variant": "#c3c9af", "inverse-primary": "#4b6700", "error-container": "#93000a", "outline-variant": "#434935", "background": "#13131b", "on-primary-fixed": "#141f00", "on-secondary": "#2a039d", "inverse-on-surface": "#303038", "tertiary-fixed": "#6dfe9c", "error": "#ffb4ab", "on-secondary-fixed-variant": "#422db2", "surface-tint": "#a3d724", "primary-fixed-dim": "#a3d724", "tertiary": "#ffffff", "on-background": "#e4e1ed", "on-primary-fixed-variant": "#384e00", "outline": "#8d937c", "on-secondary-container": "#b4abff", "secondary-fixed": "#e4dfff", "surface": "#13131b", "surface-container-low": "#1b1b23", "text-muted": "#9E9EAF", "signal-alert": "#FF6B5E", "surface-dim": "#13131b", "on-error": "#690005", "tertiary-fixed-dim": "#4de082", "on-tertiary-container": "#007439", "surface-border": "#2E2E3E", "tertiary-container": "#6dfe9c", "inverse-surface": "#e4e1ed", "secondary-container": "#422db2", "on-tertiary-fixed": "#00210c", "surface-base": "#14141C", "primary": "#ffffff", "on-secondary-fixed": "#170065", "text-primary": "#F5F3EE", "secondary-fixed-dim": "#c7bfff", "surface-container-lowest": "#0d0d15", "on-tertiary": "#003919" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "margin": "2rem", "margin-mobile": "1rem", "gutter": "1.25rem", "space-sm": "0.5rem", "gutter-mobile": "0.75rem", "space-xl": "2rem", "space-2xl": "3rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "label-sm": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "body-md": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-mobile": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface-base/90 backdrop-blur-xl border-b border-surface-border"><div class="h-20 max-w-[1280px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #8b7cff
+- Font: outfit
+- Mode: dark
+- Roundness: rounded-full
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WVGu7QN06P3COnwjivvkOs5Be3HU6HcxBwlL3oopeOhXJ1bnFQg5QC9-Awsj6L1l3lM4Kib-7e2ck25uEIcqn1ETBPzGzHGLUAdy1tmHojk7xeuCnymZs8D2ABT-v3yv4YJy7jtzJn30N2V4Pb4GyZLVDv_NU8bevadCK2GT_YS55QSyOYZUTgsCtv78vMs7jSe5nO6rxopoZqtcjZu1zArNqOcPx5mufMWRZosxO6IyHx-xClpPFLHNY"><a class="font-headline-sm text-headline-sm text-text-primary tracking-tight" data-path="cari-teman" href="#">Mabar Finder</a></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-text-primary font-bold"><a aria-current="page" class="transition-colors text-text-primary font-bold" data-path="cari-teman" href="#">Cari Teman</a><a class="font-label-lg text-label-lg text-text-muted hover:text-text-primary transition-colors" data-path="game" href="#">Game</a><a class="font-label-lg text-label-lg text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Tentang</a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-xs rounded-full border border-surface-border text-text-primary font-label-md text-label-md hover:border-secondary hover:text-secondary transition-all" data-path="masuk" href="#">Masuk</a><a class="inline-flex items-center justify-center px-space-md py-space-xs rounded-full bg-primary-container text-on-primary-fixed font-label-md text-label-md shadow-[0_0_20px_-2px_rgba(200,255,77,0.35)] hover:scale-[1.02] transition-transform" data-path="daftar" href="#">Daftar</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- Ambient Gradient Background Lights -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-40 -left-40 w-96 h-96 bg-secondary-container/20 rounded-full blur-[128px] pointer-events-none"></div>
+<div class="absolute top-80 right-0 w-[30rem] h-[30rem] bg-primary-fixed/10 rounded-full blur-[140px] pointer-events-none"></div>
+<!-- 1. Hero Section (Two-column Asymmetric Layout) -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin pt-space-xl pb-space-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left Column (55%) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md z-10">
+<div class="inline-flex items-center gap-space-xs self-start px-space-md py-space-xs rounded-full bg-surface-card shadow-sm">
+
+<span class="font-label-md text-label-md text-text-primary tracking-wide">45.000+ gamer aktif malam ini</span>
+</div>
+<h1 class="font-display text-display font-extrabold text-text-primary leading-tight tracking-tight">
+            Temukan rekan satu tim, <span class="text-primary-fixed">bukan cuma</span> satu server
+          </h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-xl leading-relaxed">
+            Platform mabar santai tapi serius push rank. Cocokkan gaya main, filter role favorit, dan langsung gas mabar bareng squad yang satu frekuensi tanpa drama solo queue.
+          </p>
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+<a class="inline-flex items-center justify-center gap-space-xs px-space-xl py-space-sm rounded-full bg-primary-fixed text-on-primary-fixed font-label-lg text-label-lg shadow-[0_0_24px_-2px_rgba(200,255,77,0.45)] hover:scale-[1.03] transition-all duration-200 cursor-pointer" data-path="daftar" href="#">
+<span class="">Mulai Cari Teman Mabar</span>
+
+</a>
+<a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-elevated text-text-primary font-label-lg text-label-lg hover:text-secondary hover:bg-surface-container-highest transition-all duration-200" href="#cara-kerja">
+
+<span class="">Lihat Cara Kerja</span>
+</a>
+</div>
+<div class="flex items-center gap-space-lg pt-space-md text-text-muted">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-signal-online text-[18px]">verified</span>
+<span class="font-body-sm text-body-sm">Anti Toxic &amp; Troll</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">mic</span>
+<span class="font-body-sm text-body-sm">Direct Discord Voice</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">bolt</span>
+<span class="font-body-sm text-body-sm">Match Cepat &lt; 2 Mnt</span>
+</div>
+</div>
+</div>
+<!-- Right Column (45%) -->
+<div class="lg:col-span-5 relative mt-space-md lg:mt-0">
+<!-- Game Capture Container -->
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-2xl bg-surface-card">
+<img alt="In-game dynamic screenshot" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1X6nNMlqOhjGm35QfOU0ZEqZ6JFXd6tWJf7WsAZHOTUO7lzh9Cgx21sG_OGGwE6w7BjK6ZUsVYyQbK6ffIhbhArOuwhru873fn5odCi1Ba9kvuCppV2c6WkzztUBL3LTleQVgRyExBptazn-q74uFmzspWS5sDuo5lorihUTOvs-iphke3nrqvoVBL_KB0wmBMdnfvG1GLh-00L7SY5fE5gIw3iK8Vr8j1rezO3yok_v0IdQYYVIxpl6g">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-base via-surface-base/40 to-transparent"></div>
+<div class="absolute top-space-md left-space-md px-space-sm py-space-xs rounded-full bg-surface-base/80 backdrop-blur-md flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">sports_esports</span>
+<span class="">Live In-Game Lobby</span>
+</div>
+</div>
+<!-- Floating Player Profile Card -->
+<div class="relative lg:-mt-24 lg:-ml-6 mx-space-sm lg:mx-0 p-space-md rounded-lg bg-surface-card/95 backdrop-blur-xl shadow-[0_16px_40px_-8px_rgba(0,0,0,0.6)]">
+<div class="flex items-start justify-between gap-space-md pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<div class="w-12 h-12 rounded-full p-0.5 bg-secondary flex items-center justify-center">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close up gamer avatar portrait with cyberpunk lighting and purple glow on face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYHm8TylkiUoKMcxN2zSVKS4He0QgcdWgU4p4rx9K3W51e7lPJkl-3999DFx1JDdBCHHguSG-XrDVTeoDxaPc4Qo8ca0pGpW7pur5x_6YbHP18M1K1uvyfASf_XP1ezYcLcmI3fv7E7rWb8E3WPFICw6gS-jFfAAg9v60JizP63HN3NsonMvLgs7SEZLhDTY5lGe807JsmZRZUa-10NwX764zMRbbtzUaG2z5p3Ac3r_vRDxp3AVGd">
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-signal-online rounded-full ring-2 ring-surface-card"></span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary">Valk_Arthur</span>
+<span class="material-symbols-outlined text-signal-online text-[16px]">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Valorant Enthusiast</p>
+</div>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-sm text-label-sm">
+                Immortal 3
+              </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs py-space-sm my-space-xs bg-surface-container rounded-DEFAULT px-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Main Role</span>
+<span class="font-label-md text-label-md text-text-primary">Initiator</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Win Rate</span>
+<span class="font-label-md text-label-md text-primary-fixed">68.4%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Reputasi</span>
+<div class="flex items-center gap-0.5 text-text-primary font-label-md text-label-md">
+<span class="">5.0</span>
+<span class="text-primary-fixed text-label-sm">★</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs gap-space-sm">
+<div class="flex items-center gap-space-xs text-signal-online font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">mic</span>
+<span class="">Discord Voice ON</span>
+</div>
+<button class="px-space-md py-space-xs rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md shadow-[0_0_16px_rgba(200,255,77,0.35)] hover:scale-105 active:scale-95 transition-all">
+                Ajak Mabar Sekarang
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Seksi Game Populer -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin py-space-2xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-xl">
+<div>
+<div class="inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md uppercase tracking-wider pb-space-xs">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+<span class="">Pilihan Komunitas</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-text-primary">
+            Game Populer di Mabar Finder
+          </h2>
+<p class="font-body-md text-body-md text-text-muted max-w-xl pt-space-xs">
+            Pilih arena tempurmu dan langsung temukan lobi yang siap tancap gas tanpa drama solo queue.
+          </p>
+</div>
+<a class="inline-flex items-center gap-space-xs text-secondary hover:text-text-primary font-label-md text-label-md transition-colors" data-path="game" href="#">
+<span class="">Semua 36+ Game</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Game 1: Mobile Legends -->
+<div class="group p-space-lg rounded-lg bg-surface-card hover:bg-surface-elevated transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-space-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-amber-400">shield</span>
+</div>
+<span class="inline-block px-space-xs py-0.5 rounded-full bg-surface-container text-amber-300 font-label-sm text-label-sm mb-space-xs">
+              Ranked 5v5 MOBA
+            </span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary-fixed transition-colors">
+              Mobile Legends
+            </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">
+              Push rank Mythic Glory bareng roamer &amp; jungler peka map.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-extrabold text-primary-fixed">14.820</span>
+<span class="w-2 h-2 rounded-full bg-signal-online"></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Pemain Aktif Lobi</span>
+</div>
+</div>
+<!-- Game 2: Valorant -->
+<div class="group p-space-lg rounded-lg bg-surface-card hover:bg-surface-elevated transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-rose-500/10 flex items-center justify-center mb-space-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-rose-400">my_location</span>
+</div>
+<span class="inline-block px-space-xs py-0.5 rounded-full bg-surface-container text-rose-300 font-label-sm text-label-sm mb-space-xs">
+              Hero Tactical FPS
+            </span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary-fixed transition-colors">
+              Valorant
+            </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">
+              Cari duelist gacor dan controller siap line-up smoke presisi.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-extrabold text-primary-fixed">12.950</span>
+<span class="w-2 h-2 rounded-full bg-signal-online"></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Pemain Aktif Lobi</span>
+</div>
+</div>
+<!-- Game 3: PUBG Mobile -->
+<div class="group p-space-lg rounded-lg bg-surface-card hover:bg-surface-elevated transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-space-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-orange-400">military_tech</span>
+</div>
+<span class="inline-block px-space-xs py-0.5 rounded-full bg-surface-container text-orange-300 font-label-sm text-label-sm mb-space-xs">
+              Squad Battle Royale
+            </span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary-fixed transition-colors">
+              PUBG Mobile
+            </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">
+              Drop Erangel or Sanhok dengan IGL handal dan sniper tenang.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-extrabold text-primary-fixed">9.410</span>
+<span class="w-2 h-2 rounded-full bg-signal-online"></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Pemain Aktif Lobi</span>
+</div>
+</div>
+<!-- Game 4: Free Fire -->
+<div class="group p-space-lg rounded-lg bg-surface-card hover:bg-surface-elevated transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-amber-600/10 flex items-center justify-center mb-space-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-amber-500">local_fire_department</span>
+</div>
+<span class="inline-block px-space-xs py-0.5 rounded-full bg-surface-container text-amber-300 font-label-sm text-label-sm mb-space-xs">
+              Fast Survival Clash
+            </span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary-fixed transition-colors">
+              Free Fire MAX
+            </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">
+              Fast tempo clash squad, rusher barbar tanpa takut kena tabrak.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-extrabold text-primary-fixed">8.120</span>
+<span class="w-2 h-2 rounded-full bg-signal-online"></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Pemain Aktif Lobi</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Seksi Cara Kerja -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin py-space-2xl" id="cara-kerja">
+<div class="text-center max-w-2xl mx-auto pb-space-2xl">
+<div class="inline-flex items-center gap-space-xs text-primary-fixed font-label-md text-label-md uppercase tracking-wider pb-space-xs">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+<span class="">Proses Anti Ribet</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-text-primary">
+          Cara Mulai Mabar Asik
+        </h2>
+<p class="font-body-md text-body-md text-text-muted pt-space-xs">
+          Gak pakai ribet, hitungan menit udah kumpul di voice lobi bareng kawan baru.
+        </p>
+</div>
+<div class="flex flex-col">
+<!-- Step 01 -->
+<div class="py-space-xl flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start md:items-center gap-space-lg md:w-2/3">
+<span class="font-display text-display font-black text-primary-fixed tracking-tight opacity-90">
+              01
+            </span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+                Buat Profil Game
+              </h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+                Tentukan role andalanmu, tier rank sekarang, dan preferensi komunikasi seperti open mic santai atau fokus callout kompetitif.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pl-16 md:pl-0">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-text-muted font-label-sm text-label-sm">Role Tag</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-text-muted font-label-sm text-label-sm">Mic On / Off</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-secondary font-label-sm text-label-sm">Auto Rank Sync</span>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-highest"></div>
+<!-- Step 02 -->
+<div class="py-space-xl flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start md:items-center gap-space-lg md:w-2/3">
+<span class="font-display text-display font-black text-primary-fixed tracking-tight opacity-90">
+              02
+            </span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+                Pilih Game &amp; Pasang Filter
+              </h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+                Filter rekan mabar berdasarkan rank sepadan, server terdekat, jam main favorit, sampai tujuan fun match atau push rank.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pl-16 md:pl-0">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-text-muted font-label-sm text-label-sm">KD / Winrate</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-text-muted font-label-sm text-label-sm">Zona Waktu</span>
+<span class="px-space-md py-space-xs rounded-full bg-primary-fixed/20 text-primary-fixed font-label-sm text-label-sm">Smart Filter</span>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-highest"></div>
+<!-- Step 03 -->
+<div class="py-space-xl flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start md:items-center gap-space-lg md:w-2/3">
+<span class="font-display text-display font-black text-primary-fixed tracking-tight opacity-90">
+              03
+            </span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+                Kirim Request Mabar
+              </h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+                Klik ajak lobi, connect Discord dengan satu klik, dan nikmati game tanpa takut kena troll atau rekan AFK mendadak.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pl-16 md:pl-0">
+<span class="px-space-md py-space-xs rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center gap-1">
+ Instant Party
+            </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container text-signal-online font-label-sm text-label-sm">100% Reputasi Aman</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Seksi Testimoni Singkat -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin py-space-2xl">
+<div class="relative p-space-xl md:p-space-2xl rounded-lg bg-surface-card shadow-2xl overflow-hidden">
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-12 -left-12 w-64 h-64 bg-primary-fixed/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
+<div class="flex items-center gap-1 text-primary-fixed mb-space-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<blockquote class="font-headline-md text-headline-md font-semibold text-text-primary leading-snug mb-space-xl">
+            “Udah capek solo queue sering dapet tim toxic yang gampang nyerah. Di Mabar Finder nemu temen main yang sefrekuensi, komunikasinya santai, dan saling support sampai win streak!”
+          </blockquote>
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-full p-0.5 bg-secondary flex items-center justify-center">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of an Indonesian male esports gamer with gaming headset in a warm neon lit bedroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEB_5YADh-CFmct9Ii4Mei5w3sPAqlGFKiRIHcf2rzxOjNDXbs4kbv3NQCN5bjE9zjQ7Ll1E6XVkCXLTgYceYcx7Cq_1qIa8gPlm2hVwwIqQ3SptFbPz0uJc3cpiw3LyFZ5EV4nfC48sZR9KBFScD2o41nkSvZPYgE7n_JDJwTr_xkN95yipBd3Z7eO39h7TFzeQZhGPAIsNRdafNiew9tOYM7MGQEMWgSnrGczLJMzQgKWmUSc-BI">
+</div>
+<div class="text-left">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary">Reza “Nexus” Pratama</span>
+<span class="material-symbols-outlined text-signal-online text-[18px]">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+                IGL Valorant • Tier Immortal • Member Terverifikasi
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Banner Konversi Penutup (Call to Action Card) -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin pt-space-md pb-space-2xl">
+<div class="relative p-space-xl md:p-space-2xl rounded-lg bg-surface-elevated shadow-2xl overflow-hidden text-center flex flex-col items-center">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary-container/20 via-transparent to-primary-container/20 pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-primary-fixed/20 text-primary-fixed flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[36px]">sports_esports</span>
+</div>
+<h2 class="font-display text-display font-extrabold text-text-primary mb-space-sm leading-tight">
+            Siap Tinggalkan Derita Solo Queue?
+          </h2>
+<p class="font-body-lg text-body-lg text-text-muted mb-space-xl leading-relaxed">
+            Bergabung dengan puluhan ribu gamer Indonesia lainnya. Gratis, tanpa ribet, langsung ketemu kawan mabar malam ini.
+          </p>
+<div class="flex flex-col sm:flex-row items-center gap-space-md w-full sm:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center px-space-xl py-space-sm rounded-full bg-primary-fixed text-on-primary-fixed font-label-lg text-label-lg shadow-[0_0_24px_-2px_rgba(200,255,77,0.45)] hover:scale-[1.03] transition-all" data-path="daftar" href="#">
+              Daftar Akun Gratis Sekarang
+            </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center px-space-xl py-space-sm rounded-full bg-surface-card text-text-primary font-label-lg text-label-lg hover:bg-surface-container-highest transition-all" data-path="cari-teman" href="#">
+              Jelajahi Lobi Terbuka
+            </a>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-space-md pt-space-xl text-text-muted font-body-sm text-body-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-signal-online text-[18px]">check_circle</span>
+<span class="">Bebas troll</span>
+</div>
+<span class="opacity-40">•</span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-signal-online text-[18px]">check_circle</span>
+<span class="">Verifikasi ID pemain otomatis</span>
+</div>
+<span class="opacity-40">•</span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-signal-online text-[18px]">check_circle</span>
+<span class="">Sistem reputasi bintang</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-base border-t border-surface-border pt-space-2xl pb-space-xl"><div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin"><div class="grid grid-cols-1 md:grid-cols-12 gap-space-xl pb-space-2xl"><div class="md:col-span-4 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #8b7cff
+- Font: outfit
+- Mode: dark
+- Roundness: rounded-full
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WVGu7QN06P3COnwjivvkOs5Be3HU6HcxBwlL3oopeOhXJ1bnFQg5QC9-Awsj6L1l3lM4Kib-7e2ck25uEIcqn1ETBPzGzHGLUAdy1tmHojk7xeuCnymZs8D2ABT-v3yv4YJy7jtzJn30N2V4Pb4GyZLVDv_NU8bevadCK2GT_YS55QSyOYZUTgsCtv78vMs7jSe5nO6rxopoZqtcjZu1zArNqOcPx5mufMWRZosxO6IyHx-xClpPFLHNY"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Mabar Finder</span></div><p class="font-body-md text-body-md text-text-muted max-w-sm">Platform matchmaking sosial gamer Indonesia. Temukan teman mabar santai maupun ranked squad impianmu dengan cepat, aman, dan seru.</p></div><div class="md:col-span-2 flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-text-primary mb-space-xs">Produk</span><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="cari-teman" href="#">Squad Finder</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="cari-teman" href="#">Party Voice</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="cari-teman" href="#">Turnamen</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="cari-teman" href="#">Leaderboard</a></div><div class="md:col-span-2 flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-text-primary mb-space-xs">Game</span><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="game" href="#">Valorant</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="game" href="#">Mobile Legends</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="game" href="#">PUBG Mobile</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="game" href="#">Dota 2</a></div><div class="md:col-span-2 flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-text-primary mb-space-xs">Bantuan</span><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Pusat Bantuan</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Panduan Komunitas</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Laporkan Toxic</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Status Server</a></div><div class="md:col-span-2 flex flex-col gap-space-xs"><span class="font-label-lg text-label-lg text-text-primary mb-space-xs">Kebijakan</span><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Ketentuan Layanan</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Kebijakan Privasi</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Pedoman Keamanan</a><a class="font-body-md text-body-md text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Pengaturan Cookie</a></div></div><div class="border-t border-surface-border pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md"><p class="font-body-sm text-body-sm text-text-muted text-center sm:text-left">© 2025 Mabar Finder. Gas mabar tanpa drama, teman seru setiap saat.</p><div class="flex items-center gap-space-md"><a class="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">ID / Bahasa</a><a class="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors" data-path="tentang" href="#">Discord Komunitas</a></div></div></div></footer>
+
+</body></html>

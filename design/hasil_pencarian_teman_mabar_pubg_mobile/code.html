@@ -1,0 +1,626 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>Mabar Finder - Temukan Rekan Main Game Sefrekuensi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#13131b",
+            "on-background": "#e4e1ed",
+            "on-primary-container": "#506e00",
+            "secondary-fixed-dim": "#c7bfff",
+            "on-tertiary": "#3b2c37",
+            "surface-container-high": "#292932",
+            "border-subtle": "#2E2E3E",
+            "tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#384e00",
+            "on-error-container": "#ffdad6",
+            "on-primary": "#253500",
+            "surface-container-low": "#1b1b23",
+            "surface-bright": "#393841",
+            "surface": "#1E1E29",
+            "tertiary-fixed-dim": "#d7c0cf",
+            "surface-variant": "#34343d",
+            "base-ink": "#14141C",
+            "surface-elevated": "#272736",
+            "inverse-on-surface": "#303038",
+            "on-secondary-fixed": "#170065",
+            "paper": "#F5F3EE",
+            "background": "#13131b",
+            "on-error": "#690005",
+            "surface-container-lowest": "#0d0d15",
+            "secondary": "#c7bfff",
+            "on-tertiary-fixed": "#251722",
+            "primary-container": "#bef443",
+            "text-muted": "#A0A0B2",
+            "primary-fixed": "#bef443",
+            "tertiary-container": "#f4dceb",
+            "secondary-container": "#422db2",
+            "on-tertiary-fixed-variant": "#53424e",
+            "on-surface-variant": "#c3c9af",
+            "on-secondary": "#2a039d",
+            "surface-container-highest": "#34343d",
+            "inverse-primary": "#4b6700",
+            "on-tertiary-container": "#725f6c",
+            "error-container": "#93000a",
+            "error": "#ffb4ab",
+            "tertiary-fixed": "#f4dceb",
+            "outline": "#8d937c",
+            "primary": "#ffffff",
+            "surface-container": "#1f1f27",
+            "secondary-fixed": "#e4dfff",
+            "outline-variant": "#434935",
+            "signal-teal": "#4ADE80",
+            "surface-tint": "#a3d724",
+            "on-surface": "#e4e1ed",
+            "primary-fixed-dim": "#a3d724",
+            "on-secondary-container": "#b4abff",
+            "on-secondary-fixed-variant": "#422db2",
+            "inverse-surface": "#e4e1ed",
+            "on-primary-fixed": "#141f00",
+            "alert-coral": "#FF6B5E"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "margin-tablet": "2rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin": "1rem",
+            "gutter": "1.25rem",
+            "space-md": "1rem",
+            "margin-desktop": "3rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          fontSize: {
+            "headline-xl-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "800" }],
+            "headline-md": ["22px", { lineHeight: "30px", letterSpacing: "-0.005em", fontWeight: "700" }],
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "label-lg": ["15px", { lineHeight: "20px", fontWeight: "600" }],
+            "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-sm": ["11px", { lineHeight: "16px", fontWeight: "600" }],
+            "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "800" }],
+            "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }],
+            "headline-sm": ["18px", { lineHeight: "26px", fontWeight: "700" }],
+            "headline-xl": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "label-md": ["13px", { lineHeight: "18px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      body {
+        background-color: #14141C;
+        color: #F5F3EE;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-base-ink text-paper antialiased selection:bg-primary-container selection:text-base-ink min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-base-ink border-b border-border-subtle">
+<div class="h-20 max-w-7xl mx-auto px-margin md:px-margin-tablet flex items-center justify-between gap-space-md">
+<!-- Brand & Left Nav -->
+<div class="flex items-center gap-space-xl">
+<a class="flex items-center gap-space-sm" data-path="beranda" href="#">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-base-ink">
+<span class="material-symbols-outlined text-2xl">sports_esports</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-paper tracking-tight">Mabar Finder</span>
+</a>
+<nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-surface-elevated text-primary-container font-semibold" data-inactive-classes="text-text-muted hover:text-paper hover:bg-surface font-medium">
+<a class="text-text-muted hover:text-paper hover:bg-surface font-medium rounded-full px-space-md py-space-sm font-label-md text-label-md transition-colors" data-path="beranda" href="#">Beranda</a>
+<a class="text-text-muted hover:text-paper hover:bg-surface font-medium rounded-full px-space-md py-space-sm font-label-md text-label-md transition-colors" data-path="pilih-game" href="#">Pilih Game</a>
+<a class="text-text-muted hover:text-paper hover:bg-surface font-medium rounded-full px-space-md py-space-sm font-label-md text-label-md transition-colors" data-path="komunitas" href="#">Komunitas</a>
+<a class="text-text-muted hover:text-paper hover:bg-surface font-medium rounded-full px-space-md py-space-sm font-label-md text-label-md transition-colors" data-path="turnamen" href="#">Turnamen</a>
+</nav>
+</div>
+<!-- Instant Search Input -->
+<div class="hidden md:flex items-center flex-1 max-w-xs relative">
+<span class="material-symbols-outlined text-text-muted text-lg absolute left-space-md pointer-events-none">search</span>
+<input class="w-full bg-surface text-paper placeholder-text-muted font-body-sm text-body-sm pl-11 pr-space-md py-space-sm rounded-full border border-border-subtle focus:outline-none focus:border-primary-container transition-colors" placeholder="Cari game atau lobi..." type="text">
+</div>
+<!-- Right Profile & Stats -->
+<div class="flex items-center gap-space-sm md:gap-space-md">
+<button aria-label="Notifikasi" class="relative p-2.5 rounded-full bg-surface border border-border-subtle text-paper hover:bg-surface-elevated transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full bg-primary-container text-base-ink font-bold text-[10px] leading-none">3</span>
+</button>
+<div class="hidden sm:flex items-center gap-space-xs px-3.5 py-1.5 rounded-full bg-surface border border-border-subtle text-paper font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-signal-teal"></span>
+<span class="">Party Aktif</span>
+</div>
+<div class="flex items-center gap-space-xs pl-space-xs">
+<div class="w-9 h-9 rounded-full ring-2 ring-secondary bg-surface-elevated flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-xl">person</span>
+</div>
+<span class="hidden xl:block font-label-md text-label-md text-paper">Arthur_Slayer</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Body Content -->
+<main class="w-full pt-20 flex-1 bg-base-ink"><div class="flex flex-col w-full">
+<div class="max-w-7xl mx-auto w-full px-margin md:px-margin-tablet py-space-xl">
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-sm font-label-md text-label-md text-text-muted mb-space-md">
+<a class="hover:text-paper transition-colors" href="#">Beranda</a>
+<span class="material-symbols-outlined text-base leading-none text-text-muted">chevron_right</span>
+<a class="hover:text-paper transition-colors" href="#">Pilih Game</a>
+<span class="material-symbols-outlined text-base leading-none text-text-muted">chevron_right</span>
+<a class="hover:text-paper transition-colors" href="#">PUBG Mobile</a>
+<span class="material-symbols-outlined text-base leading-none text-text-muted">chevron_right</span>
+<span class="text-primary-container font-semibold">Cari Teman Mabar</span>
+</nav>
+<!-- Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg mb-space-xl">
+<div class="max-w-3xl">
+<h1 class="font-headline-xl text-headline-xl text-paper tracking-tight mb-space-xs">
+          Teman Mabar PUBG Mobile
+        </h1>
+<p class="font-body-md text-body-md text-text-muted">
+          Temukan rekan satu squad Conqueror dan Ace sefrekuensi, siap rotasi rapi, komunikasi aktif, dan anti-turu.
+        </p>
+</div>
+<div class="flex items-center shrink-0">
+<button class="h-[52px] px-space-lg rounded-full bg-primary-container text-base-ink font-headline-sm text-label-lg font-bold flex items-center justify-center gap-space-sm hover:opacity-95 transition-opacity" type="button">
+
+<span class="">Bikin Lobi Mabar</span>
+</button>
+</div>
+</div>
+<!-- Two-Column Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Filter Panel (280px equivalent on desktop grid: 3.5 cols / ~320px) -->
+<aside class="lg:col-span-4 xl:col-span-3 bg-surface rounded-[24px] p-space-lg flex flex-col gap-space-lg">
+<!-- Filter Header -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm text-paper font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-primary-container text-2xl">tune</span>
+<span class="">Filter</span>
+</div>
+<button class="font-label-md text-label-md text-text-muted hover:text-paper transition-colors" type="button">
+            Reset
+          </button>
+</div>
+<div class="h-[1px] w-full bg-border-subtle"></div>
+<!-- Filter 1: Rank Game (Stepped Track) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-paper">Rank Game</span>
+<span class="font-label-sm text-label-sm text-primary-container font-semibold px-2.5 py-0.5 rounded-full bg-surface-container-high">
+              Ace - Conqueror
+            </span>
+</div>
+<!-- Stepped Range Visual Track -->
+<div class="pt-space-md pb-space-xs">
+<div class="relative w-full h-2 rounded-full bg-surface-container-high flex items-center">
+<!-- Active Range Highlight -->
+<div class="absolute left-[70%] right-0 h-full bg-primary-container rounded-full"></div>
+<!-- Left Knob Handle -->
+<div class="absolute left-[70%] -translate-x-1/2 w-5 h-5 rounded-full bg-primary-container flex items-center justify-center cursor-pointer shadow-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-base-ink"></div>
+</div>
+<!-- Right Knob Handle -->
+<div class="absolute right-0 translate-x-1/4 w-5 h-5 rounded-full bg-primary-container flex items-center justify-center cursor-pointer shadow-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-base-ink"></div>
+</div>
+</div>
+<div class="flex justify-between items-center text-text-muted font-label-sm text-label-sm mt-space-sm">
+<span class="">Bronze</span>
+<span class="">Diamond</span>
+<span class="text-primary-container font-semibold">Conqueror</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] w-full bg-border-subtle"></div>
+<!-- Filter 2: Mode Permainan (Radio Pills) -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Mode Permainan</span>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="py-2 rounded-full bg-surface-elevated text-text-muted font-label-md text-label-md hover:text-paper transition-colors" type="button">
+              Solo
+            </button>
+<button class="py-2 rounded-full bg-surface-elevated text-text-muted font-label-md text-label-md hover:text-paper transition-colors" type="button">
+              Duo
+            </button>
+<button class="py-2 rounded-full bg-secondary text-base-ink font-label-md text-label-md font-bold" type="button">
+              Squad
+            </button>
+</div>
+</div>
+<div class="h-[1px] w-full bg-border-subtle"></div>
+<!-- Filter 3: Server Wilayah -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Server Wilayah</span>
+<div class="relative w-full">
+<select class="w-full appearance-none bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-md py-3 pr-10 border-0 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer">
+<option selected="">Asia (Ping Hijau)</option>
+<option>SEA (Ping Stabil)</option>
+<option>KRJP (Kompetitif)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-xl">
+              expand_more
+            </span>
+</div>
+</div>
+<div class="h-[1px] w-full bg-border-subtle"></div>
+<!-- Filter 4: Tipe Main (Checkbox Pills) -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper">Tipe Main</span>
+<div class="flex flex-wrap gap-space-xs">
+<button class="flex items-center gap-space-xs px-3.5 py-1.5 rounded-full bg-surface-elevated text-primary-container font-label-md text-label-md font-semibold" type="button">
+
+<span class="">Push Rank</span>
+</button>
+<button class="flex items-center gap-space-xs px-3.5 py-1.5 rounded-full bg-surface-elevated text-primary-container font-label-md text-label-md font-semibold" type="button">
+
+<span class="">Santai</span>
+</button>
+<button class="flex items-center gap-space-xs px-3.5 py-1.5 rounded-full bg-surface-elevated text-text-muted hover:text-paper font-label-md text-label-md transition-colors" type="button">
+<span class="">Sniper Only</span>
+</button>
+</div>
+</div>
+<!-- Filter Action Buttons -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<button class="w-full h-12 rounded-full bg-primary-container text-base-ink font-label-lg text-label-lg font-bold flex items-center justify-center hover:opacity-95 transition-opacity" type="button">
+            Terapkan Filter
+          </button>
+<button class="text-center font-label-md text-label-md text-text-muted hover:text-paper transition-colors py-1" type="button">
+            Reset ke Pengaturan Awal
+          </button>
+</div>
+</aside>
+<!-- RIGHT COLUMN: Player Search Results Feed -->
+<main class="lg:col-span-8 xl:col-span-9 flex flex-col gap-space-lg">
+<!-- Results Top Bar & Active Filter Chips -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-row items-center justify-between gap-space-md">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-primary-container leading-none font-bold">172</span>
+<span class="font-headline-sm text-headline-sm text-paper">pemain ditemukan</span>
+</div>
+<!-- Sort By Dropdown -->
+<div class="relative shrink-0">
+<select class="appearance-none bg-surface text-paper font-label-md text-label-md rounded-full px-space-md py-2.5 pr-9 border-0 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer">
+<option selected="">Urutkan: Paling relevan</option>
+<option>K/D Ratio Tertinggi</option>
+<option>Rank Tertinggi</option>
+<option>Paling Aktif</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-lg">
+                expand_more
+              </span>
+</div>
+</div>
+<!-- Active Filter Chips -->
+<div class="flex flex-wrap items-center gap-space-xs font-label-sm text-label-sm">
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-elevated text-paper">
+<span class="">Ace+</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center" type="button">
+<span class="material-symbols-outlined text-sm leading-none">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-elevated text-paper">
+<span class="">Squad</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center" type="button">
+<span class="material-symbols-outlined text-sm leading-none">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-elevated text-paper">
+<span class="">Asia</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center" type="button">
+<span class="material-symbols-outlined text-sm leading-none">close</span>
+</button>
+</div>
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-elevated text-paper">
+<span class="">Push Rank</span>
+<button class="text-text-muted hover:text-alert-coral flex items-center" type="button">
+<span class="material-symbols-outlined text-sm leading-none">close</span>
+</button>
+</div>
+<button class="font-label-sm text-label-sm text-text-muted hover:text-primary-container transition-colors ml-space-xs" type="button">
+              Hapus Semua
+            </button>
+</div>
+</div>
+<!-- Player Match Cards List -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1: Bagas_Sniper -->
+<div class="w-full bg-surface rounded-[20px] p-space-lg transition-transform duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md min-w-0">
+<!-- Avatar with Ring and Online Status Dot -->
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover ring-2 ring-secondary" data-alt="Close up gamer portrait avatar male Indonesian teenager with tactical gaming headphones, soft ambient neon purple rim light on dark slate studio backdrop, clean high quality photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALORrmTB9NTE0F8EDIVy7uxVZDISXd5T0ESERGfr8hOwSVmSKjV8mV_7cjoV6pCm9v4Cx5O0uLnCpZpVBSbxNsjLlo6GJgRstUo9gFwjMXejHuQw5yJaSp5aequhoMPiDA-MaKOibYJh2JWpyFy4hs1LXcqd1_KX1nhCk7bc2rDiNq3CuXSYni_mdV3DcoUQCSBR09yLNPpA0_Ng7iMTwgunDY-3KxgBxZHo0Z2AIJg8_gplez850N">
+
+</div>
+<!-- Main Player Info -->
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-paper tracking-tight">Bagas_Sniper</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary-container">verified</span>
+                    Reputasi 100
+                  </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm text-label-sm font-semibold">
+                    99% Sefrekuensi
+                  </span>
+</div>
+<!-- Attribute Pills Strip (Strict flex gap, NO mid-dots) -->
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-3 py-1 rounded-full bg-secondary text-base-ink font-label-sm text-label-sm font-bold">Ace Master</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Squad</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Push Rank</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm">Asia</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-primary-container font-label-sm text-label-sm font-semibold">K/D 5.24</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">Main: AWM &amp; M416</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">mic</span>
+                    Mic Discord On
+                  </span>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center">
+<button aria-label="Kirim Pesan" class="w-11 h-11 rounded-full bg-surface-elevated text-paper flex items-center justify-center hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<button class="h-11 px-space-md rounded-full bg-surface-elevated text-paper font-label-md text-label-md font-bold hover:bg-primary-container hover:text-base-ink transition-colors flex items-center justify-center" type="button">
+                Kirim Request
+              </button>
+</div>
+</div>
+<!-- Card 2: Raja_Garuda -->
+<div class="w-full bg-surface rounded-[20px] p-space-lg transition-transform duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover ring-2 ring-secondary" data-alt="Portrait avatar of a competitive esports male player with confident gaze, hooded jersey, cool dim indoor lighting with warm purple reflections, crisp photograph." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Ic-NsmDKXPwDmvv5eV6iD7tPXURlb1nQcmSQZEFojR0rmOI-dFdtkzyOqxHeFfjo0-ySSrjn3oWXPzpw54DcpkXG9MvPtPq-1gpfUfkxpV-OTruArIuPpqXhgmdjZmiTF_0Pts8YAB51k69KW9gGaXSEjVMFEJ7LFW2Qsuug9d1Nbd8uNvmtGIMInA8ATJzoeijVR_lfevMVEdChGKMZ8Qp8roTuRQpusUqH6lDlq7o_1gxwqII0">
+
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-paper tracking-tight">Raja_Garuda</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">military_tech</span>
+                    Shot Caller
+                  </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm text-label-sm font-semibold">
+                    96% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-3 py-1 rounded-full bg-secondary text-base-ink font-label-sm text-label-sm font-bold">Conqueror</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Squad</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Push Rank</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm">Asia</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-primary-container font-label-sm text-label-sm font-semibold">K/D 6.10</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">Main: Erangel &amp; Miramar</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">headset_mic</span>
+                    In-Game Mic
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center">
+<button aria-label="Kirim Pesan" class="w-11 h-11 rounded-full bg-surface-elevated text-paper flex items-center justify-center hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<button class="h-11 px-space-md rounded-full bg-surface-elevated text-paper font-label-md text-label-md font-bold hover:bg-primary-container hover:text-base-ink transition-colors flex items-center justify-center" type="button">
+                Kirim Request
+              </button>
+</div>
+</div>
+<!-- Card 3: Sarah_Support -->
+<div class="w-full bg-surface rounded-[20px] p-space-lg transition-transform duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover ring-2 ring-secondary" data-alt="Headshot of a friendly female gamer with pastel styled hair and sleek headset, smiling softly, cinematic warm room lighting, high resolution profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsjaTowOiCBQsLcrgpbtga6J5f7Bp0_m_geY2zCE8T1zj7adJcuCY4dMT9Hd8BxlvRTuF-1O90OpgRHbIW9IZRt96Loymko_K-F38i2pFoB8ZTUuxm2dmAbp7DbUwGMT_SUVleLTaTiOcTKFKK6omDmh3FJjwRzN_oiQaEemqOqiu3wpHbYTH42qE6BDmHkF8mykzx-7SmUNhp0AwIL-UM9cVpORvbeialUfNca80xLV_ZGPzjVidx">
+
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-paper tracking-tight">Sarah_Support</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary-container">medical_services</span>
+                    Medic Handal
+                  </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm text-label-sm font-semibold">
+                    94% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-3 py-1 rounded-full bg-secondary text-base-ink font-label-sm text-label-sm font-bold">Ace</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Squad</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Push Rank</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm">SEA</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-primary-container font-label-sm text-label-sm font-semibold">K/D 3.85</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">Main: Smoke &amp; Revive</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">mic</span>
+                    Discord Ready
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center">
+<button aria-label="Kirim Pesan" class="w-11 h-11 rounded-full bg-surface-elevated text-paper flex items-center justify-center hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<button class="h-11 px-space-md rounded-full bg-surface-elevated text-paper font-label-md text-label-md font-bold hover:bg-primary-container hover:text-base-ink transition-colors flex items-center justify-center" type="button">
+                Kirim Request
+              </button>
+</div>
+</div>
+<!-- Card 4: Zeno_Rusher -->
+<div class="w-full bg-surface rounded-[20px] p-space-lg transition-transform duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover ring-2 ring-secondary" data-alt="Portrait avatar of an energetic male player wearing a gaming cap backwards, modern gamer room setup backdrop, vibrant dark tones, photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbsBmLrRxJREnS7bDcOsVKEmMHjWAC4n7rDgfHAFy2Scze1Jv7hCBTlOHGFH2ypS1OG2FTUhpXkKpYFOhrv4m8MyGtk_IKWi6LMNL7T25dOjpbRNqDXcKjl98mwUzoLCthO7bG_Ms70CpjvZ9lBQcRnvs4iyyNEmAUBV2LTEA-bzuDFkCtanPBi5fctEuY23LIEk5wcp8ynVlflQhJc5EuYhDsvKmVQd_LPPeApm_MT58gBfoHpkZx">
+
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-paper tracking-tight">Zeno_Rusher</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-alert-coral">bolt</span>
+                    Entry Fragger
+                  </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm text-label-sm font-semibold">
+                    91% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-bold">Crown 1</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Squad</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Santai</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm">Asia</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-primary-container font-label-sm text-label-sm font-semibold">K/D 4.50</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">Main: UZI &amp; SCAR-L</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">headset_mic</span>
+                    In-Game Mic
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center">
+<button aria-label="Kirim Pesan" class="w-11 h-11 rounded-full bg-surface-elevated text-paper flex items-center justify-center hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<button class="h-11 px-space-md rounded-full bg-surface-elevated text-paper font-label-md text-label-md font-bold hover:bg-primary-container hover:text-base-ink transition-colors flex items-center justify-center" type="button">
+                Kirim Request
+              </button>
+</div>
+</div>
+<!-- Card 5: Dimas_Erangel -->
+<div class="w-full bg-surface rounded-[20px] p-space-lg transition-transform duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-full object-cover ring-2 ring-secondary" data-alt="Portrait photo of a focused Southeast Asian young man gamer with glasses, dark hoodie, calm gaming space atmosphere, clean crisp professional photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwwI-aLxC_FzsHpQ9IeQJTtB7OdfPRf22k2laW418W15jMr45O8NlBXdpBq617Lnm8Ikxnv8ZajFlNhYQX8RCJiSZ3QKzzXdeSY0dmNRxTrC2SI9EgyGvcu7_OjQLQdwLdquYGtdUhjHuMyuE2EFXsjQCzgCqejrQJoOzzrJcH-p6rhxRw5q4HnhMiTsH6-RDVOr13jv7tzC29WONqqwix8ULjutaUfTXjXHXvgKJ5up44uzCjmrue">
+
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-paper tracking-tight">Dimas_Erangel</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">crisis_alert</span>
+                    Sniper Specialist
+                  </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm text-label-sm font-semibold">
+                    89% Sefrekuensi
+                  </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-3 py-1 rounded-full bg-secondary text-base-ink font-label-sm text-label-sm font-bold">Ace</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Squad</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-paper font-label-sm text-label-sm">Sniper Only</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm">Asia</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-primary-container font-label-sm text-label-sm font-semibold">K/D 4.15</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">Main: Kar98k &amp; M24</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">mic</span>
+                    Discord Ready
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-end md:self-center">
+<button aria-label="Kirim Pesan" class="w-11 h-11 rounded-full bg-surface-elevated text-paper flex items-center justify-center hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<button class="h-11 px-space-md rounded-full bg-surface-elevated text-paper font-label-md text-label-md font-bold hover:bg-primary-container hover:text-base-ink transition-colors flex items-center justify-center" type="button">
+                Kirim Request
+              </button>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="flex justify-center pt-space-xs">
+<button class="px-space-xl py-3.5 rounded-full bg-surface text-paper font-label-md text-label-md font-semibold hover:bg-surface-elevated transition-colors flex items-center gap-space-xs" type="button">
+<span class="">Muat Lebih Banyak Teman Mabar</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+<!-- Bottom Full-Party Squad Promotion Banner -->
+<div class="w-full rounded-[24px] bg-surface p-space-lg md:p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-base-ink shrink-0">
+<span class="material-symbols-outlined text-2xl font-bold">groups</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-paper tracking-tight">Mau mabar full-party 4-man squad?</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Bikin lobi terbuka dan biarkan rekan squad bergabung langsung ke lobi kamu.</p>
+</div>
+</div>
+<button class="h-12 px-space-lg rounded-full bg-primary-container text-base-ink font-label-lg text-label-lg font-bold shrink-0 hover:opacity-95 transition-opacity flex items-center justify-center" type="button">
+            Buat Lobi Tim Sekarang
+          </button>
+</div>
+</main>
+</div>
+</div>
+</div></main>
+<!-- Footer -->
+<footer class="w-full bg-base-ink border-t border-border-subtle py-space-xl mt-auto">
+<div class="max-w-7xl mx-auto px-margin md:px-margin-tablet flex flex-col md:flex-row items-center justify-between gap-space-md text-text-muted font-body-sm text-body-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-base-ink">
+<span class="material-symbols-outlined text-base leading-none">sports_esports</span>
+</div>
+<span class="font-headline-sm text-label-lg font-bold text-paper">Mabar Finder</span>
+</div>
+<p class="text-center md:text-left font-body-sm text-body-sm">
+        © 2024 Mabar Finder. Komunitas Matchmaking Gamer Indonesia.
+      </p>
+<div class="flex items-center gap-space-lg font-label-md text-label-md">
+<a class="text-text-muted hover:text-paper transition-colors" data-path="aturan-lobi" href="#">Aturan Lobi</a>
+<a class="text-text-muted hover:text-paper transition-colors" data-path="bantuan" href="#">Bantuan</a>
+<a class="text-text-muted hover:text-paper transition-colors" data-path="privasi" href="#">Privasi</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

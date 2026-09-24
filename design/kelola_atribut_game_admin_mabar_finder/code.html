@@ -1,0 +1,891 @@
+<!DOCTYPE html><html class="dark" lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-dim": "#13131b",
+          "surface-container": "#1f1f27",
+          "paper": "#F5F3EE",
+          "on-tertiary": "#3b2c37",
+          "surface": "#1E1E29",
+          "on-surface": "#e4e1ed",
+          "surface-bright": "#393841",
+          "secondary-container": "#422db2",
+          "on-secondary-fixed": "#170065",
+          "primary": "#ffffff",
+          "on-background": "#e4e1ed",
+          "on-secondary-container": "#b4abff",
+          "background": "#13131b",
+          "signal-teal": "#4ADE80",
+          "tertiary-container": "#f4dceb",
+          "on-primary": "#253500",
+          "text-muted": "#A0A0B2",
+          "secondary-fixed": "#e4dfff",
+          "base-ink": "#14141C",
+          "surface-container-lowest": "#0d0d15",
+          "alert-coral": "#FF6B5E",
+          "on-tertiary-fixed": "#251722",
+          "error-container": "#93000a",
+          "secondary": "#c7bfff",
+          "surface-container-low": "#1b1b23",
+          "primary-fixed-dim": "#a3d724",
+          "primary-container": "#bef443",
+          "on-tertiary-container": "#725f6c",
+          "on-primary-container": "#506e00",
+          "error": "#ffb4ab",
+          "on-error": "#690005",
+          "on-primary-fixed": "#141f00",
+          "surface-elevated": "#272736",
+          "surface-tint": "#a3d724",
+          "primary-fixed": "#bef443",
+          "border-subtle": "#2E2E3E",
+          "inverse-primary": "#4b6700",
+          "on-tertiary-fixed-variant": "#53424e",
+          "inverse-on-surface": "#303038",
+          "outline": "#8d937c",
+          "inverse-surface": "#e4e1ed",
+          "surface-container-high": "#292932",
+          "on-secondary": "#2a039d",
+          "secondary-fixed-dim": "#c7bfff",
+          "tertiary-fixed-dim": "#d7c0cf",
+          "outline-variant": "#434935",
+          "on-secondary-fixed-variant": "#422db2",
+          "surface-variant": "#34343d",
+          "on-surface-variant": "#c3c9af",
+          "on-primary-fixed-variant": "#384e00",
+          "tertiary": "#ffffff",
+          "on-error-container": "#ffdad6",
+          "tertiary-fixed": "#f4dceb",
+          "surface-container-highest": "#34343d"
+        },
+        "borderRadius": {
+          "DEFAULT": "1rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "margin-tablet": "2rem",
+          "margin-desktop": "3rem",
+          "margin": "1rem",
+          "space-lg": "1.5rem",
+          "gutter": "1.25rem",
+          "space-xs": "0.25rem",
+          "space-md": "1rem",
+          "space-sm": "0.5rem",
+          "gutter-desktop": "1.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "display-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "30px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "700"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-xl-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "label-lg": [
+            "15px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-xl": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-base-ink font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low flex flex-col justify-between p-space-md z-50"><div class="flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs px-space-sm pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-container text-[20px]">stadia_controller</span></div><span class="font-headline-md text-headline-md tracking-tight text-paper">Mabar Finder</span></div><div class="flex items-center"><span class="inline-flex items-center px-space-sm py-0.5 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm font-semibold tracking-wide uppercase">Admin Panel</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-full"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="dashboard-overview" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span>Dashboard Overview</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="kelola-game" href="#"><span class="material-symbols-outlined text-[20px]">sports_esports</span>Kelola Game</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="kelola-pengguna" href="#"><span class="material-symbols-outlined text-[20px]">group</span>Kelola Pengguna</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="laporan-moderasi" href="#"><span class="material-symbols-outlined text-[20px]">shield</span>Laporan &amp; Moderasi</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="pengaturan-sistem" href="#"><span class="material-symbols-outlined text-[20px]">tune</span>Pengaturan Sistem</a></nav></div><div class="flex flex-col gap-space-xs pt-space-md bg-surface-container-low"><div class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full bg-surface-elevated"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-paper truncate">Super Admin</span><span class="font-label-sm text-label-sm text-signal-teal truncate">Online</span></div></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="profil-admin" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span>Profil Admin</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-alert-coral font-label-md text-label-md hover:bg-surface-elevated hover:text-alert-coral transition-all" data-path="login" href="#"><span class="material-symbols-outlined text-[20px]">logout</span>Keluar</a></div></aside><div class="pl-72 min-h-screen flex flex-col bg-base-ink"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-sm"><span class="font-label-md text-label-md text-text-muted">Mabar Finder</span><span class="material-symbols-outlined text-text-muted text-[16px]">chevron_right</span><span class="font-label-md text-label-md text-paper font-semibold">Admin Panel</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-full"><span class="material-symbols-outlined text-text-muted text-[18px]">search</span><input class="bg-transparent border-0 text-paper placeholder-text-muted font-body-sm text-body-sm focus:outline-none w-48 lg:w-64" disabled="" placeholder="Cari lobi, game, user..." type="text"></div><div class="w-9 h-9 rounded-full bg-surface-elevated flex items-center justify-center"><span class="material-symbols-outlined text-on-surface text-[18px]">notifications</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-base-ink flex-1 px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg pb-space-xl">
+<!-- Navigasi Breadcrumb Dinamis -->
+<div class="flex items-center gap-space-xs text-text-muted font-label-md text-label-md">
+<a class="hover:text-paper transition-colors" href="#">Admin Panel</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-paper transition-colors" href="#">Kelola Game</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-paper font-semibold">Kelola Atribut Game</span>
+</div>
+<!-- Header Halaman & Aksi Simpan -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-paper tracking-tight">Kelola Skema Atribut Game</h1>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-elevated text-[#8B7CFF] font-label-sm text-label-sm font-bold uppercase tracking-wider">v2.4 Live</span>
+</div>
+<p class="font-body-md text-body-md text-text-muted">
+        Atur skema atribut spesifik per game (rank, role, preferensi main, server) tanpa coding. Fleksibel untuk profil pemain dan filter matchmaking.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0">
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-elevated text-paper font-label-lg text-label-lg hover:bg-surface-variant transition-all" id="discardBtn">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span class="">Reset</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-[#C8FF4D] text-base-ink font-headline-sm text-headline-sm font-bold hover:opacity-90 shadow-md transition-all active:scale-[0.98]" id="saveSchemaBtn">
+
+<span class="">Simpan Perubahan Skema</span>
+</button>
+</div>
+</div>
+<!-- Banner Catatan Hangat Komunitas -->
+<div class="relative overflow-hidden bg-surface rounded-lg p-space-md shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-full bg-[#C8FF4D]/15 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[#bef443] text-[24px]">lightbulb</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-paper font-semibold">Sinkronisasi Otomatis Terhubung</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Perubahan di sini otomatis muncul di form Profil Game dan Filter Pencarian untuk game ini, lho!
+        </span>
+</div>
+</div>
+</div>
+<!-- Panel Pemilih Game (Selector Toolbar) -->
+<div class="bg-surface rounded-lg p-space-md flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center gap-space-md flex-1">
+<label class="font-label-md text-label-md text-text-muted whitespace-nowrap" for="gameSelector">
+        Pilih Game yang Dikonfigurasi:
+      </label>
+<div class="relative min-w-[280px] max-w-md">
+<select class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm rounded-full px-space-md py-space-sm pr-10 appearance-none focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" id="gameSelector">
+<option selected="" value="valorant">Valorant (PC)</option>
+<option value="mlbb">Mobile Legends: Bang Bang</option>
+<option value="pubgm">PUBG Mobile</option>
+<option value="freefire">Free Fire</option>
+</select>
+<span class="material-symbols-outlined text-text-muted absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[20px]">
+          arrow_drop_down
+        </span>
+</div>
+<span class="inline-flex items-center px-space-sm py-1 rounded-full bg-surface-elevated text-[#8B7CFF] font-label-sm text-label-sm font-bold">
+        4 Atribut Aktif
+      </span>
+</div>
+<!-- Ringkasan Skema Stat Badge -->
+<div class="flex items-center gap-space-xs text-text-muted font-label-sm text-label-sm bg-surface-container-low px-space-md py-space-xs rounded-full self-start lg:self-center">
+
+<span class="text-on-surface font-medium">Skema aktif: 5 Atribut</span>
+<span class="text-surface-bright">/</span>
+<span class="">3 Pilihan Tunggal</span>
+<span class="text-surface-bright">/</span>
+<span class="">1 Pilihan Ganda</span>
+<span class="text-surface-bright">/</span>
+<span class="">1 Angka</span>
+</div>
+</div>
+<!-- Layout Utama: Kolom Daftar Atribut (Kiri) + Live Preview Sticky (Kanan) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Kolom Kiri: Atribut Builder -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="flex items-center justify-between px-space-xs">
+<span class="font-headline-sm text-headline-sm text-paper tracking-tight">Daftar Variabel &amp; Parameter</span>
+<span class="font-label-sm text-label-sm text-text-muted">Tarik handle 6-titik untuk urutan tampil</span>
+</div>
+<!-- Container List Kartu Atribut -->
+<div class="flex flex-col gap-space-md" id="attributesList">
+<!-- KARTU 1: Rank Tier -->
+<div class="attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-1">
+<span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]" title="Tahan &amp; Geser">drag_indicator</span>
+<span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#1</span>
+<div class="flex-1 max-w-sm">
+<label class="sr-only">Nama Atribut</label>
+<input class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" type="text" value="Rank Tier">
+</div>
+</div>
+<button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Parameter Setting Bar -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+<select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+<option selected="">Pilihan Tunggal (Single Select)</option>
+<option>Pilihan Ganda (Multi Select)</option>
+<option>Angka (Number)</option>
+<option>Teks Pendek (Text)</option>
+</select>
+</div>
+<div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+<span class="font-label-sm text-label-sm text-text-muted">Identitas Badge</span>
+<span class="font-label-md text-label-md text-[#8B7CFF] font-semibold">Tampil di Header Kartu</span>
+</div>
+</div>
+<!-- List Opsi Nilai -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Opsi Pilihan Nilai:</span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Iron <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Bronze <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Silver <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Gold <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Platinum <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Diamond <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Ascendant <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Immortal <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-[#8B7CFF]/15 text-[#8B7CFF] font-label-sm text-label-sm">
+                Radiant <button class="hover:text-paper"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Opsi
+              </button>
+</div>
+</div>
+</div>
+<!-- KARTU 2: Role / Agent Pool -->
+<div class="attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-1">
+<span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]">drag_indicator</span>
+<span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#2</span>
+<div class="flex-1 max-w-sm">
+<label class="sr-only">Nama Atribut</label>
+<input class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" type="text" value="Role / Agent Pool">
+</div>
+</div>
+<button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+<select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+<option>Pilihan Tunggal (Single Select)</option>
+<option selected="">Pilihan Ganda (Multi Select)</option>
+<option>Angka (Number)</option>
+<option>Teks Pendek (Text)</option>
+</select>
+</div>
+<div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+<span class="font-label-sm text-label-sm text-text-muted">Format Pilihan</span>
+<span class="font-label-md text-label-md text-paper">Maksimal 3 Seleksi</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Opsi Pilihan Nilai:</span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Duelist <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Initiator <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Controller <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Sentinel <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Opsi
+              </button>
+</div>
+</div>
+</div>
+<!-- KARTU 3: Peran dalam Tim -->
+<div class="attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-1">
+<span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]">drag_indicator</span>
+<span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#3</span>
+<div class="flex-1 max-w-sm">
+<label class="sr-only">Nama Atribut</label>
+<input class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" type="text" value="Peran dalam Tim">
+</div>
+</div>
+<button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+<select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+<option selected="">Pilihan Tunggal (Single Select)</option>
+<option>Pilihan Ganda (Multi Select)</option>
+<option>Angka (Number)</option>
+<option>Teks Pendek (Text)</option>
+</select>
+</div>
+<div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+<span class="font-label-sm text-label-sm text-text-muted">Status Atribut</span>
+<span class="font-label-md text-label-md text-text-muted">Opsional (Fleksibel)</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Opsi Pilihan Nilai:</span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Entry Fragger <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                IGL <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Support <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Lurker <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Sniper / Operator <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Opsi
+              </button>
+</div>
+</div>
+</div>
+<!-- KARTU 4: Server / Wilayah -->
+<div class="attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-1">
+<span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]">drag_indicator</span>
+<span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#4</span>
+<div class="flex-1 max-w-sm">
+<label class="sr-only">Nama Atribut</label>
+<input class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" type="text" value="Server / Wilayah">
+</div>
+</div>
+<button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+<select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+<option selected="">Pilihan Tunggal (Single Select)</option>
+<option>Pilihan Ganda (Multi Select)</option>
+<option>Angka (Number)</option>
+<option>Teks Pendek (Text)</option>
+</select>
+</div>
+<div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+<span class="font-label-sm text-label-sm text-text-muted">Ping Matchmaker</span>
+<span class="font-label-md text-label-md text-signal-teal font-semibold">Aktif Otomatis</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Opsi Pilihan Nilai:</span>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Asia Pacific (Ping Rendah) <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                SEA (Singapore) <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Hong Kong <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+                Tokyo <button class="hover:text-alert-coral"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Opsi
+              </button>
+</div>
+</div>
+</div>
+<!-- KARTU 5: Win Rate (%) -->
+<div class="attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-1">
+<span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]">drag_indicator</span>
+<span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#5</span>
+<div class="flex-1 max-w-sm">
+<label class="sr-only">Nama Atribut</label>
+<input class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all" type="text" value="Win Rate (%)">
+</div>
+</div>
+<button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+<select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+<option>Pilihan Tunggal (Single Select)</option>
+<option>Pilihan Ganda (Multi Select)</option>
+<option selected="">Angka (Number)</option>
+<option>Teks Pendek (Text)</option>
+</select>
+</div>
+<div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+<span class="font-label-sm text-label-sm text-text-muted">Rentang Nilai</span>
+<span class="font-label-md text-label-md text-paper">Min 0 - Max 100 %</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-elevated/40 px-space-md py-space-sm rounded-full text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="">Tipe angka langsung menghasilkan slider interval numerik pada filter pencarian lobi mabar.</span>
+</div>
+</div>
+</div>
+<!-- Tombol Tambah Atribut & Aksi Tambahan -->
+<div class="flex flex-col sm:flex-row items-center gap-space-md pt-space-xs">
+<button class="flex-1 w-full flex items-center justify-center gap-space-sm px-space-lg py-space-md rounded-full bg-surface hover:bg-surface-elevated text-[#bef443] font-headline-sm text-headline-sm font-bold transition-all" id="addNewAttrBtn">
+
+<span class="">Tambah Atribut Baru</span>
+</button>
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-sm px-space-lg py-space-md rounded-full bg-surface-elevated hover:bg-surface-variant text-paper font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span class="">Impor Template Atribut</span>
+</button>
+</div>
+</div>
+<!-- Kolom Kanan: Live Preview Form Pengguna (Sticky) -->
+<div class="xl:col-span-4 flex flex-col gap-space-md xl:sticky xl:top-20">
+<!-- Box Pratinjau Form Pemain -->
+<div class="bg-surface rounded-lg p-space-lg flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+
+<span class="font-headline-sm text-headline-sm text-paper tracking-tight">Live Preview</span>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm">
+            Tampilan Gamer
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Beginilah bentuk form yang akan diisi pemain saat melengkapi profil Valorant atau membuat lobi.
+        </p>
+<!-- Mock Form Preview -->
+<div class="flex flex-col gap-space-md bg-surface-container-low p-space-md rounded-lg">
+<!-- Mock Item 1: Rank -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-paper flex items-center justify-between">
+<span class="">Rank Tier <span class="text-alert-coral">*</span></span>
+<span class="text-text-muted">Wajib</span>
+</label>
+<div class="w-full bg-surface text-paper font-body-sm text-body-sm rounded-full px-space-md py-space-xs flex items-center justify-between">
+<span class="font-medium text-[#8B7CFF]">Ascendant</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Mock Item 2: Role / Agent Pool -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-paper flex items-center justify-between">
+<span class="">Role / Agent Pool <span class="text-alert-coral">*</span></span>
+<span class="text-[#bef443]">Multi</span>
+</label>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-[#bef443] text-base-ink font-label-sm text-label-sm font-bold">
+                Duelist
+              </span>
+<span class="px-space-sm py-0.5 rounded-full bg-[#bef443] text-base-ink font-label-sm text-label-sm font-bold">
+                Initiator
+              </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm">
+                + Controller
+              </span>
+</div>
+</div>
+<!-- Mock Item 3: Peran dalam Tim -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-paper flex items-center justify-between">
+<span class="">Peran dalam Tim</span>
+<span class="text-text-muted">Opsional</span>
+</label>
+<div class="w-full bg-surface text-paper font-body-sm text-body-sm rounded-full px-space-md py-space-xs flex items-center justify-between">
+<span class="">Entry Fragger</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Mock Item 4: Server / Wilayah -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-paper flex items-center justify-between">
+<span class="">Server / Wilayah <span class="text-alert-coral">*</span></span>
+<span class="text-signal-teal text-[11px] font-semibold">Ping 18ms</span>
+</label>
+<div class="w-full bg-surface text-paper font-body-sm text-body-sm rounded-full px-space-md py-space-xs flex items-center justify-between">
+<span class="">Asia Pacific (Ping Rendah)</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Mock Item 5: Win Rate Slider -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-paper">Minimal Win Rate</span>
+<span class="font-label-sm text-label-sm text-[#bef443] font-bold">54%</span>
+</div>
+<div class="w-full bg-surface h-2 rounded-full overflow-hidden">
+<div class="bg-[#bef443] h-full w-[54%] rounded-full"></div>
+</div>
+<div class="flex justify-between text-[10px] text-text-muted">
+<span class="">0%</span>
+<span class="">100%</span>
+</div>
+</div>
+</div>
+<!-- Indikator Matchmaking Engine -->
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[#8B7CFF] text-[18px] mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-paper font-semibold">Skor Akurasi Matchmaking: 96%</span>
+<span class="font-body-sm text-body-sm text-text-muted">Atribut yang didefinisikan memberikan sinyal lobi yang sangat akurat bagi gamer tanah air.</span>
+</div>
+</div>
+</div>
+<!-- Quick Tips Card -->
+<div class="bg-surface rounded-lg p-space-md flex flex-col gap-space-xs shadow-sm">
+<span class="font-label-sm text-label-sm text-[#bef443] font-bold uppercase tracking-wider">Tips Konfigurasi</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Gunakan tipe <span class="text-paper font-medium">Pilihan Ganda</span> untuk preferensi fleksibel pemain dan batasi jumlah maksimal pilihan agar kartu matchmaking tetap rapi.
+        </p>
+</div>
+</div>
+</div>
+<!-- Toast Notification Modal / Feedback -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-surface-elevated text-paper px-space-lg py-space-md rounded-full shadow-2xl" id="toastSuccess">
+<div class="w-8 h-8 rounded-full bg-signal-teal/20 flex items-center justify-center text-signal-teal">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md font-semibold">Skema atribut Valorant (PC) berhasil diperbarui!</span>
+</div>
+</div>
+<script>
+  (function() {
+    const saveBtn = document.getElementById('saveSchemaBtn');
+    const toast = document.getElementById('toastSuccess');
+    const addNewBtn = document.getElementById('addNewAttrBtn');
+    const listContainer = document.getElementById('attributesList');
+
+    // Feedback Toast Simpan
+    if (saveBtn && toast) {
+      saveBtn.addEventListener('click', () => {
+        saveBtn.classList.add('scale-95');
+        setTimeout(() => saveBtn.classList.remove('scale-95'), 150);
+
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3200);
+      });
+    }
+
+    // Delegasi hapus kartu atribut
+    if (listContainer) {
+      listContainer.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('.remove-card-btn');
+        if (removeBtn) {
+          const card = removeBtn.closest('.attribute-card');
+          if (card) {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+              card.remove();
+              updateOrderNumbers();
+            }, 200);
+          }
+        }
+      });
+    }
+
+    // Fungsi urutan # nomor
+    function updateOrderNumbers() {
+      const cards = listContainer.querySelectorAll('.attribute-card');
+      cards.forEach((c, idx) => {
+        const badge = c.querySelector('span[class*="rounded-full"][class*="text-text-muted"]');
+        if (badge && badge.textContent.startsWith('#')) {
+          badge.textContent = '#' + (idx + 1);
+        }
+      });
+    }
+
+    // Tambah Atribut Baru Mock
+    if (addNewBtn && listContainer) {
+      addNewBtn.addEventListener('click', () => {
+        const count = listContainer.querySelectorAll('.attribute-card').length + 1;
+        const newCard = document.createElement('div');
+        newCard.className = 'attribute-card bg-surface rounded-lg p-space-lg flex flex-col gap-space-md transition-all shadow-sm';
+        newCard.innerHTML = `
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex items-center gap-space-sm flex-1">
+              <span class="material-symbols-outlined text-text-muted cursor-grab hover:text-paper text-[20px]">drag_indicator</span>
+              <span class="w-6 h-6 rounded-full bg-surface-elevated text-text-muted font-label-sm text-label-sm flex items-center justify-center font-bold">#${count}</span>
+              <div class="flex-1 max-w-sm">
+                <input type="text" placeholder="Atribut Baru (misal: Device / Headset)" class="w-full bg-surface-container-low text-paper font-headline-sm text-headline-sm px-space-md py-space-xs rounded-full focus:outline-none focus:ring-1 focus:ring-[#bef443] transition-all"/>
+              </div>
+            </div>
+            <button class="remove-card-btn text-text-muted hover:text-alert-coral p-space-xs rounded-full transition-colors" title="Hapus Atribut">
+              <span class="material-symbols-outlined text-[20px]">delete</span>
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+            <div class="flex flex-col gap-space-xs">
+              <span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Tipe Data</span>
+              <select class="bg-surface-elevated text-paper font-label-md text-label-md rounded-full px-space-sm py-1 appearance-none focus:outline-none">
+                <option selected>Pilihan Tunggal (Single Select)</option>
+                <option>Pilihan Ganda (Multi Select)</option>
+                <option>Angka (Number)</option>
+                <option>Teks Pendek (Text)</option>
+              </select>
+            </div>
+            <div class="flex items-center justify-between md:justify-around gap-space-sm pt-2 md:pt-0">
+              <div class="flex flex-col gap-space-xs">
+                <span class="font-label-sm text-label-sm text-text-muted">Wajib Diisi</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+                </label>
+              </div>
+              <div class="flex flex-col gap-space-xs">
+                <span class="font-label-sm text-label-sm text-text-muted">Filter Lobi</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-surface-elevated peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-dim after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-paper after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-signal-teal"></div>
+                </label>
+              </div>
+            </div>
+            <div class="flex flex-col gap-space-xs justify-center text-right md:text-left">
+              <span class="font-label-sm text-label-sm text-text-muted">Status</span>
+              <span class="font-label-md text-label-md text-[#bef443]">Draf Baru</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-space-xs">
+            <span class="font-label-sm text-label-sm text-text-muted">Opsi Pilihan:</span>
+            <div class="flex flex-wrap items-center gap-space-xs">
+              <button class="inline-flex items-center gap-1 px-space-md py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm hover:bg-surface-variant transition-colors">
+                <span class="material-symbols-outlined text-[14px]">add</span> Tambah Opsi Nilai
+              </button>
+            </div>
+          </div>
+        `;
+        listContainer.appendChild(newCard);
+        newCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  })();
+</script></main></div>
+
+</body></html>

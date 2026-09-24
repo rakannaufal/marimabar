@@ -1,0 +1,644 @@
+<!DOCTYPE html><html class="dark" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>Mabar Finder - Temukan Rekan Main Game Sefrekuensi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "base-ink": "#14141C",
+            "surface": "#1E1E29",
+            "surface-elevated": "#272736",
+            "border-subtle": "#272736",
+            "border-stroke": "#2E2E3E",
+            "primary-container": "#C8FF4D",
+            "on-primary-container": "#14141C",
+            "paper": "#F5F3EE",
+            "text-muted": "#A0A0B2",
+            "signal-teal": "#4ADE80",
+            "accent-violet": "#8B7CFF",
+            "secondary-container": "#272736"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            headline: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      background-color: #14141C;
+      color: #F5F3EE;
+      font-family: 'Inter', sans-serif;
+    }
+    .font-headline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-base-ink font-sans text-paper antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-base-ink">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#14141C] border-b border-border-subtle">
+<div class="h-20 max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between gap-4">
+<!-- Brand & Left Nav -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 group" data-path="beranda" href="#">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-base-ink">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+<path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+</svg>
+</div>
+<span class="font-headline font-extrabold text-xl text-paper tracking-tight">Mabar Finder</span>
+</a>
+<nav class="hidden lg:flex items-center gap-1.5">
+<a class="bg-[#272736] text-primary-container font-semibold rounded-full px-4 py-2 text-sm flex items-center gap-2" data-path="beranda" href="#">
+
+            Beranda
+          </a>
+<a class="text-text-muted hover:text-paper hover:bg-[#1E1E29] font-medium rounded-full px-4 py-2 text-sm transition-colors" data-path="cari-lobi" href="#">Cari Lobi</a>
+<a class="text-text-muted hover:text-paper hover:bg-[#1E1E29] font-medium rounded-full px-4 py-2 text-sm transition-colors" data-path="komunitas" href="#">Komunitas</a>
+<a class="text-text-muted hover:text-paper hover:bg-[#1E1E29] font-medium rounded-full px-4 py-2 text-sm transition-colors" data-path="turnamen" href="#">Turnamen</a>
+</nav>
+</div>
+<!-- Search Input -->
+<div class="hidden md:flex items-center flex-1 max-w-xs relative">
+<svg class="w-4 h-4 text-text-muted absolute left-4 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<input class="w-full bg-surface text-paper placeholder-text-muted text-sm pl-11 pr-4 py-2 rounded-full border border-border-stroke focus:outline-none focus:border-primary-container transition-colors" placeholder="Cari pemain atau ruang..." type="text">
+</div>
+<!-- Right Profile & Stats -->
+<div class="flex items-center gap-3">
+<button aria-label="Notifikasi" class="relative p-2.5 rounded-full bg-surface border border-border-stroke text-paper hover:bg-surface-elevated transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full bg-primary-container text-base-ink font-bold text-xs">3</span>
+</button>
+<div class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border-stroke text-paper text-xs font-semibold">
+
+<span class="">Party Aktif</span>
+</div>
+<div class="flex items-center gap-2.5 pl-1">
+<div class="w-9 h-9 rounded-full ring-2 ring-accent-violet overflow-hidden bg-surface-elevated flex items-center justify-center">
+<svg class="w-5 h-5 text-accent-violet" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+</svg>
+</div>
+<span class="hidden xl:block text-sm font-semibold text-paper">Arthur_Slayer</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Body Content -->
+<main class="w-full pt-28 pb-16 flex-1 bg-base-ink">
+<div class="w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col gap-8">
+<!-- Hero / Quick Match Action Banner -->
+<section class="w-full rounded-2xl bg-surface border border-border-subtle p-6 md:p-8 flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<div class="flex items-center gap-2 text-signal-teal text-xs font-semibold">
+
+<span class="">Status server prima • Siap mabar</span>
+</div>
+<h1 class="font-headline font-extrabold text-2xl md:text-3xl lg:text-4xl text-paper tracking-tight">
+              Selamat datang kembali, Arthur!
+            </h1>
+<p class="text-sm md:text-base text-text-muted">
+              Ada 3.420 lobi aktif malam ini. Mau langsung tancap gas atau santai bareng teman sefrekuensi?
+            </p>
+</div>
+<div class="flex flex-wrap items-center gap-3 self-start md:self-center">
+<button class="h-12 px-6 rounded-full bg-primary-container text-base-ink font-headline font-extrabold text-sm md:text-base hover:opacity-95 transition shadow-[0_4px_20px_rgba(200,255,77,0.18)] flex items-center gap-2" type="button">
+
+<span class="">Cari Match Kilat</span>
+</button>
+<button class="h-12 px-5 rounded-full border border-primary-container text-primary-container bg-transparent font-headline font-bold text-sm md:text-base hover:bg-primary-container/10 transition flex items-center gap-2" type="button">
+
+<span class="">Buat Lobi Baru</span>
+</button>
+</div>
+</div>
+<!-- Quick Game Filter & Stats Bar -->
+<div class="pt-4 border-t border-border-subtle flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs md:text-sm" type="button">
+              Semua Game
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface border border-border-stroke text-paper hover:border-primary-container font-medium text-xs md:text-sm transition-colors" type="button">
+              Valorant
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface border border-border-stroke text-paper hover:border-primary-container font-medium text-xs md:text-sm transition-colors" type="button">
+              Mobile Legends
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface border border-border-stroke text-paper hover:border-primary-container font-medium text-xs md:text-sm transition-colors" type="button">
+              PUBG Mobile
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface border border-border-stroke text-paper hover:border-primary-container font-medium text-xs md:text-sm transition-colors" type="button">
+              Free Fire
+            </button>
+</div>
+<div class="flex items-center gap-5 text-text-muted text-xs md:text-sm self-start lg:self-auto">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-signal-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M12 6v6l4 2"></path>
+</svg>
+<span class="">Waktu tunggu rata-rata: <span class="text-paper font-semibold">45 detik</span></span>
+</div>
+<div class="flex items-center gap-2">
+
+<span class="">12.450 Pemain Terhubung</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content 2-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Open Matchmaking Lobbies (~67%) -->
+<section class="lg:col-span-8 flex flex-col gap-4">
+<!-- Feed Control Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-[#272736] flex items-center justify-center text-primary-container">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
+</svg>
+</div>
+<h2 class="font-headline font-extrabold text-xl text-paper">Lobi Mabar Terbuka Siap Tempur</h2>
+</div>
+<!-- Tab Pills -->
+<div class="flex items-center gap-1 bg-[#14141C] p-1 rounded-full border border-border-stroke self-start sm:self-auto">
+<button class="px-3.5 py-1.5 rounded-full bg-primary-container text-base-ink font-semibold text-xs" type="button">
+                Paling Cocok
+              </button>
+<button class="px-3.5 py-1.5 rounded-full text-text-muted hover:text-paper font-medium text-xs transition-colors" type="button">
+                Peringkat Serupa
+              </button>
+<button class="px-3.5 py-1.5 rounded-full text-text-muted hover:text-paper font-medium text-xs transition-colors" type="button">
+                Santai / Unrated
+              </button>
+</div>
+</div>
+<!-- Lobby Card 1: Valorant -->
+<article class="bg-surface rounded-2xl p-5 border border-border-subtle hover:border-accent-violet/60 transition-colors flex flex-col gap-4">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-accent-violet">
+<img alt="Reyhan_Viper" class="w-full h-full object-cover" data-alt="Close up gamer portrait avatar with dark gaming headphones, neon ambient light studio portrait, warm slate background, sharp professional esports vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoevGKJrR1y6lsTYo8uC-L3prb3T0HkL7fj4BiII8RKGesjv4T8yuYWTXKTXwNy4XL02DeHkvXqRDu54ynlDHOPuOQ577DJammBLwjdB3aFb-2PPGhcB9wwALzWQu2EESTuGMXmtevimRTSdDFZ1md9LXltKBuLx0NkzgDjdLX8XaS3ebM7wS4QSAwBD5X0Fjl4XuojPRx_F-jDghFPIAOdvYt5kSeZzBYab_5P1FKR7nGN80g72LT">
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-base text-paper">Push Immortal Santai Anti-Ragequit</span>
+<svg class="w-4 h-4 text-signal-teal" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+</svg>
+</div>
+<span class="text-xs text-text-muted">Dibuat oleh <span class="text-paper font-semibold">Reyhan_Viper</span> • 3 menit yang lalu</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#14141C] border border-border-stroke text-signal-teal text-xs font-semibold">
+
+<span class="">Lobi Terbuka</span>
+</div>
+</div>
+<!-- Tags & Badges -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-[#272736] text-primary-container font-semibold text-xs border border-border-stroke">
+                Valorant
+              </span>
+<span class="px-3 py-1 rounded-full bg-accent-violet/20 border border-accent-violet/50 text-accent-violet font-semibold text-xs">
+                Immortal 2-3
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-text-muted text-xs">
+                Server Jakarta
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-signal-teal text-xs">
+                Mic On (Discord)
+              </span>
+</div>
+<div class="h-px w-full bg-border-subtle"></div>
+<!-- Bottom Row: Slots and Action Button -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center -space-x-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 1" class="w-full h-full object-cover" data-alt="Male esport player avatar portrait smiling friendly with dark headset against dark purple studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQag-u-i5UqN5XU92sI5gDQJEK9ns0XG6voHKQn70PvxzMYgJHFb7bp0mJZS2NufYd3W0YfYM0Fo9boZK2Sayko0JgJMNXtMua0p4Ato2p_BgNQ8jlRmENV3s3U-EwIK2Z1TN8ReWQdmj4zeqoewGJuwoc8-z8e4J8PpRCRkIvskeUO_De_orH7dvM0iENZJ2sxK889G_gVmiyaWJpe7yAXzJF09gfAa_UxXJrLxnU10jNizBLd-jT">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 2" class="w-full h-full object-cover" data-alt="Female gamer avatar wearing modern techwear jacket on slate studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVkF8yRwgeZFBsndfWA0gPJZbmkqDW3tcVElNApREoyCLBspkbURAEHkxFmAYjqwgYoO-Qb4sZnUyBb63svEqgcNe6z5d9TcKWYQtzphxSEMTKuXS-RraSn6y0gNEJGMItWppClBmBsCRAnevsQIWdFJD1csAmAFiJk-cn89hB_vhmQ9lP6NwG9LChwvrxyZeOYD3SYhkq5Qvuvwegn3GHNuvTc7a9SdxPCGHTs4d0jWA3YOW4344L">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 3" class="w-full h-full object-cover" data-alt="Indonesian young male player avatar wearing gaming jersey with lime accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ0VYGTZDu7fJn_pOWt3KgfyhpQYHTNGOt4xDQUxdeTNn6yt8Vyge2QQUWnDDpJYWdKqAxp2jqnsFUGB7dMNOzLmyrPthg_2mC7pbflM0LISa-N48t3tMFPUtL-TWt146MEycodONq0alNcyTriiYJl_pYnrrbG1__uCrGHDza3RqjlvPWIFyZmIk0sSXRHBpzrEc8r00YqDl-d8ik4YL-6UeWhfx8kioKuKANIITg9yDZgRI4ymHO">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 4" class="w-full h-full object-cover" data-alt="Anime stylized 3D gamer avatar with headphones, warm dark tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTdGcd1XaqvTSahcVrkA9_yvdxBdIlYSD9qdt8RWN2RaSwW1B3Vfj0kOWkCvmnj3dr9FYDeGUay5RC1pRIbsbA2Amrm_TApwHeQ9Y5FwKhtlNWjHK8vDwnSjoFXF182-MBZpsHAxOtCMZ6A1fUOYKAiLiCZQWzGka_gU8epaho1GfTF6jkM_GMwq5ms6l_35gjE0O9qTER0SptGRzW5s1eNgBmeHrlt0IG9QFUfBK1128KhaZf4Rsy">
+</div>
+<div class="w-8 h-8 rounded-full border border-dashed border-text-muted flex items-center justify-center bg-surface-elevated text-text-muted text-xs">
+                    +
+                  </div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-paper">4/5 Terisi</span>
+<span class="text-xs text-signal-teal">1 slot tersisa (Controller/Duelist)</span>
+</div>
+</div>
+<button class="h-10 px-6 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5" type="button">
+<span class="">Gabung Lobi</span>
+</button>
+</div>
+</article>
+<!-- Lobby Card 2: Mobile Legends -->
+<article class="bg-surface rounded-2xl p-5 border border-border-subtle hover:border-accent-violet/60 transition-colors flex flex-col gap-4">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-accent-violet">
+<img alt="Dinda_MageGod" class="w-full h-full object-cover" data-alt="Portrait of an energetic Indonesian female gamer wearing wireless gaming earphones in low key ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWj8ERmrAz0WZcqYWmY_ZTFb2cPtvKVfJ98qT1DSxbT2dpoD9y0Ndi1aDLYbYbOM33WaYakAWsbJSSJrnbNHrpGELr1FbyRXqsUMEgSGHU0vldJ7fjVvhJ5H_9CJrRlNPun_QBuuFxdTKdt_KJXu70K7EYRDqfU__nhpuvpHXQCRvQQdzqm8HxdbkpFMM-Y0PplOKAtu0GKeA6l3NF_14Q_eleF8lzjyweM2qR-StEZcVpyGkxooaL">
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-base text-paper">Mythic Glory 5-Man Butuh Midlaner Mage</span>
+<svg class="w-4 h-4 text-signal-teal" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+</svg>
+</div>
+<span class="text-xs text-text-muted">Dibuat oleh <span class="text-paper font-semibold">Dinda_MageGod</span> • 6 menit yang lalu</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#14141C] border border-border-stroke text-signal-teal text-xs font-semibold">
+
+<span class="">Lobi Terbuka</span>
+</div>
+</div>
+<!-- Tags & Badges -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-[#272736] text-primary-container font-semibold text-xs border border-border-stroke">
+                Mobile Legends
+              </span>
+<span class="px-3 py-1 rounded-full bg-accent-violet/20 border border-accent-violet/50 text-accent-violet font-semibold text-xs">
+                Mythic Glory 80+
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-text-muted text-xs">
+                Peran Midlaner Mage
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-signal-teal text-xs">
+                Voice In-Game
+              </span>
+</div>
+<div class="h-px w-full bg-border-subtle"></div>
+<!-- Bottom Row: Slots and Action Button -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center -space-x-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 1" class="w-full h-full object-cover" data-alt="Female mobile gamer avatar with sleek headset smiling in cool slate dark backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX1x0pFlOxgEMJrloCqLJqhgjXvMzY5W3VDxmyJcddeJImppo7FBwXODxBGB743t09CX7fDF1StQ2_nu8dJTp7XG8WWdXrnfjWxakzBKTKLnwyQtFsONmRtySUkokAI9jF8B_-IKTtvY6eSsdMUcl6LQyzoo5dLE2NLEaljbCs9fwm3lBVstd2vWoWhU7QV-ACVq9Zx_1WwmttPfXrURKYVzw1s82ZH0tNda5gynT8eMsCcLKmgLo7">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 2" class="w-full h-full object-cover" data-alt="Male gamer avatar wearing cap in gaming setup with purple neon fill" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkTaDsyRns_6jVOC16ef0CZm4bA_qkYkta243Sr5bZltgdHXQFVuHkrZhP5xw4vnXCklW521sBHNivNfp0hYRGcCv1Y647o6naFESf8WhXE9zzmvbsEEkViCmattgW_KSFjW-d8DwTBpMMRpOE2m2RwJZvvfYa0KgK4Nl-AcBb-WvqJbD3B24ZLZPr2PQZQQaaK5T-R-3Wz8vHinx-ZFshQUtG9ujne7z7CsIekQ5AkHssBzKlv3_H">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 3" class="w-full h-full object-cover" data-alt="Portrait of an esports player focusing on phone screen in dark moody environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuKG0waS_VvWsH8DUnbGDUThM4AO6qEe2l2feD6vo5We8-mFd79qut3EQ32KMn9B4kbIdCZBK5p3zfx1eg6v3FEOWEaWjkz47oLkGZ9mULS3T9mnJ33-EdKm6fc-sdSL4J4yUN7a3n_la1RXHmqo6fV606kF1h11t3p8jYpfWHuHXxoX88f6wf-hXp7pdCP0DF0cEByGNKesBmmVA8_9VtUh6B42LauMZJopzHcqbmA33k7BulIUjT">
+</div>
+<div class="w-8 h-8 rounded-full border border-dashed border-text-muted flex items-center justify-center bg-surface-elevated text-text-muted text-xs">
+                    +
+                  </div>
+<div class="w-8 h-8 rounded-full border border-dashed border-text-muted flex items-center justify-center bg-surface-elevated text-text-muted text-xs">
+                    +
+                  </div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-paper">3/5 Terisi</span>
+<span class="text-xs text-signal-teal">2 slot tersisa (Midlaner &amp; Roamer)</span>
+</div>
+</div>
+<button class="h-10 px-6 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5" type="button">
+<span class="">Gabung Lobi</span>
+</button>
+</div>
+</article>
+<!-- Lobby Card 3: PUBG Mobile -->
+<article class="bg-surface rounded-2xl p-5 border border-border-subtle hover:border-accent-violet/60 transition-colors flex flex-col gap-4">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-accent-violet">
+<img alt="Bagas_Sniper" class="w-full h-full object-cover" data-alt="Close up avatar of serious male battle royale player wearing dark tactical hoodie and gaming headset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYqbnly4u-79U2HdGa4GUflRrNi1C1QQ1tqk02S2x74vBeWWn0AoJXaKTmDlhr8CKvn7e26bHc9NX_KVKt6Y6NDvh3gjyPG80kx23ZsIPkFTBl3zJfcX3zAU9ZJ1OaoMklxgsONzp3e4a6UoM-XG0ZwRFlsnBVCKTmvAH8ooQj_TdViQ9OgMmsXxmqVru598UfvedEd_Z-1h6MPWUBiMhWzVVqpHUgTixspb2k2FHiUmr7Cdj_32J2">
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-base text-paper">Push Rank Erangel Chicken Hunting Malam Ini</span>
+<span class="text-xs text-text-muted">Dibuat oleh <span class="text-paper font-semibold">Bagas_Sniper</span> • 11 menit yang lalu</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#14141C] border border-border-stroke text-signal-teal text-xs font-semibold">
+
+<span class="">Lobi Terbuka</span>
+</div>
+</div>
+<!-- Tags & Badges -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-[#272736] text-primary-container font-semibold text-xs border border-border-stroke">
+                PUBG Mobile
+              </span>
+<span class="px-3 py-1 rounded-full bg-accent-violet/20 border border-accent-violet/50 text-accent-violet font-semibold text-xs">
+                Ace Tier
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-text-muted text-xs">
+                Rusher / Scout
+              </span>
+<span class="px-3 py-1 rounded-full bg-surface-elevated text-paper text-xs">
+                Erangel Only
+              </span>
+</div>
+<div class="h-px w-full bg-border-subtle"></div>
+<!-- Bottom Row: Slots and Action Button -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center -space-x-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 1" class="w-full h-full object-cover" data-alt="Portrait of young casual gamer male wearing black hoodie in warm dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7lICY9V1ji6JHGbLLht6ZMO1-VhNx3i0e6aVQPVwc5DG2fG1V_sVKHv0VFNaAn6LIdQRhQrkgk21yykzAGUuXGq7bf1264okihhFgD6AGkSareCyvUsJUk1yBjlrkJV7K_qPIMibLSDxJr2jxy7X-HvIH1kbIV_2DB655XByhmQ1XZhEGcprt643zAgkz8a-kj_TAG8MXkk2-JERly39aEvaPlOEWnNbXGgFPJ83iuvBWBsNB8Yht">
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-surface">
+<img alt="Pemain 2" class="w-full h-full object-cover" data-alt="Portrait of female gamer smiling with neon cyan studio light on slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhwED5Rgjcqu-buUnXfMK9nLX0EZVX8BmWV8s7P3dPRUvZd8gP-WjNvx4Rk0jMcFzDer2I6rvn9E-gYM4ybevaH9Qr-XENpu2ZNaB-uIi3IAYqbx-vWgS2oItKIvAZs5PcHdOcDfsvfqYnPJrORUNmL1Prm3V4kVKdwibYwFjKSaB41zFtBvHYDr7TELegCKeqp94tSUPtXDmGaQ2i3nw82WGV43axMFMvTtaAuanTsVCY1cSJ5qTH">
+</div>
+<div class="w-8 h-8 rounded-full border border-dashed border-text-muted flex items-center justify-center bg-surface-elevated text-text-muted text-xs">
+                    +
+                  </div>
+<div class="w-8 h-8 rounded-full border border-dashed border-text-muted flex items-center justify-center bg-surface-elevated text-text-muted text-xs">
+                    +
+                  </div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-paper">2/4 Terisi</span>
+<span class="text-xs text-signal-teal">2 slot tersisa</span>
+</div>
+</div>
+<button class="h-10 px-6 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5" type="button">
+<span class="">Gabung Lobi</span>
+</button>
+</div>
+</article>
+<!-- Community Story / Highlight Card -->
+<article class="bg-surface rounded-2xl p-5 border border-border-subtle flex flex-col gap-4 mt-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full overflow-hidden bg-surface-elevated ring-2 ring-accent-violet">
+<img alt="Clara_Viper" class="w-full h-full object-cover" data-alt="Charismatic female esport streamer with purple gaming room background wearing headset and smiling warmly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAlHAtM2PR66YsJVsePpQkSoXAiInewi-dHTaIBQ9d2jZmyJ6MnotYBl53rA5voCY2OhCy5AWM_H7jy35rsAEYTBnGj8-j3XOI6G1tUKgV_fnkgnylpKK9zuH1KE9RmnzEuqiLbu4ap7SwBj6G8RvB6MO905TWFqa1Z8X04Dx-1dVdeN8P5xqErpvXhkqFgc9uPFsbUptHX2mp6Cj7n0A_Potd3wty16GlCmegFKtBSHqLNjfevl-Z">
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-base text-paper">Clara_Viper</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-elevated text-accent-violet font-semibold text-xs">[GARUDA]</span>
+<svg class="w-4 h-4 text-signal-teal" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+</svg>
+</div>
+<span class="text-xs text-text-muted">Memposting sorotan mabar • 45 menit yang lalu</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#14141C] border border-border-stroke text-paper text-xs font-medium">
+                Highlight Kemenangan
+              </span>
+</div>
+<p class="text-sm text-paper leading-relaxed">
+              Win streak 5 bareng kawan dari Mabar Finder! Komunikasi rapi, no toxic, semua paham rotasi. Ini baru namanya mabar berfaedah! Sampai ketemu di Immortal 3 besok malam.
+            </p>
+<!-- Match Summary Visual Media -->
+<div class="w-full rounded-xl overflow-hidden relative bg-[#14141C] border border-border-stroke aspect-video md:h-72">
+<img alt="Match Victory" class="w-full h-full object-cover" data-alt="Epic cinematic victory screen from a tactical competitive first person shooter match, showing match MVP accolades, clean solid dark overlay with lime green celebratory banner and Indonesian gaming clan logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoP9qaj3p4WrH1y5XKJBZAPGRnYiIB9VT25oZuNO469vtzesC1lZ3GxQP0awD-341-82JxS8q0QcQudh_Gdsi1IloqbALF6y62W_1NEnL5myPKpB1r8j_ia3YkkaMRBDGFRE5Vtqbm9EPlnd0oTl21wUYnx-865MhjpQGn-cIMRTbtplFutQ22jRJCiz3Y39nLCyw-Jx5rQCtbVHJq_bxFEwQIP9HS3z3s0JwgLHa4I70yQ0KQezy9">
+<!-- Subtle Dark Tint Overlay -->
+<div class="absolute inset-0 bg-[#14141C]/40 flex items-center justify-center">
+<div class="w-14 h-14 rounded-full bg-surface/90 border border-border-stroke text-primary-container flex items-center justify-center shadow-lg transition-transform hover:scale-105">
+<svg class="w-6 h-6 fill-current translate-x-0.5" viewBox="0 0 24 24">
+<path d="M8 5v14l11-7z"></path>
+</svg>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-base-ink/90 text-paper text-xs font-semibold flex items-center gap-1.5 border border-border-stroke">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<polygon points="23 7 16 12 23 17 23 7"></polygon>
+<rect height="14" rx="2" ry="2" width="15" x="1" y="5"></rect>
+</svg>
+<span class="">0:45 Cuplikan</span>
+</div>
+</div>
+<!-- Interactions Bar -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="h-9 px-4 rounded-full bg-[#14141C] border border-border-stroke text-paper text-xs font-semibold hover:border-primary-container transition-colors flex items-center gap-2" type="button">
+<svg class="w-4 h-4 text-primary-container fill-current" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<span class="">142 Respect</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-[#14141C] border border-border-stroke text-paper text-xs font-semibold hover:border-accent-violet transition-colors flex items-center gap-2" type="button">
+<svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="">28 Komentar</span>
+</button>
+</div>
+<button class="h-9 px-4 rounded-full bg-[#14141C] border border-border-stroke text-paper text-xs font-semibold hover:text-primary-container transition-colors flex items-center gap-2" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="18" cy="5" r="3"></circle>
+<circle cx="6" cy="12" r="3"></circle>
+<circle cx="18" cy="19" r="3"></circle>
+<line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+<line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+</svg>
+<span class="">Bagikan</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Right Column: Sidebar Feeds & Widgets (~33%) -->
+<aside class="lg:col-span-4 flex flex-col gap-5">
+<!-- Widget 1: Online Friends -->
+<div class="bg-surface rounded-2xl p-5 border border-border-subtle flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+
+<h3 class="font-headline font-bold text-base text-paper">Teman Sefrekuensi Online</h3>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-[#14141C] border border-border-stroke text-signal-teal font-semibold text-xs">4 Aktif</span>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Friend 1 -->
+<div class="p-3 rounded-xl bg-[#14141C] border border-border-stroke flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-elevated ring-1 ring-accent-violet">
+<img alt="Raka_Frost" class="w-full h-full object-cover" data-alt="Avatar of male gamer with headphones in dark ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB002sWFoxq9zOIef19TXm0kuhTKVQuBbRL3pWSBYJ5yXxe06LWqAaal6_RTiF0tjFOnpXlUze63C3i7R0vOT8N2641JN-qYqIPc06nR9mLwkHvjZyfIHvswdl9JtOoK3yTwzmBoN44v5Th0KStSFxE8lYdD0jxMm3n9Na34YzA75D1FdXmD-V3gcrHZTlvrmncI787QVpuZ4niRQjQRtMBspQcCkmwel6cJF3wvp529iOmiHc4qmI5">
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-signal-teal ring-1 ring-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-xs text-paper truncate">Raka_Frost</span>
+<span class="text-xs text-text-muted truncate">Lobi Valorant (4/5)</span>
+</div>
+</div>
+<button class="h-7 px-3 rounded-full bg-accent-violet text-base-ink font-headline font-bold text-xs flex-shrink-0 hover:opacity-90 transition-opacity" type="button">
+                  Ajak Gabung
+                </button>
+</div>
+<!-- Friend 2 -->
+<div class="p-3 rounded-xl bg-[#14141C] border border-border-stroke flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-elevated ring-1 ring-accent-violet">
+<img alt="NadiaSky" class="w-full h-full object-cover" data-alt="Avatar of female gamer smiling against cozy dark blue room backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0dkzPnTpmJgpwak3mqXbogfruf7usb5F2V5_fuXAKVhevyMu4EBZ4Mkz5-wrY03oh11RgoHUrZmBbJ2yEEyIWTOd5B7knooWVFZxdou28Y5pSevkOK7C7jK1CXcrqpwYG0e5XVj6WDDvQWoo3YVmriteJmhKylrpma841c7QTU4IzCkP94aTac6TJOVU3A4ECUO8bacX4juSop18xwfGQau3fnU0X-IIS1u89nVm2r0ILZjyt68wP">
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-signal-teal ring-1 ring-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-xs text-paper truncate">NadiaSky</span>
+<span class="text-xs text-accent-violet truncate">In-Game MLBB (Menit 12)</span>
+</div>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-text-muted text-xs flex-shrink-0">
+                  Sibuk
+                </span>
+</div>
+<!-- Friend 3 -->
+<div class="p-3 rounded-xl bg-[#14141C] border border-border-stroke flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-elevated ring-1 ring-accent-violet">
+<img alt="Dimas_K" class="w-full h-full object-cover" data-alt="Portrait of young gamer in black tee shirt with warm slate dark lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzgcTsV7v1geaLiperFJqyD3Wn3H2S-mw8pTjdCewNhe7xBTI3So27g8hXW6IBdFjUJpZCz_pLmEVsVsStfN_iJVym-eRSXGrV3GdeQMz5aJMidsM_zf2_OcCZLYr2uLyBZlmcDs91i3xubxY2aO7xjy-zUh7DUVkSRdgvO4ChIyqZbO3ALZE5qTcB59aU8b-9Moazk3gJIieIVFikGV2WKVW-931-Hu3ZKBj0nN46eNE6Rj0Fnmjy">
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-signal-teal ring-1 ring-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-xs text-paper truncate">Dimas_K</span>
+<span class="text-xs text-primary-container truncate">Cari teman PUBG</span>
+</div>
+</div>
+<button class="h-7 px-3 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs flex-shrink-0 hover:opacity-90 transition-opacity" type="button">
+                  Ajak Mabar
+                </button>
+</div>
+<!-- Friend 4 -->
+<div class="p-3 rounded-xl bg-[#14141C] border border-border-stroke flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative flex-shrink-0">
+<div class="w-9 h-9 rounded-full overflow-hidden bg-surface-elevated ring-1 ring-accent-violet">
+<img alt="Kazuya_99" class="w-full h-full object-cover" data-alt="Male gamer avatar with glasses in neutral dark studio room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATLoSXYsNCFawfsYppq8-eqKOaZeUjqA9RVByAiAyiHsozCaCFg8fgK6os-Aslbi3EgZBuTATJmz_UnxDS00UeYPPajo0RfNlIZA_TpzrLyy5VQaN7Y0vfLDvOEe0duxBGUT0N0yoCy9TY7A325Ya2kqC7rmBtqM2E6YZvf3SQxnz33TDJQZ8JIvmODVxDL8gKHSm--4D_pMpUAv0Z7bwdBZqo3_pRVD9VsrrOPaU-QIa2zcVu2YsL">
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-signal-teal ring-1 ring-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-semibold text-xs text-paper truncate">Kazuya_99</span>
+<span class="text-xs text-text-muted truncate">Online santai</span>
+</div>
+</div>
+<button aria-label="Kirim Pesan" class="w-7 h-7 rounded-full bg-surface-elevated text-paper flex items-center justify-center flex-shrink-0 hover:bg-[#2E2E3E] transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Widget 2: Weekend Scrim & Tournament Card -->
+<div class="bg-surface rounded-2xl p-5 border border-border-subtle flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 rounded-full bg-[#14141C] border border-border-stroke text-accent-violet font-semibold text-xs">
+                Komunitas
+              </span>
+<span class="text-text-muted text-xs">Pendaftaran Terbuka</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<h3 class="font-headline font-bold text-base text-paper">Weekend Scrim Community Valorant Cup</h3>
+<p class="text-xs text-text-muted leading-relaxed">Ajang tanding santai mingguan untuk tim komunitas tier Diamond hingga Radiant.</p>
+</div>
+<div class="flex flex-col gap-2 p-3.5 rounded-xl bg-[#14141C] border border-border-stroke">
+<div class="flex items-center justify-between text-xs">
+<span class="text-text-muted">Waktu Tanding</span>
+<span class="text-paper font-semibold">Sabtu, 20:00 WIB</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-text-muted">Total Hadiah</span>
+<span class="text-primary-container font-headline font-bold text-sm">Rp 2.500.000</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-text-muted">Slot Terisi</span>
+<span class="text-paper font-semibold">12 / 16 Tim</span>
+</div>
+</div>
+<button class="w-full h-11 rounded-full bg-primary-container text-base-ink font-headline font-bold text-xs md:text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2" type="button">
+
+<span class="">Daftar Tim Sekarang</span>
+</button>
+</div>
+<!-- Widget 3: Quick Personal Hub / Dashboard -->
+<div class="bg-surface rounded-2xl p-5 border border-border-subtle flex flex-col gap-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-[#14141C] border border-border-stroke flex items-center justify-center text-primary-container">
+<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+</svg>
+</div>
+<h3 class="font-headline font-bold text-base text-paper">Akses Cepat Ruang Pribadi</h3>
+</div>
+<p class="text-xs text-text-muted leading-relaxed">
+              Lihat ringkasan performa mabar, reputasi anti-ragequit (99.4%), dan kelola game tag terhubung.
+            </p>
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#14141C] border border-border-stroke text-center">
+<div class="flex flex-col">
+<span class="font-headline font-extrabold text-xl text-paper">86%</span>
+<span class="text-xs text-text-muted">Tingkat Menang</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-extrabold text-xl text-signal-teal">Tier S</span>
+<span class="text-xs text-text-muted">Reputasi Positif</span>
+</div>
+</div>
+<button class="w-full h-11 rounded-full bg-[#272736] border border-border-stroke text-paper font-semibold text-xs md:text-sm hover:border-primary-container hover:text-primary-container transition-colors flex items-center justify-center gap-2" type="button">
+
+<span class="">Buka Dashboard Pribadi</span>
+</button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#14141C] border-t border-border-subtle py-8">
+<div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-text-muted text-xs md:text-sm">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-base-ink">
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+<path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+</svg>
+</div>
+<span class="font-headline font-bold text-sm text-paper">Mabar Finder</span>
+</div>
+<p class="text-center md:text-left text-xs">
+        © 2024 Mabar Finder. Komunitas Matchmaking Gamer Indonesia.
+      </p>
+<div class="flex items-center gap-6 font-medium text-xs">
+<a class="text-text-muted hover:text-paper transition-colors" data-path="aturan-lobi" href="#">Aturan Lobi</a>
+<a class="text-text-muted hover:text-paper transition-colors" data-path="bantuan" href="#">Bantuan</a>
+<a class="text-text-muted hover:text-paper transition-colors" data-path="privasi" href="#">Privasi</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,869 @@
+<!DOCTYPE html><html class="dark" lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-dim": "#13131b",
+          "surface-container": "#1f1f27",
+          "paper": "#F5F3EE",
+          "on-tertiary": "#3b2c37",
+          "surface": "#1E1E29",
+          "on-surface": "#e4e1ed",
+          "surface-bright": "#393841",
+          "secondary-container": "#422db2",
+          "on-secondary-fixed": "#170065",
+          "primary": "#ffffff",
+          "on-background": "#e4e1ed",
+          "on-secondary-container": "#b4abff",
+          "background": "#13131b",
+          "signal-teal": "#4ADE80",
+          "tertiary-container": "#f4dceb",
+          "on-primary": "#253500",
+          "text-muted": "#A0A0B2",
+          "secondary-fixed": "#e4dfff",
+          "base-ink": "#14141C",
+          "surface-container-lowest": "#0d0d15",
+          "alert-coral": "#FF6B5E",
+          "on-tertiary-fixed": "#251722",
+          "error-container": "#93000a",
+          "secondary": "#c7bfff",
+          "surface-container-low": "#1b1b23",
+          "primary-fixed-dim": "#a3d724",
+          "primary-container": "#bef443",
+          "on-tertiary-container": "#725f6c",
+          "on-primary-container": "#506e00",
+          "error": "#ffb4ab",
+          "on-error": "#690005",
+          "on-primary-fixed": "#141f00",
+          "surface-elevated": "#272736",
+          "surface-tint": "#a3d724",
+          "primary-fixed": "#bef443",
+          "border-subtle": "#2E2E3E",
+          "inverse-primary": "#4b6700",
+          "on-tertiary-fixed-variant": "#53424e",
+          "inverse-on-surface": "#303038",
+          "outline": "#8d937c",
+          "inverse-surface": "#e4e1ed",
+          "surface-container-high": "#292932",
+          "on-secondary": "#2a039d",
+          "secondary-fixed-dim": "#c7bfff",
+          "tertiary-fixed-dim": "#d7c0cf",
+          "outline-variant": "#434935",
+          "on-secondary-fixed-variant": "#422db2",
+          "surface-variant": "#34343d",
+          "on-surface-variant": "#c3c9af",
+          "on-primary-fixed-variant": "#384e00",
+          "tertiary": "#ffffff",
+          "on-error-container": "#ffdad6",
+          "tertiary-fixed": "#f4dceb",
+          "surface-container-highest": "#34343d"
+        },
+        "borderRadius": {
+          "DEFAULT": "1rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "margin-tablet": "2rem",
+          "margin-desktop": "3rem",
+          "margin": "1rem",
+          "space-lg": "1.5rem",
+          "gutter": "1.25rem",
+          "space-xs": "0.25rem",
+          "space-md": "1rem",
+          "space-sm": "0.5rem",
+          "gutter-desktop": "1.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "display-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "30px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "700"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-xl-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "800"
+            }
+          ],
+          "label-lg": [
+            "15px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-xl": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-base-ink font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low flex flex-col justify-between p-space-md z-50"><div class="flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs px-space-sm pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary-container text-[20px]">stadia_controller</span></div><span class="font-headline-md text-headline-md tracking-tight text-paper">Mabar Finder</span></div><div class="flex items-center"><span class="inline-flex items-center px-space-sm py-0.5 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm font-semibold tracking-wide uppercase">Admin Panel</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-full"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="dashboard-overview" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span>Dashboard Overview</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="kelola-game" href="#"><span class="material-symbols-outlined text-[20px]">sports_esports</span>Kelola Game</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full bg-primary-container text-on-primary-container font-bold transition-all" data-path="kelola-pengguna" href="#"><span class="material-symbols-outlined text-[20px] text-on-primary-container">group</span>Kelola Pengguna</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="laporan-moderasi" href="#"><span class="material-symbols-outlined text-[20px]">shield</span>Laporan &amp; Moderasi</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="pengaturan-sistem" href="#"><span class="material-symbols-outlined text-[20px]">tune</span>Pengaturan Sistem</a></nav></div><div class="flex flex-col gap-space-xs pt-space-md bg-surface-container-low"><div class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full bg-surface-elevated"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md text-paper truncate">Super Admin</span><span class="font-label-sm text-label-sm text-signal-teal truncate">Online</span></div></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-elevated hover:text-on-surface transition-all" data-path="profil-admin" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span>Profil Admin</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-full text-alert-coral font-label-md text-label-md hover:bg-surface-elevated hover:text-alert-coral transition-all" data-path="login" href="#"><span class="material-symbols-outlined text-[20px]">logout</span>Keluar</a></div></aside><div class="pl-72 min-h-screen flex flex-col bg-base-ink"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-sm"><span class="font-label-md text-label-md text-text-muted">Mabar Finder</span><span class="material-symbols-outlined text-text-muted text-[16px]">chevron_right</span><span class="font-label-md text-label-md text-paper font-semibold">Admin Panel</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-full"><span class="material-symbols-outlined text-text-muted text-[18px]">search</span><input class="bg-transparent border-0 text-paper placeholder-text-muted font-body-sm text-body-sm focus:outline-none w-48 lg:w-64" disabled="" placeholder="Cari lobi, game, user..." type="text"></div><div class="w-9 h-9 rounded-full bg-surface-elevated flex items-center justify-center"><span class="material-symbols-outlined text-on-surface text-[18px]">notifications</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-base-ink flex-1 px-space-lg py-space-lg"><div class="flex flex-col w-full relative">
+<!-- Active state update for Shell Navigation via script -->
+<script>
+    (function () {
+      const activePath = 'kelola-pengguna';
+      const navLinks = document.querySelectorAll('aside nav a');
+      navLinks.forEach((link) => {
+        if (link.getAttribute('data-path') === activePath) {
+          link.className = 'flex items-center gap-space-sm px-space-md py-space-sm rounded-full bg-primary-container text-on-primary-container font-bold transition-all';
+          const icon = link.querySelector('.material-symbols-outlined');
+          if (icon) icon.className = 'material-symbols-outlined text-[20px] text-on-primary-container';
+        }
+      });
+    })();
+  </script>
+<!-- BREADCRUMB & HEADER SECTION -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Admin Panel</span>
+<span class="material-symbols-outlined text-[14px] text-text-muted">chevron_right</span>
+<span class="font-label-sm text-label-sm text-primary-container font-bold uppercase tracking-wider">Kelola Pengguna</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-paper tracking-tight">Kelola Pengguna</h1>
+<p class="font-body-sm text-body-sm text-text-muted max-w-xl">
+        Pantau aktivitas gamer, verifikasi akun anggota, dan kelola status keanggotaan komunitas Mabar Finder secara real-time.
+      </p>
+</div>
+<!-- Actions & Filter Toolbar -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface px-space-md py-2.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-text-muted text-[18px]">search</span>
+<input class="bg-transparent text-paper placeholder-text-muted font-body-sm text-body-sm focus:outline-none w-48 sm:w-56" placeholder="Cari nickname, email, user ID..." type="text">
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface text-paper font-label-md text-label-md py-2.5 pl-space-md pr-9 rounded-full focus:outline-none cursor-pointer shadow-sm">
+<option value="all">Semua Status</option>
+<option value="active">Aktif</option>
+<option value="warning">Peringatan</option>
+<option value="suspended">Disuspend</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-text-muted text-[18px] pointer-events-none">expand_more</span>
+</div>
+<button class="flex items-center gap-space-xs bg-surface-elevated hover:bg-surface-bright text-paper font-label-md text-label-md px-space-md py-2.5 rounded-full transition-colors shadow-sm">
+
+<span class="">Export CSV</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-elevated hover:bg-surface-bright text-paper flex items-center justify-center transition-colors shadow-sm" title="Refresh Data">
+
+</button>
+</div>
+</div>
+<!-- METRIC STATS OVERVIEW -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Stat 1 -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-muted">Total Gamer Terdaftar</span>
+<div class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-paper">
+<span class="material-symbols-outlined text-[18px]">group</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-paper tracking-tight">28,450</span>
+<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-signal-teal/10 text-signal-teal font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">arrow_upward</span>
+          +12.4%
+        </span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">712 gamer baru minggu ini</span>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-muted">Gamer Aktif Mabar</span>
+<div class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-signal-teal">
+<span class="material-symbols-outlined text-[18px]">sports_esports</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-paper tracking-tight">19,320</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-elevated text-signal-teal font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-signal-teal animate-pulse"></span>
+          Live Mabar
+        </span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Sedang di voice / room lobi</span>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-muted">Akun Terverifikasi</span>
+<div class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-paper tracking-tight">24,110</span>
+<span class="font-label-sm text-label-sm text-text-muted">84.7% rasio</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Validasi WhatsApp &amp; Game ID</span>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-muted">Akun Disuspend</span>
+<div class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-alert-coral">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-paper tracking-tight">142</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-alert-coral/10 text-alert-coral font-label-sm text-label-sm">
+          0.5% total
+        </span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Kepatuhan fair play &amp; toxicity filter</span>
+</div>
+</div>
+<!-- MAIN TABLE CONTAINER -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-paper">Daftar Pengguna Mabar</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Daftar pengguna aktif yang berpartisipasi dalam komunitas matchmaking.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted">Filter Terapan:</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+          Semua Wilayah
+        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-elevated text-paper font-label-sm text-label-sm">
+          Top Reputasi
+        </span>
+</div>
+</div>
+<!-- Responsive Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high rounded-full text-text-muted font-label-sm text-label-sm tracking-wider uppercase">
+<th class="py-3.5 px-4 rounded-l-full">Avatar &amp; Nickname</th>
+<th class="py-3.5 px-4">Email</th>
+<th class="py-3.5 px-4">Profil Game</th>
+<th class="py-3.5 px-4">Tanggal Daftar</th>
+<th class="py-3.5 px-4">Status</th>
+<th class="py-3.5 px-4 text-right rounded-r-full">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-sm text-body-sm">
+<!-- Row 1 (Active Selected Row for Drawer) -->
+<tr class="bg-surface-elevated/70 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-paper">swords</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-paper font-bold truncate">Valk_Arthur</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-10294</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-paper">arthur.slayer@gamermail.com</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-paper">3 Game</span>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-secondary font-bold">VAL</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-primary-container font-bold">MLBB</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-signal-teal font-bold">PUBG</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">15 Agu 2023</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-signal-teal/15 text-signal-teal font-label-sm text-label-sm font-bold">
+
+                Aktif
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold hover:brightness-105 transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high text-alert-coral hover:bg-alert-coral/20 font-label-sm text-label-sm transition-all">
+                  Suspend
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors" title="Hapus Pengguna">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-elevated/40 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-secondary">explore</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-paper font-bold truncate">Kazuya_Sova</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-8921</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-paper">kazuya.lineups@gmail.com</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-paper">2 Game</span>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-secondary font-bold">VAL</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-paper font-bold">APEX</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">12 Jan 2024</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-signal-teal/15 text-signal-teal font-label-sm text-label-sm font-bold">
+
+                Aktif
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-surface-elevated text-paper hover:bg-surface-bright font-label-sm text-label-sm font-bold transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high text-alert-coral hover:bg-alert-coral/20 font-label-sm text-label-sm transition-all">
+                  Suspend
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-elevated/40 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-paper">file_download_done</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-text-muted"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-paper font-bold truncate">Siti_Sniper</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-9042</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-paper">siti.gamingind@outlook.com</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-paper">4 Game</span>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-primary-container font-bold">MLBB</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-signal-teal font-bold">PUBG</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-secondary font-bold">FF</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">05 Mar 2024</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-text-muted font-label-sm text-label-sm font-bold">
+
+                Offline
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-surface-elevated text-paper hover:bg-surface-bright font-label-sm text-label-sm font-bold transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high text-alert-coral hover:bg-alert-coral/20 font-label-sm text-label-sm transition-all">
+                  Suspend
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-elevated/40 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-alert-coral">warning</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-alert-coral"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-paper font-bold truncate">Rayhan_Viper</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-6512</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-paper">rayhan.toxicv@yahoo.com</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-paper">1 Game</span>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-secondary font-bold">VAL</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">18 Okt 2023</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-alert-coral/15 text-alert-coral font-label-sm text-label-sm font-bold">
+
+                Peringatan
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-surface-elevated text-paper hover:bg-surface-bright font-label-sm text-label-sm font-bold transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-alert-coral text-on-error font-label-sm text-label-sm font-bold transition-all">
+                  Review
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-elevated/40 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center opacity-60">
+<span class="material-symbols-outlined text-[20px] text-text-muted">block</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-text-muted font-bold truncate line-through">Kenjiro_Apex</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-4109</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-text-muted">kenjiro.troll@proton.me</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-text-muted">2 Game</span>
+<div class="flex items-center gap-1 opacity-50">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-paper font-bold">APEX</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-paper font-bold">DOTA</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">02 Feb 2024</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-error font-label-sm text-label-sm font-bold">
+
+                Disuspend
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-surface-elevated text-paper hover:bg-surface-bright font-label-sm text-label-sm font-bold transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high text-signal-teal hover:bg-signal-teal/20 font-label-sm text-label-sm transition-all">
+                  Pulihkan
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-elevated/40 transition-colors">
+<td class="py-3.5 px-4 rounded-l-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-paper">bolt</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-signal-teal"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] leading-tight text-paper font-bold truncate">Nadia_Mage</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">#MF-7823</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 font-body-sm text-paper">nadia.midlaner@gmail.com</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold text-paper">3 Game</span>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-primary-container font-bold">MLBB</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-secondary font-bold">HOK</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[10px] font-label-sm text-signal-teal font-bold">LOL</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-text-muted">29 Nov 2023</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-signal-teal/15 text-signal-teal font-label-sm text-label-sm font-bold">
+
+                Aktif
+              </span>
+</td>
+<td class="py-3.5 px-4 text-right rounded-r-2xl">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-surface-elevated text-paper hover:bg-surface-bright font-label-sm text-label-sm font-bold transition-all" onclick="toggleDrawer(true)">
+                  Detail
+                </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container-high text-alert-coral hover:bg-alert-coral/20 font-label-sm text-label-sm transition-all">
+                  Suspend
+                </button>
+<button class="p-1 rounded-full text-text-muted hover:text-alert-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs text-text-muted font-body-sm text-body-sm">
+<span class="">Menampilkan <strong class="text-paper">1 - 6</strong> dari <strong class="text-paper">28,450</strong> pengguna</span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-text-muted hover:text-paper transition-colors" disabled="">
+
+</button>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md font-bold">1</button>
+<button class="w-8 h-8 rounded-full bg-surface-elevated hover:bg-surface-bright text-paper font-label-md text-label-md transition-colors">2</button>
+<button class="w-8 h-8 rounded-full bg-surface-elevated hover:bg-surface-bright text-paper font-label-md text-label-md transition-colors">3</button>
+<span class="px-1 text-text-muted">...</span>
+<button class="w-8 h-8 rounded-full bg-surface-elevated hover:bg-surface-bright text-paper font-label-md text-label-md transition-colors">4,742</button>
+<button class="w-8 h-8 rounded-full bg-surface-elevated flex items-center justify-center text-paper hover:bg-surface-bright transition-colors">
+
+</button>
+</div>
+</div>
+</div>
+<!-- SLIDE-IN DETAIL USER DRAWER (Right Overlay) -->
+<div class="fixed inset-0 bg-base-ink/60 backdrop-blur-sm z-50 transition-opacity duration-300" id="userDrawerBackdrop" onclick="toggleDrawer(false)"></div>
+<aside class="fixed top-0 right-0 h-full w-full max-w-[440px] bg-surface-container-low shadow-2xl z-50 flex flex-col justify-between transition-transform duration-300 translate-x-0 overflow-y-auto" id="userDrawer">
+<!-- Drawer Header -->
+<div class="sticky top-0 z-10 bg-surface-container-low/95 backdrop-blur-md p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<button class="w-8 h-8 rounded-full bg-surface-elevated hover:bg-surface-bright text-paper flex items-center justify-center transition-colors" onclick="toggleDrawer(false)">
+
+</button>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-paper">Detail Pengguna</h3>
+<span class="font-label-sm text-label-sm text-text-muted">ID Gamer #MF-10294</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-signal-teal/15 text-signal-teal font-label-sm text-label-sm font-bold">
+
+        Aktif (Verified)
+      </span>
+</div>
+<!-- Drawer Content Scrollable Area -->
+<div class="p-space-md flex flex-col gap-space-md flex-1">
+<!-- Profile Card -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm flex flex-col items-center text-center gap-space-sm relative overflow-hidden">
+<div class="w-20 h-20 rounded-full bg-surface-elevated flex items-center justify-center ring-4 ring-secondary/30 relative">
+<span class="material-symbols-outlined text-[40px] text-paper">swords</span>
+<span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+</div>
+<div class="flex flex-col items-center">
+<div class="flex items-center gap-1">
+<h4 class="font-headline-md text-headline-md text-paper">Valk_Arthur</h4>
+<span class="material-symbols-outlined text-primary-container text-[20px]">verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">arthur.slayer@gamermail.com</span>
+<div class="flex items-center gap-2 mt-1 font-label-sm text-label-sm text-text-muted">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">Jakarta Selatan, Indonesia</span>
+</div>
+</div>
+<!-- Reputation Fair Play Gauge Bar -->
+<div class="w-full bg-surface-elevated p-space-sm rounded-xl flex items-center justify-between mt-space-xs">
+<div class="flex items-center gap-space-xs text-left">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-paper block">Skor Reputasi</span>
+<span class="font-label-sm text-label-sm text-signal-teal">Pemain Sangat Sportif</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary-container font-extrabold">98%</span>
+<span class="font-label-sm text-label-sm text-text-muted block">Fair Play</span>
+</div>
+</div>
+</div>
+<!-- Quick Metrics Grid in Drawer -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface rounded-xl p-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted block">Bergabung Sejak</span>
+<span class="font-label-md text-label-md font-bold text-paper">15 Agu 2023</span>
+</div>
+<div class="bg-surface rounded-xl p-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted block">Total Jam Mabar</span>
+<span class="font-label-md text-label-md font-bold text-paper">428 Jam</span>
+</div>
+<div class="bg-surface rounded-xl p-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted block">Request Diterima</span>
+<span class="font-label-md text-label-md font-bold text-paper">142 kali</span>
+</div>
+<div class="bg-surface rounded-xl p-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted block">Kehadiran (No AFK)</span>
+<span class="font-label-md text-label-md font-bold text-signal-teal">99.4%</span>
+</div>
+</div>
+<!-- Linked Game Profiles -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-paper font-bold">Game Terhubung (3)</span>
+<span class="font-label-sm text-label-sm text-primary-container cursor-pointer hover:underline">Kelola Game</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Valorant -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-lg bg-surface-elevated flex items-center justify-center font-bold text-secondary text-[11px]">VAL</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-paper block">Valorant</span>
+<span class="font-label-sm text-label-sm text-text-muted">Duelist · Immortal 3</span>
+</div>
+</div>
+<span class="inline-flex px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-[11px] font-bold">ID Terverifikasi</span>
+</div>
+<!-- MLBB -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-lg bg-surface-elevated flex items-center justify-center font-bold text-primary-container text-[11px]">ML</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-paper block">Mobile Legends</span>
+<span class="font-label-sm text-label-sm text-text-muted">Jungler · Mythical Glory</span>
+</div>
+</div>
+<span class="inline-flex px-2 py-0.5 rounded-full bg-primary-container/15 text-primary-container font-label-sm text-[11px] font-bold">ID Terverifikasi</span>
+</div>
+<!-- PUBG Mobile -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-lg bg-surface-elevated flex items-center justify-center font-bold text-signal-teal text-[11px]">PUBG</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-paper block">PUBG Mobile</span>
+<span class="font-label-sm text-label-sm text-text-muted">Assault · Ace Master</span>
+</div>
+</div>
+<span class="inline-flex px-2 py-0.5 rounded-full bg-signal-teal/15 text-signal-teal font-label-sm text-[11px] font-bold">ID Terverifikasi</span>
+</div>
+</div>
+</div>
+<!-- Recent Community Activity Timeline -->
+<div class="bg-surface rounded-DEFAULT p-space-md shadow-sm flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-paper font-bold">Riwayat Aktivitas Komunitas</span>
+<div class="relative pl-6 space-y-4">
+<!-- Timeline line -->
+<div class="absolute left-2.5 top-2 bottom-2 w-0.5 bg-surface-elevated"></div>
+<!-- Item 1 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-signal-teal ring-2 ring-surface"></span>
+<span class="font-label-md text-label-md text-paper font-semibold">Mabar Valorant 5v5 Selesai</span>
+<p class="font-body-sm text-[12px] text-text-muted">Menerima +1 Pujian Sportif dari anggota tim lobi.</p>
+<span class="font-label-sm text-[11px] text-text-muted">10 menit lalu</span>
+</div>
+<!-- Item 2 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface"></span>
+<span class="font-label-md text-label-md text-paper font-semibold">Mengirim Request Mabar</span>
+<p class="font-body-sm text-[12px] text-text-muted">Bergabung pada room "Push Rank Santai Sampai Sahur" (PUBG).</p>
+<span class="font-label-sm text-[11px] text-text-muted">Kemarin, 21:30 WIB</span>
+</div>
+<!-- Item 3 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-surface-bright ring-2 ring-surface"></span>
+<span class="font-label-md text-label-md text-paper font-semibold">Update Atribut Game</span>
+<p class="font-body-sm text-[12px] text-text-muted">Menyinkronkan tier Immortal 3 pada Riot Games API.</p>
+<span class="font-label-sm text-[11px] text-text-muted">3 hari lalu</span>
+</div>
+<!-- Item 4 -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-6 top-1 w-3 h-3 rounded-full bg-primary-container ring-2 ring-surface"></span>
+<span class="font-label-md text-label-md text-paper font-semibold">Verifikasi Akun Sukses</span>
+<p class="font-body-sm text-[12px] text-text-muted">WhatsApp OTP &amp; Riot ID terverifikasi oleh sistem.</p>
+<span class="font-label-sm text-[11px] text-text-muted">12 hari lalu</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Sticky Action Buttons -->
+<div class="sticky bottom-0 z-10 bg-surface-container-low/95 backdrop-blur-md p-space-md flex flex-col gap-2">
+<div class="grid grid-cols-2 gap-2">
+<button class="w-full py-2.5 px-space-sm rounded-full bg-alert-coral hover:brightness-110 text-on-error font-label-md text-label-md font-bold transition-all shadow-sm">
+          Suspend Akun
+        </button>
+<button class="w-full py-2.5 px-space-sm rounded-full bg-surface-elevated hover:bg-surface-bright text-paper font-label-md text-label-md font-semibold transition-all">
+          Kirim Peringatan
+        </button>
+</div>
+<button class="w-full py-2 rounded-full bg-surface-container hover:bg-surface text-text-muted hover:text-paper font-label-sm text-label-sm transition-all">
+        Reset Password &amp; Notifikasi Email
+      </button>
+</div>
+</aside>
+<!-- DRAWER INTERACTION JAVASCRIPT -->
+<script>
+    function toggleDrawer(open) {
+      const drawer = document.getElementById('userDrawer');
+      const backdrop = document.getElementById('userDrawerBackdrop');
+      if (open) {
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100', 'pointer-events-auto');
+      } else {
+        drawer.classList.add('translate-x-full');
+        drawer.classList.remove('translate-x-0');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+      }
+    }
+  </script>
+</div></main></div>
+
+</body></html>
