@@ -29,7 +29,7 @@ async function logout() {
       <div class="dashboard-layout">
         <aside id="dashboard-navigation" class="app-sidebar" :class="{ 'app-sidebar--open': mobileOpen }" aria-label="Navigasi dashboard">
           <div class="app-sidebar__top">
-            <RouterLink class="brand" to="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10a4 4 0 0 1 3.9 3.1l1 4.5a2.5 2.5 0 0 1-4 2.5L15 16H9l-2.9 2.1a2.5 2.5 0 0 1-4-2.5l1-4.5A4 4 0 0 1 7 8Z"/><path d="M7 11v4m-2-2h4m7-1h.01m2 2h.01"/></svg></span><span>Mabar Finder</span></RouterLink>
+            <RouterLink class="brand" to="/"><span>Marimabar</span></RouterLink>
             <span v-if="adminArea" class="app-sidebar__badge">Admin Panel</span>
             <div class="app-sidebar__identity"><span class="app-avatar" aria-hidden="true">{{ initials }}</span><span class="app-sidebar__person"><strong>{{ displayName }}</strong><small>{{ adminArea ? 'Admin' : 'Siap mabar' }}</small></span></div>
             <nav v-if="adminArea" class="app-sidebar__nav" aria-label="Navigasi admin">
@@ -56,7 +56,7 @@ async function logout() {
           <header class="site-header site-header--dashboard">
             <div class="header-inner">
               <button class="menu-toggle" type="button" :aria-expanded="mobileOpen" aria-controls="dashboard-navigation" :aria-label="mobileOpen ? 'Tutup menu' : 'Buka menu'" @click="mobileOpen = !mobileOpen"><span></span><span></span><span></span></button>
-              <div class="dashboard-header__title"><span>Mabar Finder</span><strong>{{ adminArea ? 'Admin Panel' : 'Beranda' }}</strong></div>
+              <div class="dashboard-header__title"><span>Marimabar</span><strong>{{ adminArea ? 'Admin Panel' : 'Beranda' }}</strong></div>
               <div class="dashboard-header__actions"><RouterLink to="/pilih-game" class="dashboard-header__search">Cari teman mabar</RouterLink><RouterLink class="app-avatar app-avatar--small" to="/profil-saya" aria-label="Profil saya">{{ initials }}</RouterLink></div>
             </div>
           </header>
@@ -66,13 +66,13 @@ async function logout() {
     </template>
     <template v-else>
       <header class="site-header site-header--public"><div class="header-inner container">
-        <RouterLink class="brand" to="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10a4 4 0 0 1 3.9 3.1l1 4.5a2.5 2.5 0 0 1-4 2.5L15 16H9l-2.9 2.1a2.5 2.5 0 0 1-4-2.5l1-4.5A4 4 0 0 1 7 8Z"/><path d="M7 11v4m-2-2h4m7-1h.01m2 2h.01"/></svg></span><span>Mabar Finder</span></RouterLink>
+        <RouterLink class="brand" to="/"><span>Marimabar</span></RouterLink>
         <nav class="nav-links" aria-label="Navigasi utama"><RouterLink to="/">Cari Teman</RouterLink><RouterLink to="/pilih-game">Game</RouterLink><RouterLink to="/tentang">Tentang</RouterLink></nav>
-        <div class="header-actions"><template v-if="session.user"><RouterLink class="button button--outline small" to="/beranda">Beranda</RouterLink><button class="button button--primary small" @click="logout">Keluar</button></template><template v-else><RouterLink class="button button--outline small" to="/login">Masuk</RouterLink><RouterLink class="button button--primary small" to="/register">Daftar</RouterLink></template></div>
+        <div class="header-actions"><template v-if="session.user"><RouterLink class="button button--outline small" to="/beranda">Beranda</RouterLink><button class="button button--primary small" @click="logout">Keluar</button></template><template v-else><RouterLink class="button button--primary small" to="/login">Masuk</RouterLink><RouterLink class="button button--primary small" to="/register">Daftar</RouterLink></template></div>
         <button class="menu-toggle" type="button" :aria-expanded="mobileOpen" aria-controls="public-navigation" :aria-label="mobileOpen ? 'Tutup menu' : 'Buka menu'" @click="mobileOpen = !mobileOpen"><span></span><span></span><span></span></button>
       </div><nav v-if="mobileOpen" id="public-navigation" class="mobile-navigation" aria-label="Navigasi seluler"><RouterLink to="/">Cari Teman</RouterLink><RouterLink to="/pilih-game">Game</RouterLink><RouterLink to="/tentang">Tentang</RouterLink><RouterLink v-if="session.user" to="/beranda">Beranda</RouterLink><template v-else><RouterLink to="/login">Masuk</RouterLink><RouterLink to="/register">Daftar</RouterLink></template></nav></header>
       <RouterView />
-      <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-about"><RouterLink class="brand" to="/"><span class="brand-mark" aria-hidden="true">M</span><span>Mabar Finder</span></RouterLink><p>Temukan teman mabar yang sefrekuensi. Main bareng, tanpa drama solo queue.</p></div><div><h2>Produk</h2><RouterLink to="/beranda">Beranda</RouterLink><RouterLink to="/pilih-game">Pilih game</RouterLink></div><div><h2>Komunitas</h2><RouterLink to="/tentang">Tentang kami</RouterLink><RouterLink to="/request-mabar">Ajakan mabar</RouterLink></div><div><h2>Kebijakan</h2><RouterLink to="/syarat-ketentuan">Syarat &amp; ketentuan</RouterLink><RouterLink to="/kebijakan-privasi">Kebijakan privasi</RouterLink></div></div><div class="footer-bottom"><span>Mabar Finder</span><span>Data game diisi pengguna, belum terverifikasi.</span></div></div></footer>
+      <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-about"><RouterLink class="brand" to="/"><span class="brand-mark" aria-hidden="true">M</span><span>Marimabar</span></RouterLink><p>Temukan teman mabar yang sefrekuensi. Main bareng, tanpa drama solo queue.</p></div><div><h2>Produk</h2><RouterLink to="/beranda">Beranda</RouterLink><RouterLink to="/pilih-game">Pilih game</RouterLink></div><div><h2>Komunitas</h2><RouterLink to="/tentang">Tentang kami</RouterLink><RouterLink to="/request-mabar">Ajakan mabar</RouterLink></div><div><h2>Kebijakan</h2><RouterLink to="/syarat-ketentuan">Syarat &amp; ketentuan</RouterLink><RouterLink to="/kebijakan-privasi">Kebijakan privasi</RouterLink></div></div><div class="footer-bottom"><span>Marimabar</span><span>Data game diisi pengguna, belum terverifikasi.</span></div></div></footer>
     </template>
   </div>
 </template>

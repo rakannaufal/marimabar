@@ -30,7 +30,6 @@ onServerPrefetch(loadGames)
   <main class="site-main landing-page">
     <section class="home-hero page-shell">
       <div class="home-hero__copy">
-        <span class="hero-eyebrow"><span class="status-dot"></span> CARI TEMAN MABAR SEFREKUENSI</span>
         <h1>Temukan rekan satu tim, <em>bukan cuma satu server.</em></h1>
         <p>Cari teman mabar sesuai game, rank, role, dan region. Kenalan dulu lewat profil, lalu kirim ajakan kalau sudah cocok.</p>
         <div class="hero-actions"><a class="button button--primary" href="#pilih-game">Mulai Cari Teman Mabar <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#cara-kerja">Lihat Cara Kerja</a></div>
