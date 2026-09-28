@@ -26,14 +26,14 @@
         <h2 id="values-title">Cara kami berpikir</h2>
         <div class="value-list">
           <article><span class="value-symbol" aria-hidden="true">✳</span><div><h3>Teman dulu, rank nomor dua</h3><p>Rank membantu kamu mencari pemain dengan preferensi serupa. Yang bikin sesi mabar nyaman tetap komunikasi dan saling menghargai, saat menang maupun kalah.</p></div></article>
-          <article><span class="value-symbol" aria-hidden="true">◎</span><div><h3>Main aman, sama-sama nyaman</h3><p>Kamu bisa melihat profil publik sebelum mengirim ajakan. Laporkan atau blokir pengguna bila interaksi terasa tidak aman. Data rank diisi pemain sendiri dan belum terverifikasi.</p></div></article>
+          <article><span class="value-symbol" aria-hidden="true">◎</span><div><h3>Main aman, sama-sama nyaman</h3><p>Kamu bisa melihat profil publik sebelum mengirim permintaan teman. Laporkan atau blokir pengguna bila interaksi terasa tidak aman. Data rank diisi pemain sendiri dan belum terverifikasi.</p></div></article>
           <article><span class="value-symbol" aria-hidden="true">⌁</span><div><h3>Cari sesuai gaya mainmu</h3><p>Mulai dari Mobile Legends, PUBG Mobile, Free Fire, atau Valorant. Pilih game dan saring profil menurut role, mode, rank, atau region yang kamu cari.</p></div></article>
         </div>
       </section>
 
       <section class="about-invite" aria-labelledby="invite-title">
         <div><h2 id="invite-title">Siap cari squad sefrekuensi?</h2><p>Lengkapi profil game dan mulai kenalan dengan calon rekan mabar.</p></div>
-        <div class="invite-actions"><RouterLink class="about-button" to="/register">Buat Akun Gratis</RouterLink><RouterLink class="about-secondary" to="/">Kembali ke Beranda</RouterLink></div>
+        <div class="invite-actions"><RouterLink class="about-button" to="/register">Buat Akun</RouterLink><RouterLink class="about-secondary" to="/">Kembali ke Beranda</RouterLink></div>
       </section>
     </div>
   </main>

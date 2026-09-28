@@ -83,11 +83,13 @@ describe('production chat', () => {
     view.unmount()
   })
 
-  it('does not expose private game ID without sharing', async () => {
+  it('keeps contact hidden in chat until friendship is approved', async () => {
     mocks.configured = true; signIn()
     const view = mount(); await settle()
-    expect(view.host.textContent).toContain('Rekan chat belum membagikan ID game.')
+    expect(view.host.textContent).toContain('Tambah teman, tunggu persetujuan')
     expect(view.host.textContent).not.toContain('private-game-id')
+    expect(mocks.readSharedGameId).not.toHaveBeenCalled()
+    expect(mocks.shareGameId).not.toHaveBeenCalled()
     view.unmount()
   })
 })

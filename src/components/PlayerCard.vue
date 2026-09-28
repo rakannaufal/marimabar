@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { publicGameFacts } from '../lib/models'
 import type { Player } from '../lib/models'
 defineProps<{ player: Player }>()
 const initials = (name: string) => name.trim().slice(0, 2).toUpperCase() || 'TM'
@@ -9,7 +10,7 @@ const detailPath = (id: string) => `/profil/${encodeURIComponent(id)}`
 <template>
   <article class="player-card">
     <div class="player-card__identity"><div class="avatar" aria-hidden="true"><img v-if="player.avatar_url" :src="player.avatar_url" alt="" loading="lazy" /><span v-else>{{ initials(player.display_name || '') }}</span></div>
-      <div class="player-card__body"><div class="player-card__title"><h3><RouterLink :to="detailPath(player.id)">{{ player.display_name }}</RouterLink></h3><span v-if="player.ready" class="ready-indicator"><span class="status-dot" aria-hidden="true"></span> Siap mabar</span></div><p class="muted">{{ player.game_name }}</p><div class="chip-list"><span v-if="player.rank" class="chip chip--violet">{{ player.rank }}</span><span v-if="player.role" class="chip">{{ player.role }}</span><span v-if="player.region" class="chip">{{ player.region }}</span><span v-if="stale(player.updated_at)" class="chip">Perlu diperbarui</span></div></div>
+      <div class="player-card__body"><div class="player-card__title"><h3><RouterLink :to="detailPath(player.id)">{{ player.display_name }}</RouterLink></h3><span v-if="player.ready" class="ready-indicator"><span class="status-dot" aria-hidden="true"></span> Siap mabar</span></div><p class="muted">{{ player.game_name }}</p><div class="chip-list"><span v-for="fact in publicGameFacts(player).filter(fact => ['Rank', 'Posisi utama', 'Peran squad', 'Peran tim', 'Role agent', 'Role', 'Posisi kedua', 'Mode', 'Server'].includes(fact.label))" :key="fact.label" class="chip" :class="fact.label.startsWith('Rank') ? 'chip--violet' : ''">{{ fact.label }}: {{ fact.value }}</span><span v-if="stale(player.updated_at)" class="chip">Perlu diperbarui</span></div></div>
     </div>
     <RouterLink class="button button--outline player-card__action" :to="detailPath(player.id)">Lihat profil dan ajak mabar</RouterLink>
   </article>

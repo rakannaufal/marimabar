@@ -4,6 +4,8 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { configured, supabase } from '../lib/supabase'
 import { useSessionStore } from '../stores/session'
 
+import { safeInternalPath } from '../lib/accountAccess'
+
 const route = useRoute()
 const router = useRouter()
 const session = useSessionStore()
@@ -16,18 +18,23 @@ onMounted(async () => {
     // Supabase completes the OAuth redirect before this callback asks for the verified user.
     await session.refreshUser()
     if (!session.user) throw new Error('No authenticated user')
+
     if (route.query.register === '1') {
+      // Explicit registration flow — declare adult consent
       const { error: failure } = await supabase.rpc('declare_adult_account')
       if (failure) throw failure
-    } else {
-      const { data: profile, error: failure } = await supabase.from('profiles').select('adult_declared_at').eq('user_id', session.user.id).single()
-      if (failure) throw failure
-      if (!profile.adult_declared_at) { await router.replace('/register'); return }
+      await session.refreshUser()
+      await router.replace('/onboarding/1')
+      return
     }
-    const redirect = route.query.redirect
-    const safe = typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') && !redirect.startsWith('/\\')
-      ? redirect : '/beranda'
-    await router.replace(safe)
+
+    // Use the same database-backed state as the router and password login.
+    if (!session.registered) {
+      await router.replace({ path: '/register', query: { pending: '1' } })
+      return
+    }
+    const landing = session.landing()
+    await router.replace(landing === '/beranda' ? safeInternalPath(route.query.redirect) ?? landing : landing)
   } catch { error.value = 'Masuk dengan Google belum berhasil. Coba lagi atau periksa konfigurasi akun.' }
 })
 </script>

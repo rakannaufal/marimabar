@@ -12,6 +12,7 @@ insert into public.game_profiles(user_id,game_id,ign,game_id_private)
 values
 ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1','11111111-1111-4111-8111-111111111111','Alpha','private-alpha'),
 ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','11111111-1111-4111-8111-111111111111','Beta','private-beta'),
+('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','22222222-2222-4222-8222-222222222222','Beta PUBG','private-beta-pubg'),
 ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3','11111111-1111-4111-8111-111111111111','Gamma','private-gamma');
 -- Transaction-scoped JWT claims simulate PostgREST auth.uid().
 set local role anon;
@@ -47,6 +48,11 @@ begin
  v_error:=false;
  begin perform public.send_message(gen_random_uuid(),'early'); exception when others then v_error:=true; end;
  if not v_error then raise exception 'pre-accept chat'; end if;
+ -- Sender may invite a public recipient profile for a game the sender does not own.
+ if (public.create_invite('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',
+   '22222222-2222-4222-8222-222222222222')).game_id <> '22222222-2222-4222-8222-222222222222' then
+   raise exception 'cross-game invite missing';
+ end if;
  v_error:=false;
  begin perform public.create_invite('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2','11111111-1111-4111-8111-111111111111');
  exception when others then v_error:=true; end;
@@ -59,17 +65,12 @@ begin
  perform public.respond_invite(v_inv.id,true);
  select id into v_conv from public.conversations where invite_id=v_inv.id;
  if v_conv is null then raise exception 'conversation missing'; end if;
- if public.read_shared_game_id(v_conv,'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1') is not null then
-   raise exception 'ID opened automatically'; end if;
- perform set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',true);
- perform public.share_game_id(v_conv,(select id from public.game_profiles where user_id=auth.uid()));
- perform set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',true);
- if public.read_shared_game_id(v_conv,'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1')<>'private-alpha' then
-   raise exception 'explicit share unavailable'; end if;
+ -- Legacy ID sharing is revoked: friendship approval is now the only contact path.
+ if has_function_privilege('authenticated','public.read_shared_game_id(uuid,uuid)','EXECUTE')
+ or has_function_privilege('authenticated','public.share_game_id(uuid,uuid)','EXECUTE') then
+   raise exception 'legacy share still executable'; end if;
  perform public.send_message(v_conv,'hello');
  insert into public.blocks(blocker_id,blocked_id) values(auth.uid(),'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1');
- if public.read_shared_game_id(v_conv,'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1') is not null then
-   raise exception 'block did not revoke ID'; end if;
  v_error:=false;
  begin perform public.send_message(v_conv,'blocked'); exception when others then v_error:=true; end;
  if not v_error then raise exception 'block did not stop chat'; end if;
@@ -148,6 +149,19 @@ begin
  denied:=false;
  begin update public.moderation_actions set reason='tamper' where id=action_id; exception when insufficient_privilege then denied:=true; end;
  if not denied then raise exception 'audit mutated'; end if;
+end $$;
+-- Recipient verification is enforced independently from sender verification.
+reset role;
+update auth.users set email_confirmed_at=null where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2';
+update public.profiles set account_status='active' where user_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2';
+set local role authenticated;
+select set_config('request.jwt.claim.sub','aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',true);
+do $$ declare denied boolean:=false; begin
+ begin
+  perform public.create_invite('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2',
+    '11111111-1111-4111-8111-111111111111',null);
+ exception when others then denied:=true; end;
+ if not denied then raise exception 'unverified recipient accepted invite'; end if;
 end $$;
 reset role;
 rollback;

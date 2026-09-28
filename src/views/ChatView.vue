@@ -5,9 +5,9 @@ import { useSessionStore } from '../stores/session'
 import { configured } from '../lib/supabase'
 import {
   blockUser, listConversations, listGames, listInvites, listMessages,
-  ownGameProfiles, readSharedGameId, reportUser, searchProfiles, sendMessage, shareGameId,
+  reportUser, searchProfiles, sendMessage,
 } from '../lib/api'
-import type { ChatMessage, Conversation, Game, GameProfile, Invite, Player } from '../lib/models'
+import type { ChatMessage, Conversation, Game, Invite, Player } from '../lib/models'
 
 const route = useRoute()
 const session = useSessionStore()
@@ -16,12 +16,9 @@ const conversations = ref<Conversation[]>([])
 const invites = ref<Invite[]>([])
 const games = ref<Game[]>([])
 const players = ref<Player[]>([])
-const profiles = ref<GameProfile[]>([])
 const messages = ref<ChatMessage[]>([])
 const selected = ref('')
 const draft = ref('')
-const profileId = ref('')
-const shared = ref<string | null>(null)
 const loading = ref(false)
 const threadLoading = ref(false)
 const busy = ref(false)
@@ -48,7 +45,6 @@ const invite = computed(() => invites.value.find(i => i.id === conversation.valu
 const gameName = computed(() => games.value.find(g => g.id === invite.value?.game_id)?.name || '')
 const otherPlayer = computed(() => players.value.find(p => p.user_id === other.value && p.game_id === invite.value?.game_id))
 const otherName = computed(() => otherPlayer.value?.display_name?.trim() || 'Pemain')
-const eligibleProfiles = computed(() => profiles.value.filter(p => p.status === 'active' && p.game_id === invite.value?.game_id && !!p.game_id_private))
 const canChat = computed(() => conversation.value?.status === 'active' && !!session.verified)
 function nameFor(c: Conversation) {
   const personId = c.participant_low === userId.value ? c.participant_high : c.participant_low
@@ -71,12 +67,11 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    const [nextConversations, nextProfiles, nextInvites, nextGames] = await Promise.all([
-      listConversations(userId.value), ownGameProfiles(userId.value), listInvites(userId.value), listGames(),
+    const [nextConversations, nextInvites, nextGames] = await Promise.all([
+      listConversations(userId.value), listInvites(userId.value), listGames(),
     ])
     if (version !== loadVersion) return
     conversations.value = nextConversations
-    profiles.value = nextProfiles
     invites.value = nextInvites
     games.value = nextGames
     const requested = typeof route.query.conversation === 'string' ? route.query.conversation : ''
@@ -101,12 +96,9 @@ async function refresh() {
   threadLoading.value = true
   threadError.value = ''
   try {
-    const [nextMessages, nextShared] = await Promise.all([
-      listMessages(id), owner ? readSharedGameId(id, owner) : Promise.resolve(null),
-    ])
+    const nextMessages = await listMessages(id)
     if (version !== threadVersion || selected.value !== id) return
     messages.value = nextMessages
-    shared.value = nextShared
   } catch {
     if (version === threadVersion) threadError.value = 'Pesan belum bisa dimuat. Coba lagi.'
   } finally {
@@ -123,15 +115,6 @@ async function send() {
     await sendMessage(id, body)
     if (selected.value === id) { draft.value = ''; await refresh() }
   } catch { error.value = 'Pesan belum bisa dikirim. Periksa akun atau status percakapan, lalu coba lagi.' }
-  finally { busy.value = false }
-}
-async function share() {
-  if (!canChat.value || busy.value || !eligibleProfiles.value.some(p => p.id === profileId.value)) return
-  if (!window.confirm('Bagikan ID game privat ini kepada peserta percakapan? Hanya lakukan jika kamu memang ingin membagikannya.')) return
-  busy.value = true
-  error.value = ''
-  try { await shareGameId(selected.value, profileId.value); notice.value = 'ID game berhasil dibagikan kepada peserta percakapan ini.' }
-  catch { error.value = 'ID game belum bisa dibagikan. Periksa profil dan status percakapan.' }
   finally { busy.value = false }
 }
 function openReport(message: ChatMessage) {
@@ -166,15 +149,13 @@ async function block() {
   catch { error.value = 'Pemain belum bisa diblokir. Coba lagi.' }
   finally { busy.value = false }
 }
-watch(userId, () => { selected.value = ''; conversations.value = []; messages.value = []; shared.value = null; reportMessage.value = null; void load() })
+watch(userId, () => { selected.value = ''; conversations.value = []; messages.value = []; reportMessage.value = null; void load() })
 watch(() => route.query.conversation, value => {
   if (typeof value === 'string' && conversations.value.some(c => c.id === value)) selected.value = value
 })
 watch(selected, () => {
   ++threadVersion
   messages.value = []
-  shared.value = null
-  profileId.value = ''
   draft.value = ''
   reportMessage.value = null
   threadError.value = ''
@@ -186,19 +167,19 @@ onMounted(load)
 
 <template>
   <main class="chat">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><RouterLink to="/">Beranda</RouterLink><span>/</span><RouterLink to="/request-mabar">Request mabar</RouterLink><span>/</span><span>Pesan</span></nav>
-    <header class="page-head"><h1>Pesan</h1><p>Ajakan sudah diterima? Lanjut ngobrol di sini. ID game tetap privat sampai pemilik membagikannya sendiri.</p></header>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><RouterLink to="/">Beranda</RouterLink><span>/</span><RouterLink to="/teman">Teman</RouterLink><span>/</span><span>Pesan</span></nav>
+    <header class="page-head"><h1>Pesan</h1><p>Pesan langsung dengan sesama pemain. Nama dalam game, ID game, dan Discord hanya terbuka setelah kalian berteman.</p></header>
     <p v-if="!configured" role="alert" class="state">Layanan belum dikonfigurasi.</p>
     <p v-else-if="!userId" class="state">Silakan <RouterLink to="/login">masuk</RouterLink> untuk melihat pesan.</p>
     <template v-else>
-      <p v-if="!session.verified" class="warning" role="status">Verifikasi email sebelum mengirim pesan atau membagikan ID game.</p>
+      <p v-if="!session.verified" class="warning" role="status">Verifikasi email sebelum mengirim pesan.</p>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <p v-if="notice" role="status" class="success">{{ notice }}</p>
       <p v-if="loading" role="status" class="state">Memuat percakapan…</p>
       <div v-else class="layout">
         <aside class="conversation-list" aria-label="Daftar percakapan">
           <div class="section-heading"><h2>Percakapan</h2><span class="count">{{ conversations.length }}</span></div>
-          <p v-if="!conversations.length" class="empty-list">Belum ada percakapan. Setelah ajakan diterima, chat akan muncul di sini. <RouterLink to="/request-mabar">Lihat ajakan</RouterLink></p>
+          <p v-if="!conversations.length" class="empty-list">Belum ada percakapan aktif saat ini. <RouterLink to="/teman">Lihat teman</RouterLink></p>
           <button v-for="c in conversations" :key="c.id" type="button" class="conversation-choice" :aria-pressed="selected === c.id" @click="selected = c.id">
             <span class="avatar" aria-hidden="true">{{ initials(nameFor(c)) }}</span>
             <span class="choice-copy"><strong>{{ nameFor(c) }}</strong><small v-if="gameFor(c)">{{ gameFor(c) }}</small><small>{{ c.status === 'active' ? 'Percakapan aktif' : 'Percakapan tidak aktif' }}</small></span>
@@ -218,7 +199,7 @@ onMounted(load)
             </article>
           </div>
           <form id="message-form" class="composer" @submit.prevent="send"><label for="message">Pesan baru</label><textarea id="message" v-model="draft" maxlength="2000" rows="3" placeholder="Tulis pesan untuk rekan mabar…" :disabled="!canChat || busy" /><div class="composer-foot"><small>Maksimal 2.000 karakter</small><button type="submit" :disabled="!canChat || busy || !draft.trim()">{{ busy ? 'Mengirim…' : 'Kirim pesan' }}</button></div></form>
-          <section class="share"><div><h3>Bagikan ID game</h3><p>ID milikmu tidak akan ditampilkan kepada rekan chat kecuali kamu memilih membagikannya.</p></div><p v-if="shared" class="shared-id">ID game yang dibagikan {{ otherName }}: <strong>{{ shared }}</strong></p><p v-else class="muted">Rekan chat belum membagikan ID game.</p><div v-if="eligibleProfiles.length" class="share-control"><label for="profile-id">Pilih profil game milikmu</label><select id="profile-id" v-model="profileId" :disabled="!canChat || busy"><option value="">Pilih profil</option><option v-for="p in eligibleProfiles" :key="p.id" :value="p.id">{{ p.ign }}</option></select><button type="button" :disabled="!canChat || busy || !profileId" @click="share">Bagikan ID game</button></div><p v-else class="muted">Belum ada profil aktif untuk game ini dengan ID yang bisa dibagikan.</p></section>
+          <section class="share"><h3>Kontak pemain</h3><p>Tambah teman, tunggu persetujuan, lalu lihat nama dalam game, ID game, dan Discord di profil pemain.</p><RouterLink v-if="otherPlayer" :to="`/profil/${otherPlayer.id}`">Lihat profil dan tambah teman</RouterLink><RouterLink v-else to="/teman">Lihat pertemanan</RouterLink></section>
           <form v-if="reportMessage" id="report-form" class="report-form" aria-label="Form laporan pesan" @submit.prevent="submitReport"><div class="report-heading"><h3>Laporkan pesan</h3><button class="text-action" type="button" :disabled="busy" @click="reportMessage = null">Batal</button></div><p class="muted">Pesan yang dipilih: “{{ reportMessage.body }}”</p><label for="report-category">Alasan laporan</label><select id="report-category" v-model="category" required><option value="" disabled>Pilih alasan</option><option v-for="option in categories" :key="option.code" :value="option.code">{{ option.label }}</option></select><label for="report-description">Apa yang terjadi?</label><textarea id="report-description" v-model="description" required minlength="10" maxlength="2000" rows="3" placeholder="Ceritakan kejadian secara singkat." /><button type="submit" :disabled="busy || !category || description.trim().length < 10">{{ busy ? 'Mengirim…' : 'Kirim laporan' }}</button></form>
         </section>
         <div v-else class="thread no-selection"><p>Pilih percakapan untuk mulai ngobrol.</p></div>

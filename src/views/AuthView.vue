@@ -3,15 +3,16 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { configured, supabase } from '../lib/supabase'
 import { useSessionStore } from '../stores/session'
+import { safeInternalPath } from '../lib/accountAccess'
 
 const route = useRoute(), router = useRouter(), session = useSessionStore()
 const register = computed(() => route.path === '/register')
+const pending = computed(() => route.query.pending === '1')
 const email = ref(''), password = ref(''), nickname = ref(''), city = ref(''), showPassword = ref(false)
 const adult = ref(false), consent = ref(false), busy = ref(false), error = ref('')
 watch(register, () => { error.value = ''; password.value = ''; showPassword.value = false })
 function destination() {
-  const redirect = route.query.redirect
-  return typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') && !redirect.startsWith('/\\') ? redirect : '/beranda'
+  return safeInternalPath(route.query.redirect) ?? '/beranda'
 }
 async function googleSignIn() {
   if (!configured || !supabase || busy.value) return
@@ -53,7 +54,8 @@ async function submit() {
       if (failure) throw failure
       password.value = ''
       await session.refreshUser()
-      await router.replace(destination())
+      const landing = session.landing()
+      await router.replace(landing === '/beranda' ? destination() : landing)
     }
   } catch { error.value = register.value ? 'Pendaftaran belum berhasil. Periksa data lalu coba lagi.' : 'Gagal masuk. Periksa email dan kata sandi.' }
   finally { busy.value = false }
@@ -63,6 +65,7 @@ async function submit() {
   <main class="auth"><aside class="visual"><RouterLink class="brand" to="/">Mabar Finder</RouterLink><div class="visual-copy"><h1>Teman satu frekuensi mulai dari sini.</h1><p>Kenali pemain lewat game, role, dan waktu main. Rank diisi sendiri oleh pengguna, belum terverifikasi.</p><div class="preview"><span class="avatar" aria-hidden="true">MF</span><div><strong>Squad barumu menanti</strong><small>Mulai dengan profilmu sendiri</small></div></div></div></aside>
     <section class="panel" aria-labelledby="auth-title"><nav class="tabs" aria-label="Pilihan akun"><RouterLink to="/login" :aria-current="!register ? 'page' : undefined">Masuk</RouterLink><RouterLink to="/register" :aria-current="register ? 'page' : undefined">Daftar</RouterLink></nav>
       <h2 id="auth-title">{{ register ? 'Buat akun baru, gampang kok' : 'Masuk ke akunmu, yuk!' }}</h2><p>{{ register ? 'Kenalan dulu sebelum masuk ke lobi.' : 'Lanjutkan cari teman mabar yang cocok.' }}</p>
+      <p v-if="pending && !register" role="alert" class="error">Kamu belum terdaftar. Silakan daftar terlebih dahulu sebelum bisa masuk.</p>
       <p v-if="!configured" role="alert" class="error">Layanan akun belum dikonfigurasi. Pendaftaran dan masuk belum tersedia. Hubungi pengelola situs.</p>
       <p v-if="error" role="alert" class="error">{{ error }}</p>
       <form @submit.prevent="submit"><template v-if="register"><label for="auth-name">Nickname</label><input id="auth-name" v-model="nickname" required minlength="2" maxlength="60" autocomplete="nickname" placeholder="Nama tampilan kamu"><label for="auth-city">Kota <span class="optional">(opsional, belum disimpan)</span></label><input id="auth-city" v-model="city" disabled placeholder="Kota belum tersedia di profil"></template>

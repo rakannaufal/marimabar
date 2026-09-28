@@ -12,7 +12,7 @@ import { useSessionStore } from '../stores/session'
 
 const mocks = vi.hoisted(() => ({
   configured: false,
-  listGames: vi.fn(), listInvites: vi.fn(), listOptions: vi.fn(),
+  listGames: vi.fn(), listFriendRequests: vi.fn(), listOptions: vi.fn(),
   ownGameProfiles: vi.fn(), ownProfile: vi.fn(), searchProfiles: vi.fn(),
 }))
 vi.mock('../lib/supabase', () => ({ get configured() { return mocks.configured }, supabase: null }))
@@ -43,7 +43,7 @@ beforeEach(() => {
   mocks.searchProfiles.mockResolvedValue([player])
   mocks.ownProfile.mockResolvedValue({ display_name: 'Pemilik' })
   mocks.ownGameProfiles.mockResolvedValue([{ id: 'owned', game_id: 'game-1', status: 'active' }])
-  mocks.listInvites.mockResolvedValue([])
+  mocks.listFriendRequests.mockResolvedValue([])
   mocks.listOptions.mockResolvedValue([])
 })
 
@@ -63,13 +63,30 @@ describe('production-only views', () => {
     expect(mocks.listGames).toHaveBeenCalledTimes(2)
   })
 
+  it('uses catalog logos on game selection and personal pages', async () => {
+    mocks.configured = true
+    mocks.listGames.mockResolvedValue([
+      { id: 'game-1', name: 'Valorant', slug: 'valorant' },
+      { id: 'game-2', name: 'Mobile Legends', slug: 'mlbb' },
+      { id: 'game-3', name: 'PUBG Mobile', slug: 'pubg-mobile' },
+      { id: 'game-4', name: 'Free Fire', slug: 'free-fire' },
+    ])
+    for (const component of [HomeView, GamePickerView]) {
+      const view = await html(component)
+      for (const file of ['valorant.png', 'mobilelegends.png', 'pubgmobile.png', 'freefire.png']) {
+        expect(view).toContain(`/logo/${file}`)
+      }
+    }
+    expect(await html(DashboardView, true)).toContain('/logo/valorant.png')
+  })
+
   it('renders own dashboard data without private IDs', async () => {
     mocks.configured = true
     const view = await html(DashboardView, true)
     expect(view).toContain('Pemilik')
     expect(view).toContain('/profil/public-profile')
     expect(view).not.toContain('private-game-id')
-    expect(mocks.listInvites).toHaveBeenCalledWith('owner')
+    expect(mocks.listFriendRequests).toHaveBeenCalled()
   })
 
   it('renders public community profiles from search', async () => {

@@ -10,7 +10,7 @@ const implementedRoutes = [
  '/login', '/register', '/lupa-password', '/reset-password', '/reset-password/:token',
  '/verifikasi-email', '/verifikasi-email/berhasil', '/onboarding/:step?',
  '/beranda', '/komunitas', '/pilih-game', '/cari/:gameSlug', '/profil/:id',
- '/profil-saya', '/request-mabar', '/pesan', '/admin', '/admin/game',
+ '/profil-saya', '/request-mabar', '/teman', '/teman/:id', '/pesan', '/admin', '/admin/game',
  '/admin/atribut-game', '/admin/user', '/admin/laporan', '/admin/statistik',
  '/server-bermasalah', '/:pathMatch(.*)*',
 ]

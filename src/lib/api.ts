@@ -1,5 +1,5 @@
 import { requireBackend } from './supabase'
-import type { Game, Player, SearchFilters, Option, AttributeDefinition, GameProfile, Invite, Conversation, ChatMessage } from './models'
+import type { Game, Player, SearchFilters, Option, AttributeDefinition, GameProfile, Invite, Conversation, ChatMessage, FriendRequest, FriendContact, FriendRequestPlayer, FriendProfileGame } from './models'
 
 function unwrap<T>(result: {data:T|null;error:{message:string}|null}):T {
   if (result.error) throw new Error(result.error.message)
@@ -10,17 +10,32 @@ export async function listGames():Promise<Game[]> { return unwrap(await requireB
 export async function listOptions(gameId:string):Promise<Option[]> { return unwrap(await requireBackend().from('game_catalog_options').select('id,game_id,kind,code,label,sort_order,rank_mode_option_id').eq('game_id',gameId).eq('active',true).order('sort_order')) as Option[] }
 export async function listAttributeDefinitions(gameId:string):Promise<AttributeDefinition[]> { return unwrap(await requireBackend().from('game_attribute_definitions').select('game_id,key,label,category,value_type,filter_type,options,range_min,range_max,unit,sort_order,active').eq('game_id',gameId).eq('active',true).order('sort_order')) as AttributeDefinition[] }
 export async function searchProfiles(gameSlug:string,filters:SearchFilters={},page=0):Promise<Player[]> {
-  if (filters.attributes !== undefined) return unwrap(await requireBackend().rpc('search_game_profiles_by_attributes',{p_game_slug:gameSlug,p_filters:filters.attributes,p_limit:20,p_offset:page*20})) as Player[]
+  if (filters.attributes !== undefined || Object.keys(filters).length === 0) return unwrap(await requireBackend().rpc('search_game_profiles_by_attributes_with_public_facts',{p_game_slug:gameSlug,p_filters:filters.attributes || {},p_limit:20,p_offset:page*20})) as Player[]
   return unwrap(await requireBackend().rpc('search_game_profiles',{p_game_slug:gameSlug,p_rank:filters.rank||null,p_roles:filters.roles?.length?filters.roles:null,p_mode:filters.mode||null,p_region:filters.region||null,p_ready:filters.ready??null,p_limit:20,p_offset:page*20})) as Player[]
 }
-export async function profileDetail(id:string):Promise<Player|null> { const data=unwrap(await requireBackend().rpc('public_profile_detail',{p_id:id})); return Array.isArray(data)?(data[0]||null):data as Player|null }
+export async function profileDetail(id:string):Promise<Player|null> {
+  const data=unwrap(await requireBackend().rpc('public_profile_detail',{p_id:id}))
+  const player=Array.isArray(data)?(data[0]||null):data as Player|null
+  if (!player) return null
+  const attributes=unwrap(await requireBackend().rpc('public_profile_game_attributes',{p_id:id})) as Record<string,unknown>
+  return { ...player, attributes }
+}
 export async function createInvite(recipientId:string,gameId:string,message=''):Promise<string> { const row=unwrap(await requireBackend().rpc('create_invite',{p_recipient:recipientId,p_game:gameId,p_message:message})) as {id:string};return row.id }
+export async function createMabarRequest(recipientId:string,gameId:string,message:string|null=null):Promise<{invite_id:string;friend_request_id:string}> { return unwrap(await requireBackend().rpc('create_mabar_request',{p_recipient:recipientId,p_game:gameId,p_message:message})) as {invite_id:string;friend_request_id:string} }
 export async function blockUser(id:string):Promise<void> { const client=requireBackend();const {data:{user},error:authError}=await client.auth.getUser();if(authError||!user)throw new Error('Masuk terlebih dahulu');const {error}=await client.from('blocks').insert({blocker_id:user.id,blocked_id:id});if(error)throw error }
 export async function reportUser(id:string,category:string,description:string,targetId:string,targetType:'profile'|'invite'|'message'='profile'):Promise<void> { unwrap(await requireBackend().rpc('create_report',{p_reported:id,p_category:category,p_description:description,p_target_type:targetType,p_target_id:targetId})) }
-export async function ownProfile(userId:string) { return unwrap(await requireBackend().from('profiles').select('user_id,display_name,bio,timezone,languages,voice_preference,play_style,availability_status,visibility').eq('user_id',userId).single()) }
+export async function ownProfile(userId:string) { return unwrap(await requireBackend().from('profiles').select('user_id,display_name,bio,timezone,languages,voice_preference,play_style,availability_status,visibility,discord').eq('user_id',userId).single()) }
 export async function updateOwnProfile(userId:string,input:Record<string,unknown>) { return unwrap(await requireBackend().from('profiles').update(input).eq('user_id',userId).select('user_id').single()) }
 export async function ownGameProfiles(userId:string):Promise<GameProfile[]> { return unwrap(await requireBackend().from('game_profiles').select('id,user_id,game_id,ign,game_id_private,region_option_id,primary_rank_option_id,primary_rank_mode_option_id,primary_role_option_id,visibility,status,attributes').eq('user_id',userId).order('created_at')) as GameProfile[] }
 export async function saveGameProfile(input:Record<string,unknown>,id?:string) { return unwrap(id ? await requireBackend().from('game_profiles').update(input).eq('id',id).select('id').single() : await requireBackend().from('game_profiles').insert(input).select('id').single()) }
+export async function deleteGameProfile(id:string):Promise<void> { unwrap(await requireBackend().from('game_profiles').delete().eq('id',id).select('id').single()) }
+export async function friendRequestPlayers():Promise<FriendRequestPlayer[]> { return unwrap(await requireBackend().rpc('friend_request_players')) as FriendRequestPlayer[] }
+export async function friendProfile(otherId:string):Promise<FriendProfileGame[]> { return unwrap(await requireBackend().rpc('friend_profile',{p_other:otherId})) as FriendProfileGame[] }
+export async function listFriendRequests():Promise<FriendRequest[]> { return unwrap(await requireBackend().from('friend_requests').select('id,requester_id,recipient_id,status,created_at,responded_at').order('created_at',{ascending:false}).limit(100)) as FriendRequest[] }
+export async function requestFriend(recipientId:string):Promise<void> { unwrap(await requireBackend().rpc('request_friend',{p_recipient:recipientId})) }
+export async function respondFriend(id:string,accept:boolean):Promise<void> { unwrap(await requireBackend().rpc('respond_friend',{p_id:id,p_accept:accept})) }
+export async function removeFriend(otherId:string):Promise<void> { const {error}=await requireBackend().rpc('remove_friend',{p_other:otherId}); if(error) throw new Error(error.message) }
+export async function friendContact(otherId:string,gameId:string):Promise<FriendContact|null> { const rows=unwrap(await requireBackend().rpc('friend_contact',{p_other:otherId,p_game:gameId})) as FriendContact[]; return rows[0] || null }
 export async function listInvites(userId:string):Promise<Invite[]> { return unwrap(await requireBackend().from('invites').select('id,sender_id,recipient_id,game_id,message,status,created_at,expires_at').or(`sender_id.eq.${userId},recipient_id.eq.${userId}`).order('created_at',{ascending:false}).limit(100)) as Invite[] }
 export async function respondInvite(id:string,decision:'accepted'|'rejected'):Promise<void> { unwrap(await requireBackend().rpc('respond_invite',{p_id:id,p_accept:decision==='accepted'})) }
 export async function cancelInvite(id:string):Promise<void> { unwrap(await requireBackend().rpc('cancel_invite',{p_id:id})) }
@@ -33,3 +48,4 @@ export async function isAdmin(userId:string):Promise<boolean> { const {data,erro
 // SQL exposes option creation and moderation RPCs only. Game CRUD and report status edits remain unsupported.
 export async function addCatalogOption(gameId:string,kind:string,code:string,label:string,rankModeId:string|null=null):Promise<string> { return unwrap(await requireBackend().rpc('add_catalog_option',{p_game:gameId,p_kind:kind,p_code:code,p_label:label,p_rank_mode:rankModeId})) as string }
 export async function applyModerationAction(subjectId:string,action:'hide_profile'|'restrict_account'|'restore_profile'|'restore_account',reason:string,reportId:string|null=null):Promise<string> { return unwrap(await requireBackend().rpc('apply_moderation_action',{p_subject:subjectId,p_action:action,p_reason:reason,p_report:reportId})) as string }
+export async function completeOnboarding():Promise<void> { const { error } = await requireBackend().rpc('complete_onboarding'); if (error) throw new Error(error.message) }

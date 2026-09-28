@@ -1,7 +1,7 @@
 import { describe,it,expect,vi,beforeEach } from 'vitest'
 const {rpc,from}=vi.hoisted(()=>({rpc:vi.fn(),from:vi.fn()}))
 vi.mock('./supabase',()=>({requireBackend:()=>({rpc,from})}))
-import { searchProfiles,listAttributeDefinitions,createInvite,reportUser,profileDetail,addCatalogOption,applyModerationAction } from './api'
+import { searchProfiles,listAttributeDefinitions,createInvite,createMabarRequest,reportUser,profileDetail,addCatalogOption,applyModerationAction,completeOnboarding,listFriendRequests,requestFriend,respondFriend,removeFriend,friendContact,deleteGameProfile } from './api'
 describe('kontrak API publik',()=>{
  beforeEach(()=>{rpc.mockReset();from.mockReset()})
  it('mengirim filter dan paginasi ke RPC server, bukan menyaring data pribadi di browser',async()=>{
@@ -23,15 +23,32 @@ describe('kontrak API publik',()=>{
   expect(active).toHaveBeenCalledWith('active',true)
   expect(order).toHaveBeenCalledWith('sort_order')
  })
+ it('pencarian awal dan rekomendasi menggunakan proyeksi atribut publik',async()=>{
+  rpc.mockResolvedValue({data:[],error:null})
+  await searchProfiles('mlbb')
+  expect(rpc).toHaveBeenCalledWith('search_game_profiles_by_attributes_with_public_facts',{p_game_slug:'mlbb',p_filters:{},p_limit:20,p_offset:0})
+ })
  it('mengirim atribut dinamis ke RPC JSONB dengan paginasi',async()=>{
   rpc.mockResolvedValue({data:[],error:null})
   const attributes={role:['Tank'],rank_current:{min:'Epic',max:'Mythic'},voice_chat:false}
   await searchProfiles('mlbb',{attributes},1)
-  expect(rpc).toHaveBeenCalledWith('search_game_profiles_by_attributes',{p_game_slug:'mlbb',p_filters:attributes,p_limit:20,p_offset:20})
+  expect(rpc).toHaveBeenCalledWith('search_game_profiles_by_attributes_with_public_facts',{p_game_slug:'mlbb',p_filters:attributes,p_limit:20,p_offset:20})
  })
  it('mengembalikan detail kosong untuk profil yang tidak terlihat',async()=>{
   rpc.mockResolvedValue({data:[],error:null})
   expect(await profileDetail('123')).toBeNull()
+  expect(rpc).toHaveBeenCalledTimes(1)
+ })
+ it('menggabungkan atribut publik terbatas dari RPC terproteksi',async()=>{
+  rpc.mockResolvedValueOnce({data:[{id:'public',rank:'Epic',role:'Roam'}],error:null})
+    .mockResolvedValueOnce({data:{position_secondary:['Jungle'],game_mode:'Competitive'},error:null})
+  expect(await profileDetail('public')).toEqual({id:'public',rank:'Epic',role:'Roam',attributes:{position_secondary:['Jungle'],game_mode:'Competitive'}})
+  expect(rpc).toHaveBeenLastCalledWith('public_profile_game_attributes',{p_id:'public'})
+ })
+ it('membuat satu request mabar yang tercatat sebagai ajakan dan permintaan teman',async()=>{
+  rpc.mockResolvedValueOnce({data:{invite_id:'invite-id',friend_request_id:'friend-id'},error:null})
+  expect(await createMabarRequest('target','game')).toEqual({invite_id:'invite-id',friend_request_id:'friend-id'})
+  expect(rpc).toHaveBeenCalledWith('create_mabar_request',{p_recipient:'target',p_game:'game',p_message:null})
  })
  it('ajakan dan laporan menggunakan RPC terproteksi',async()=>{
   rpc.mockResolvedValueOnce({data:{id:'invite-id'},error:null}).mockResolvedValueOnce({data:'report-id',error:null})
@@ -45,12 +62,52 @@ describe('kontrak API publik',()=>{
   await reportUser('target','spam','Pesan mengganggu','message-id','message')
   expect(rpc).toHaveBeenCalledWith('create_report',{p_reported:'target',p_category:'spam',p_description:'Pesan mengganggu',p_target_type:'message',p_target_id:'message-id'})
  })
+ it('pertemanan dan kontak memakai RPC terotorisasi; daftar hanya untuk peserta',async()=>{
+  const rows=[{id:'friend-1',requester_id:'me',recipient_id:'other',status:'pending'}]
+  const limit=vi.fn().mockResolvedValue({data:rows,error:null})
+  const order=vi.fn().mockReturnValue({limit})
+  const select=vi.fn().mockReturnValue({order})
+  from.mockReturnValue({select})
+  expect(await listFriendRequests()).toEqual(rows)
+  expect(from).toHaveBeenCalledWith('friend_requests')
+  rpc.mockResolvedValueOnce({data:{id:'friend-1'},error:null})
+    .mockResolvedValueOnce({data:{id:'friend-1',status:'accepted'},error:null})
+    .mockResolvedValueOnce({data:null,error:null})
+    .mockResolvedValueOnce({data:[{ign:'Pemain',game_id_private:'ID123',discord:'rekan'}],error:null})
+  await requestFriend('other')
+  expect(rpc).toHaveBeenCalledWith('request_friend',{p_recipient:'other'})
+  await respondFriend('friend-1',true)
+  expect(rpc).toHaveBeenCalledWith('respond_friend',{p_id:'friend-1',p_accept:true})
+  await removeFriend('other')
+  expect(rpc).toHaveBeenCalledWith('remove_friend',{p_other:'other'})
+  expect(await friendContact('other','game-1')).toEqual({ign:'Pemain',game_id_private:'ID123',discord:'rekan'})
+  expect(rpc).toHaveBeenCalledWith('friend_contact',{p_other:'other',p_game:'game-1'})
+ })
  it('routes supported admin mutations to authorized RPCs',async()=>{
   rpc.mockResolvedValueOnce({data:'option-id',error:null}).mockResolvedValueOnce({data:'action-id',error:null})
   expect(await addCatalogOption('game-free-fire','rank','legendary','Legendary','mode-id')).toBe('option-id')
   expect(rpc).toHaveBeenCalledWith('add_catalog_option',{p_game:'game-free-fire',p_kind:'rank',p_code:'legendary',p_label:'Legendary',p_rank_mode:'mode-id'})
   expect(await applyModerationAction('demo-rival','hide_profile','Alasan moderasi','report-id')).toBe('action-id')
   expect(rpc).toHaveBeenCalledWith('apply_moderation_action',{p_subject:'demo-rival',p_action:'hide_profile',p_reason:'Alasan moderasi',p_report:'report-id'})
+ })
+ it('menghapus profil game berdasarkan ID melalui policy pemilik',async()=>{
+  const single=vi.fn().mockResolvedValue({data:{id:'profile-1'},error:null})
+  const select=vi.fn().mockReturnValue({single})
+  const eq=vi.fn().mockReturnValue({select})
+  const remove=vi.fn().mockReturnValue({eq})
+  from.mockReturnValue({delete:remove})
+  await expect(deleteGameProfile('profile-1')).resolves.toBeUndefined()
+  expect(from).toHaveBeenCalledWith('game_profiles')
+  expect(eq).toHaveBeenCalledWith('id','profile-1')
+ })
+ it('menerima keberhasilan RPC void complete_onboarding tanpa data',async()=>{
+  rpc.mockResolvedValueOnce({data:null,error:null})
+  await expect(completeOnboarding()).resolves.toBeUndefined()
+  expect(rpc).toHaveBeenCalledWith('complete_onboarding')
+ })
+ it('menampilkan kegagalan RPC void secara nyata',async()=>{
+  rpc.mockResolvedValueOnce({data:null,error:{message:'At least one game profile required'}})
+  await expect(completeOnboarding()).rejects.toThrow('At least one game profile required')
  })
  it('tidak menyembunyikan kesalahan RPC',async()=>{
   rpc.mockResolvedValue({data:null,error:{message:'Akses ditolak'}})

@@ -51,7 +51,8 @@ describe('public content screens', () => {
     }
     expect(html).toContain('href="/syarat-ketentuan"')
     expect(html).toContain('ID game')
-    expect(html).toContain('dibagikan secara eksplisit')
+    expect(html).toContain('pertemanan disetujui')
+    expect(html).toContain('Discord')
     expect(html).toContain('belum ditetapkan')
     expect(html).not.toMatch(/enkripsi end-to-end|AES-256|TLS 1\.3|zero-log|24 jam|Jakarta, Indonesia|retensi 24|Argon2|Bcrypt|unduh arsip|23 September 2026|href="#"/i)
   })

@@ -8,7 +8,7 @@ import App from './App.vue'
 vi.mock('./lib/supabase', () => ({ configured: false, supabase: null, requireBackend: () => { throw new Error('Supabase belum dikonfigurasi') } }))
 
 async function renderShell(path = '/') {
-  const paths = ['/', '/beranda', '/pilih-game', '/tentang', '/syarat-ketentuan', '/kebijakan-privasi', '/login', '/register', '/request-mabar', '/pesan', '/profil-saya', '/admin', '/admin/statistik', '/admin/game', '/admin/atribut-game', '/admin/user', '/admin/laporan']
+  const paths = ['/', '/beranda', '/pilih-game', '/tentang', '/syarat-ketentuan', '/kebijakan-privasi', '/login', '/register', '/teman', '/pesan', '/profil-saya', '/admin', '/admin/statistik', '/admin/game', '/admin/atribut-game', '/admin/user', '/admin/laporan']
   const router = createRouter({ history: createMemoryHistory(), routes: paths.map(path => ({ path, component: { template: '<main>Konten</main>' } })) })
   const app = createSSRApp(App).use(createPinia()).use(router)
   await router.push(path); await router.isReady()

@@ -127,7 +127,9 @@ npm ci
 
 **2. Setup Supabase**
 
-Buat proyek Supabase development baru. Jalankan migrasi dari folder `supabase/migrations/` secara berurutan melalui Supabase Dashboard > SQL Editor, lalu jalankan `supabase/seed.sql`.
+Buat proyek Supabase development baru. Jalankan migrasi dari folder `supabase/migrations/` secara berurutan melalui Supabase Dashboard > SQL Editor, lalu jalankan `supabase/seed.sql`. Untuk proyek yang sudah memakai empat migrasi sebelumnya, jalankan **hanya** migrasi baru `supabase/migrations/202609240005_profile_taxonomy.sql` (jangan mengulang semua migrasi). Migrasi ini menambah posisi/peran per game, rank BR dan CS terpisah, serta proyeksi atribut publik terbatas; data profil dan opsi lama tidak dihapus. Deploy migrasi sebelum frontend baru karena pencarian dan halaman detail memakai RPC baru. Berkas `supabase/latest_database.sql` adalah gabungan seluruh migrasi + seed untuk **database baru saja**; jangan jalankan pada database yang sudah ada. Uji lokal: `NODE_OPTIONS=--experimental-websocket npm run test` (termasuk SQL di PGlite), `npm run typecheck`, `npm run build`. Ini bukan verifikasi terhadap proyek Supabase production.
+
+**Profil game:** MLBB menggunakan posisi EXP/Jungle/Mid/Gold/Roam, bukan kelas hero. PUBG Mobile menyimpan mode antrean, perspektif, ukuran tim, dan peran squad. Free Fire menyimpan rank Battle Royale dan Clash Squad secara terpisah; pilihan mode menentukan rank yang ditampilkan dan difilter. VALORANT menggunakan kelas agent terpisah dari tugas tim. Rank, jadwal, dan statistik merupakan isian pemain, belum terverifikasi; katalog lama/opsi spesifik musim tetap ada untuk kompatibilitas dan perlu audit konten sebelum digunakan sebagai klaim resmi.
 
 Baca `BACKEND.md` untuk bootstrap akun admin dan konfigurasi izin database.
 

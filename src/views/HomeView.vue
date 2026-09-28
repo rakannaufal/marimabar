@@ -4,15 +4,16 @@ import { RouterLink } from 'vue-router'
 import { listGames } from '../lib/api'
 import { configured } from '../lib/supabase'
 import type { Game } from '../lib/models'
+import GameLogo from '../components/GameLogo.vue'
 
 const games = ref<Game[]>([])
 const loading = ref(true)
 const error = ref('')
-const gameDescriptions: Record<string, { genre: string; description: string; icon: string }> = {
-  mlbb: { genre: 'RANKED 5V5 MOBA', description: 'Temukan rekan satu tim untuk push rank atau main santai.', icon: '♜' },
-  valorant: { genre: 'TACTICAL FPS', description: 'Cari rekan untuk koordinasi dan main bareng.', icon: '⌖' },
-  'pubg-mobile': { genre: 'BATTLE ROYALE', description: 'Bentuk squad untuk turun bersama.', icon: '✦' },
-  'free-fire': { genre: 'SURVIVAL CLASH', description: 'Cari teman untuk main squad.', icon: '♨' },
+const gameDescriptions: Record<string, { genre: string; description: string }> = {
+  mlbb: { genre: 'RANKED 5V5 MOBA', description: 'Temukan rekan satu tim untuk push rank atau main santai.' },
+  valorant: { genre: 'TACTICAL FPS', description: 'Cari rekan untuk koordinasi dan main bareng.' },
+  'pubg-mobile': { genre: 'BATTLE ROYALE', description: 'Bentuk squad untuk turun bersama.' },
+  'free-fire': { genre: 'SURVIVAL CLASH', description: 'Cari teman untuk main squad.' },
 }
 async function loadGames() {
   if (!configured) { loading.value = false; return }
@@ -31,7 +32,7 @@ onServerPrefetch(loadGames)
     <section class="home-hero page-shell">
       <div class="home-hero__copy">
         <h1>Temukan rekan satu tim, <em>bukan cuma satu server.</em></h1>
-        <p>Cari teman mabar sesuai game, rank, role, dan region. Kenalan dulu lewat profil, lalu kirim ajakan kalau sudah cocok.</p>
+        <p>Cari teman mabar sesuai game, rank, role, dan region. Kenalan lewat profil, lalu kirim permintaan teman jika sudah cocok.</p>
         <div class="hero-actions"><a class="button button--primary" href="#pilih-game">Mulai Cari Teman Mabar <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#cara-kerja">Lihat Cara Kerja</a></div>
         <div class="hero-benefits"><span>✓ Pilih game favorit</span><span>♧ Filter preferensi</span><span>⚡ Kenalan lewat profil</span></div>
       </div>
@@ -49,7 +50,7 @@ onServerPrefetch(loadGames)
       <div v-else-if="!games.length" class="state-card"><h3>Belum ada game tersedia</h3><p>Coba kembali nanti untuk melihat pilihan game.</p></div>
       <div v-else class="game-grid">
         <RouterLink v-for="game in games" :key="game.id" class="game-tile" :to="`/cari/${encodeURIComponent(game.slug)}`">
-          <span class="game-tile__icon" aria-hidden="true">{{ gameDescriptions[game.slug]?.icon || '✦' }}</span>
+          <span class="game-tile__icon" aria-hidden="true"><GameLogo :slug="game.slug" :name="game.name" /></span>
           <span class="game-tile__genre">{{ gameDescriptions[game.slug]?.genre || 'GAME KOMUNITAS' }}</span>
           <span class="game-tile__name">{{ game.name }}</span>
           <span class="game-tile__description">{{ gameDescriptions[game.slug]?.description || 'Temukan pemain untuk main bersama.' }}</span>
@@ -60,7 +61,7 @@ onServerPrefetch(loadGames)
 
     <section id="cara-kerja" class="page-shell home-section steps" aria-labelledby="steps-title">
       <div class="section-heading section-heading--center"><span class="section-kicker">✦ PROSES ANTI RIBET</span><h2 id="steps-title">Cara Mulai Mabar Asik</h2><p>Tiga langkah untuk kenalan dengan rekan main yang cocok.</p></div>
-      <ol class="steps-list"><li><span>01</span><div><h3>Buat Profil Game</h3><p>Isi nama dalam game, rank, role, dan preferensi bermainmu.</p></div><span class="step-label">Profilmu</span></li><li><span>02</span><div><h3>Pilih Game &amp; Pasang Filter</h3><p>Cari berdasarkan rank, role, mode, atau region yang kamu inginkan.</p></div><span class="step-label">Pencarian</span></li><li><span>03</span><div><h3>Kirim Request Mabar</h3><p>Lihat info publik pemain, lalu kirim ajakan setelah masuk akun.</p></div><span class="step-label">Kenalan</span></li></ol>
+      <ol class="steps-list"><li><span>01</span><div><h3>Buat Profil Game</h3><p>Isi nama dalam game, rank, role, dan preferensi bermainmu.</p></div><span class="step-label">Profilmu</span></li><li><span>02</span><div><h3>Pilih Game &amp; Pasang Filter</h3><p>Cari berdasarkan rank, role, mode, atau region yang kamu inginkan.</p></div><span class="step-label">Pencarian</span></li><li><span>03</span><div><h3>Kirim Permintaan Teman</h3><p>Lihat info publik pemain, lalu terhubung melalui pertemanan setelah masuk akun.</p></div><span class="step-label">Kenalan</span></li></ol>
     </section>
     <section class="page-shell home-bottom"><h2>Siap cari teman mabar?</h2><p>Jelajahi game dan temukan pemain dengan preferensi main yang cocok.</p><a class="button button--primary" href="#pilih-game">Pilih Game <span aria-hidden="true">↗</span></a></section>
   </main>
